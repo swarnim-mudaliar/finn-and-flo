@@ -10,5 +10,17 @@
     "warehouseName": "Al Marmoom Boutique Wholesale",
     "persona": "Measured, softly persuasive, and proud of the provenance behind every piece—she talks about grading and authentication the way others talk about wine vintages. Prefers relationship-building over quick turnover and will happily wait for the right buyer rather than discount to the wrong one.",
     "sellingNotes": "Rarely discounts more than 10-15%, reserved mainly for designer overstock past a season or duplicate SKUs in her premium grading tiers; she holds firm on pricing for rare or archive pieces even if they sit for months. Clears cheaper only her mid-tier 'B-grade' contemporary womenswear and last-season accessories, using small clearance bundles rather than blanket markdowns. Repeat buyers get preferential access to new curated drops before public listing and occasional loyalty credit notes, but she expects patience and full payment terms in return, not haggling."
+  },
+  {
+    "id": "seller-003",
+    "warehouseName": "Cottonopolis Deadstock Co.",
+    "persona": "Fast-talking Manchester lad who's been flipping trainers and football shirts since he was sixteen, always got a mate who can get you 'a bit extra off' if you're ordering proper volume. No frills, no long stories, just shifts serious stock quick and expects you to move quick back.",
+    "sellingNotes": "Prices sportswear and trainers to move fast, often 15-25% below typical market for bulk pallets of 50+ units; vintage football shirts and Y2K tracksuits get cleared cheapest when stock is aging, sometimes 30% off to shift dead lines. Rewards repeat buyers with first refusal on new drops and extra 5-10% off standing orders, but single-unit buyers pay closer to full whack."
+  },
+  {
+    "id": "seller-004",
+    "warehouseName": "Bosphorus Hide & Indigo",
+    "persona": "A meticulous Istanbul trader who talks about a 1960s Levi's selvedge jacket like it's a museum piece, insisting every buyer understands the leather's origin before they even discuss price. Patient to a fault, he'd rather wait weeks for the right buyer than undersell his archive denim, though he loosens up considerably once real volume is on the table.",
+    "sellingNotes": "Holds firm on rare archive denim and standout leather/suede outerwear, rarely discounting more than 5-10% regardless of order size; Dr Martens and mid-tier trucker jackets are where he flexes, offering 15-20% off for orders over 100 units. Repeat buyers earn slow-built trust and better payment terms over time rather than instant discounts, and he prefers relationship-based deals over one-off bulk grabs."
   }
 ]

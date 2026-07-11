@@ -7,7 +7,8 @@
     "era": "1990s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "levis-501"
+    "archetype": "levis-501",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-002",
@@ -20,7 +21,8 @@
       "fading at knees",
       "small stain on thigh"
     ],
-    "archetype": "levis-501"
+    "archetype": "levis-501",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-003",
@@ -34,7 +36,8 @@
       "repaired seam",
       "belt loop torn"
     ],
-    "archetype": "levis-501"
+    "archetype": "levis-501",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-004",
@@ -44,7 +47,8 @@
     "era": "1990s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "carhartt-jacket"
+    "archetype": "carhartt-jacket",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-005",
@@ -57,7 +61,8 @@
       "cuff wear",
       "light staining"
     ],
-    "archetype": "carhartt-jacket"
+    "archetype": "carhartt-jacket",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-006",
@@ -71,7 +76,8 @@
       "torn pocket",
       "oil stain"
     ],
-    "archetype": "carhartt-jacket"
+    "archetype": "carhartt-jacket",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-007",
@@ -81,7 +87,8 @@
     "era": "1990s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "ralph-lauren-oxford"
+    "archetype": "ralph-lauren-oxford",
+    "sellerId": "seller-002"
   },
   {
     "id": "item-008",
@@ -93,7 +100,8 @@
     "defects": [
       "collar fraying"
     ],
-    "archetype": "ralph-lauren-oxford"
+    "archetype": "ralph-lauren-oxford",
+    "sellerId": "seller-002"
   },
   {
     "id": "item-009",
@@ -107,7 +115,8 @@
       "missing button",
       "small tear"
     ],
-    "archetype": "ralph-lauren-oxford"
+    "archetype": "ralph-lauren-oxford",
+    "sellerId": "seller-002"
   },
   {
     "id": "item-010",
@@ -117,7 +126,8 @@
     "era": "2000s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "y2k-graphic-tee"
+    "archetype": "y2k-graphic-tee",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-011",
@@ -129,7 +139,8 @@
     "defects": [
       "cracked print"
     ],
-    "archetype": "y2k-graphic-tee"
+    "archetype": "y2k-graphic-tee",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-012",
@@ -143,7 +154,8 @@
       "faded print",
       "neckline stretched"
     ],
-    "archetype": "y2k-graphic-tee"
+    "archetype": "y2k-graphic-tee",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-013",
@@ -153,7 +165,8 @@
     "era": "1990s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "nike-vintage-hoodie"
+    "archetype": "nike-vintage-hoodie",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-014",
@@ -166,7 +179,8 @@
       "pilling",
       "drawstring missing"
     ],
-    "archetype": "nike-vintage-hoodie"
+    "archetype": "nike-vintage-hoodie",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-015",
@@ -180,7 +194,8 @@
       "holes in sleeve",
       "cuff wear"
     ],
-    "archetype": "nike-vintage-hoodie"
+    "archetype": "nike-vintage-hoodie",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-016",
@@ -190,7 +205,8 @@
     "era": "1980s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "adidas-track-jacket"
+    "archetype": "adidas-track-jacket",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-017",
@@ -203,7 +219,8 @@
       "zipper sticking",
       "light bobbling"
     ],
-    "archetype": "adidas-track-jacket"
+    "archetype": "adidas-track-jacket",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-018",
@@ -217,7 +234,8 @@
       "stains",
       "frayed collar"
     ],
-    "archetype": "adidas-track-jacket"
+    "archetype": "adidas-track-jacket",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-019",
@@ -227,7 +245,8 @@
     "era": "1990s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "barbour-wax-jacket"
+    "archetype": "barbour-wax-jacket",
+    "sellerId": "seller-002"
   },
   {
     "id": "item-020",
@@ -240,7 +259,8 @@
       "wax wear on cuffs",
       "minor scuffing"
     ],
-    "archetype": "barbour-wax-jacket"
+    "archetype": "barbour-wax-jacket",
+    "sellerId": "seller-002"
   },
   {
     "id": "item-021",
@@ -254,7 +274,8 @@
       "missing snap button",
       "heavy wax loss"
     ],
-    "archetype": "barbour-wax-jacket"
+    "archetype": "barbour-wax-jacket",
+    "sellerId": "seller-002"
   },
   {
     "id": "item-022",
@@ -264,7 +285,8 @@
     "era": "1990s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "band-tee"
+    "archetype": "band-tee",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-023",
@@ -277,7 +299,8 @@
       "small hole",
       "print cracking"
     ],
-    "archetype": "band-tee"
+    "archetype": "band-tee",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-024",
@@ -291,7 +314,8 @@
       "collar stretched",
       "stains"
     ],
-    "archetype": "band-tee"
+    "archetype": "band-tee",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-025",
@@ -301,7 +325,8 @@
     "era": "1990s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "levis-trucker-jacket"
+    "archetype": "levis-trucker-jacket",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-026",
@@ -314,7 +339,8 @@
       "button loose",
       "light fraying"
     ],
-    "archetype": "levis-trucker-jacket"
+    "archetype": "levis-trucker-jacket",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-027",
@@ -328,7 +354,8 @@
       "repaired seam",
       "missing button"
     ],
-    "archetype": "levis-trucker-jacket"
+    "archetype": "levis-trucker-jacket",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-028",
@@ -338,7 +365,8 @@
     "era": "1990s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "patagonia-fleece"
+    "archetype": "patagonia-fleece",
+    "sellerId": "seller-002"
   },
   {
     "id": "item-029",
@@ -351,7 +379,8 @@
       "pilling",
       "zip pull missing"
     ],
-    "archetype": "patagonia-fleece"
+    "archetype": "patagonia-fleece",
+    "sellerId": "seller-002"
   },
   {
     "id": "item-030",
@@ -365,7 +394,8 @@
       "broken snap",
       "frayed cuffs"
     ],
-    "archetype": "patagonia-fleece"
+    "archetype": "patagonia-fleece",
+    "sellerId": "seller-002"
   },
   {
     "id": "item-031",
@@ -375,7 +405,8 @@
     "era": "2000s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "dickies-work-pants"
+    "archetype": "dickies-work-pants",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-032",
@@ -388,7 +419,8 @@
       "knee wear",
       "small stain"
     ],
-    "archetype": "dickies-work-pants"
+    "archetype": "dickies-work-pants",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-033",
@@ -402,7 +434,8 @@
       "hem fraying",
       "paint stains"
     ],
-    "archetype": "dickies-work-pants"
+    "archetype": "dickies-work-pants",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-034",
@@ -412,7 +445,8 @@
     "era": "1990s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "burberry-scarf"
+    "archetype": "burberry-scarf",
+    "sellerId": "seller-002"
   },
   {
     "id": "item-035",
@@ -425,7 +459,8 @@
       "light pilling",
       "frayed fringe"
     ],
-    "archetype": "burberry-scarf"
+    "archetype": "burberry-scarf",
+    "sellerId": "seller-002"
   },
   {
     "id": "item-036",
@@ -439,7 +474,8 @@
       "holes",
       "fringe missing"
     ],
-    "archetype": "burberry-scarf"
+    "archetype": "burberry-scarf",
+    "sellerId": "seller-002"
   },
   {
     "id": "item-037",
@@ -449,7 +485,8 @@
     "era": "2000s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "stone-island-crewneck"
+    "archetype": "stone-island-crewneck",
+    "sellerId": "seller-002"
   },
   {
     "id": "item-038",
@@ -462,7 +499,8 @@
       "pilling",
       "badge slightly discolored"
     ],
-    "archetype": "stone-island-crewneck"
+    "archetype": "stone-island-crewneck",
+    "sellerId": "seller-002"
   },
   {
     "id": "item-039",
@@ -476,7 +514,8 @@
       "stains",
       "cuff fraying"
     ],
-    "archetype": "stone-island-crewneck"
+    "archetype": "stone-island-crewneck",
+    "sellerId": "seller-002"
   },
   {
     "id": "item-040",
@@ -486,7 +525,8 @@
     "era": "1990s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "vintage-football-shirt"
+    "archetype": "vintage-football-shirt",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-041",
@@ -499,7 +539,8 @@
       "small hole",
       "print cracking"
     ],
-    "archetype": "vintage-football-shirt"
+    "archetype": "vintage-football-shirt",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-042",
@@ -513,7 +554,8 @@
       "collar stretched",
       "print peeling"
     ],
-    "archetype": "vintage-football-shirt"
+    "archetype": "vintage-football-shirt",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-043",
@@ -523,7 +565,8 @@
     "era": "1990s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "dr-martens-boots"
+    "archetype": "dr-martens-boots",
+    "sellerId": "seller-002"
   },
   {
     "id": "item-044",
@@ -536,7 +579,8 @@
       "sole wear",
       "scuffed toe"
     ],
-    "archetype": "dr-martens-boots"
+    "archetype": "dr-martens-boots",
+    "sellerId": "seller-002"
   },
   {
     "id": "item-045",
@@ -550,7 +594,8 @@
       "broken laces",
       "sole separation"
     ],
-    "archetype": "dr-martens-boots"
+    "archetype": "dr-martens-boots",
+    "sellerId": "seller-002"
   },
   {
     "id": "item-046",
@@ -563,7 +608,8 @@
       "fading",
       "small tear at cuff"
     ],
-    "archetype": "levis-501"
+    "archetype": "levis-501",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-047",
@@ -573,7 +619,8 @@
     "era": "2000s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "carhartt-jacket"
+    "archetype": "carhartt-jacket",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-048",
@@ -583,7 +630,8 @@
     "era": "2000s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "nike-vintage-hoodie"
+    "archetype": "nike-vintage-hoodie",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-049",
@@ -593,7 +641,8 @@
     "era": "1990s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "adidas-track-jacket"
+    "archetype": "adidas-track-jacket",
+    "sellerId": "seller-001"
   },
   {
     "id": "item-050",
@@ -603,6 +652,1030 @@
     "era": "2000s",
     "conditionGrade": "A",
     "defects": [],
-    "archetype": "stone-island-crewneck"
+    "archetype": "stone-island-crewneck",
+    "sellerId": "seller-002"
+  },
+  {
+    "id": "item-051",
+    "sellerId": "seller-003",
+    "title": "Nike Vintage Fleece Hoodie",
+    "brand": "Nike",
+    "category": "Hoodie",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "nike-vintage-hoodie"
+  },
+  {
+    "id": "item-052",
+    "sellerId": "seller-003",
+    "title": "Nike Grey Swoosh Hoodie",
+    "brand": "Nike",
+    "category": "Hoodie",
+    "era": "1990s",
+    "conditionGrade": "B",
+    "defects": [
+      "bobbling",
+      "small stain on sleeve"
+    ],
+    "archetype": "nike-vintage-hoodie"
+  },
+  {
+    "id": "item-053",
+    "sellerId": "seller-003",
+    "title": "Nike Centre Swoosh Pullover Hoodie",
+    "brand": "Nike",
+    "category": "Hoodie",
+    "era": "2000s",
+    "conditionGrade": "C",
+    "defects": [
+      "cracked print",
+      "loose stitching on hem",
+      "bobbling"
+    ],
+    "archetype": "nike-vintage-hoodie"
+  },
+  {
+    "id": "item-054",
+    "sellerId": "seller-003",
+    "title": "Nike Vintage Spellout Hoodie",
+    "brand": "Nike",
+    "category": "Hoodie",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "nike-vintage-hoodie"
+  },
+  {
+    "id": "item-055",
+    "sellerId": "seller-003",
+    "title": "Nike Faded Navy Hoodie",
+    "brand": "Nike",
+    "category": "Hoodie",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "bobbling"
+    ],
+    "archetype": "nike-vintage-hoodie"
+  },
+  {
+    "id": "item-056",
+    "sellerId": "seller-003",
+    "title": "Adidas Originals Track Jacket",
+    "brand": "Adidas",
+    "category": "Track Jacket",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "adidas-track-jacket"
+  },
+  {
+    "id": "item-057",
+    "sellerId": "seller-003",
+    "title": "Adidas Trefoil Track Jacket",
+    "brand": "Adidas",
+    "category": "Track Jacket",
+    "era": "1980s",
+    "conditionGrade": "B",
+    "defects": [
+      "small stain on chest",
+      "loose stitching on cuff"
+    ],
+    "archetype": "adidas-track-jacket"
+  },
+  {
+    "id": "item-058",
+    "sellerId": "seller-003",
+    "title": "Adidas Three Stripe Track Top",
+    "brand": "Adidas",
+    "category": "Track Jacket",
+    "era": "2000s",
+    "conditionGrade": "C",
+    "defects": [
+      "cracked print",
+      "bobbling",
+      "zip pull missing"
+    ],
+    "archetype": "adidas-track-jacket"
+  },
+  {
+    "id": "item-059",
+    "sellerId": "seller-003",
+    "title": "Adidas Firebird Track Jacket",
+    "brand": "Adidas",
+    "category": "Track Jacket",
+    "era": "2000s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "adidas-track-jacket"
+  },
+  {
+    "id": "item-060",
+    "sellerId": "seller-003",
+    "title": "Adidas Retro Colourblock Track Jacket",
+    "brand": "Adidas",
+    "category": "Track Jacket",
+    "era": "1990s",
+    "conditionGrade": "B",
+    "defects": [
+      "small stain on sleeve"
+    ],
+    "archetype": "adidas-track-jacket"
+  },
+  {
+    "id": "item-061",
+    "sellerId": "seller-003",
+    "title": "Manchester United 1999 Home Shirt",
+    "brand": "Umbro",
+    "category": "Football Shirt",
+    "era": "1990s",
+    "conditionGrade": "B",
+    "defects": [
+      "cracked print",
+      "small stain on hem"
+    ],
+    "archetype": "vintage-football-shirt"
+  },
+  {
+    "id": "item-062",
+    "sellerId": "seller-003",
+    "title": "England 1990 World Cup Shirt",
+    "brand": "Umbro",
+    "category": "Football Shirt",
+    "era": "1990s",
+    "conditionGrade": "C",
+    "defects": [
+      "loose stitching on collar",
+      "cracked print",
+      "small hole"
+    ],
+    "archetype": "vintage-football-shirt"
+  },
+  {
+    "id": "item-063",
+    "sellerId": "seller-003",
+    "title": "Liverpool 1996 Away Shirt",
+    "brand": "Adidas",
+    "category": "Football Shirt",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "vintage-football-shirt"
+  },
+  {
+    "id": "item-064",
+    "sellerId": "seller-003",
+    "title": "Arsenal 1998 Home Shirt",
+    "brand": "Nike",
+    "category": "Football Shirt",
+    "era": "1990s",
+    "conditionGrade": "B",
+    "defects": [
+      "bobbling"
+    ],
+    "archetype": "vintage-football-shirt"
+  },
+  {
+    "id": "item-065",
+    "sellerId": "seller-003",
+    "title": "Juventus 1995 Home Shirt",
+    "brand": "Kappa",
+    "category": "Football Shirt",
+    "era": "1990s",
+    "conditionGrade": "C",
+    "defects": [
+      "cracked print",
+      "loose stitching on sleeve"
+    ],
+    "archetype": "vintage-football-shirt"
+  },
+  {
+    "id": "item-066",
+    "sellerId": "seller-003",
+    "title": "Y2K Sportswear Graphic Tee",
+    "brand": "Nike",
+    "category": "T-Shirt",
+    "era": "2000s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "y2k-graphic-tee"
+  },
+  {
+    "id": "item-067",
+    "sellerId": "seller-003",
+    "title": "Y2K Bootleg Racing Graphic Tee",
+    "brand": "Unbranded",
+    "category": "T-Shirt",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "small stain on front"
+    ],
+    "archetype": "y2k-graphic-tee"
+  },
+  {
+    "id": "item-068",
+    "sellerId": "seller-003",
+    "title": "Y2K Flame Print Graphic Tee",
+    "brand": "Ecko",
+    "category": "T-Shirt",
+    "era": "2000s",
+    "conditionGrade": "C",
+    "defects": [
+      "cracked print",
+      "bobbling"
+    ],
+    "archetype": "y2k-graphic-tee"
+  },
+  {
+    "id": "item-069",
+    "sellerId": "seller-003",
+    "title": "Y2K Airbrush Style Graphic Tee",
+    "brand": "Unbranded",
+    "category": "T-Shirt",
+    "era": "2000s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "y2k-graphic-tee"
+  },
+  {
+    "id": "item-070",
+    "sellerId": "seller-003",
+    "title": "Y2K Skater Brand Graphic Tee",
+    "brand": "No Fear",
+    "category": "T-Shirt",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "loose stitching on hem"
+    ],
+    "archetype": "y2k-graphic-tee"
+  },
+  {
+    "id": "item-071",
+    "sellerId": "seller-003",
+    "title": "Metallica 1994 Tour Tee",
+    "brand": "Band Merch",
+    "category": "T-Shirt",
+    "era": "1990s",
+    "conditionGrade": "B",
+    "defects": [
+      "cracked print",
+      "small stain"
+    ],
+    "archetype": "band-tee"
+  },
+  {
+    "id": "item-072",
+    "sellerId": "seller-003",
+    "title": "Nirvana Vintage Band Tee",
+    "brand": "Band Merch",
+    "category": "T-Shirt",
+    "era": "1990s",
+    "conditionGrade": "C",
+    "defects": [
+      "cracked print",
+      "bobbling",
+      "small hole"
+    ],
+    "archetype": "band-tee"
+  },
+  {
+    "id": "item-073",
+    "sellerId": "seller-003",
+    "title": "AC/DC World Tour Tee",
+    "brand": "Band Merch",
+    "category": "T-Shirt",
+    "era": "1980s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "band-tee"
+  },
+  {
+    "id": "item-074",
+    "sellerId": "seller-003",
+    "title": "Oasis Be Here Now Tour Tee",
+    "brand": "Band Merch",
+    "category": "T-Shirt",
+    "era": "1990s",
+    "conditionGrade": "B",
+    "defects": [
+      "bobbling"
+    ],
+    "archetype": "band-tee"
+  },
+  {
+    "id": "item-075",
+    "sellerId": "seller-003",
+    "title": "Ramones Logo Band Tee",
+    "brand": "Band Merch",
+    "category": "T-Shirt",
+    "era": "2000s",
+    "conditionGrade": "C",
+    "defects": [
+      "cracked print",
+      "loose stitching on collar"
+    ],
+    "archetype": "band-tee"
+  },
+  {
+    "id": "item-076",
+    "sellerId": "seller-003",
+    "title": "Brazil 2002 Y2K Football Shirt",
+    "brand": "Nike",
+    "category": "Football Shirt",
+    "era": "2000s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "football-shirt-y2k"
+  },
+  {
+    "id": "item-077",
+    "sellerId": "seller-003",
+    "title": "Italy 2000 Y2K Away Shirt",
+    "brand": "Kappa",
+    "category": "Football Shirt",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "small stain on sleeve"
+    ],
+    "archetype": "football-shirt-y2k"
+  },
+  {
+    "id": "item-078",
+    "sellerId": "seller-003",
+    "title": "Manchester City 2001 Home Shirt",
+    "brand": "Le Coq Sportif",
+    "category": "Football Shirt",
+    "era": "2000s",
+    "conditionGrade": "C",
+    "defects": [
+      "cracked print",
+      "loose stitching on hem"
+    ],
+    "archetype": "football-shirt-y2k"
+  },
+  {
+    "id": "item-079",
+    "sellerId": "seller-003",
+    "title": "France 1998 Y2K Home Shirt",
+    "brand": "Adidas",
+    "category": "Football Shirt",
+    "era": "2000s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "football-shirt-y2k"
+  },
+  {
+    "id": "item-080",
+    "sellerId": "seller-003",
+    "title": "Chelsea 2003 Away Shirt",
+    "brand": "Umbro",
+    "category": "Football Shirt",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "bobbling",
+      "small stain"
+    ],
+    "archetype": "football-shirt-y2k"
+  },
+  {
+    "id": "item-081",
+    "sellerId": "seller-003",
+    "title": "Nike Classic Windbreaker",
+    "brand": "Nike",
+    "category": "Windbreaker",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "nike-windbreaker"
+  },
+  {
+    "id": "item-082",
+    "sellerId": "seller-003",
+    "title": "Nike Swoosh Packable Windbreaker",
+    "brand": "Nike",
+    "category": "Windbreaker",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "small stain on back"
+    ],
+    "archetype": "nike-windbreaker"
+  },
+  {
+    "id": "item-083",
+    "sellerId": "seller-003",
+    "title": "Nike Vintage Colourblock Windbreaker",
+    "brand": "Nike",
+    "category": "Windbreaker",
+    "era": "1990s",
+    "conditionGrade": "C",
+    "defects": [
+      "loose stitching on zip",
+      "bobbling",
+      "cracked print"
+    ],
+    "archetype": "nike-windbreaker"
+  },
+  {
+    "id": "item-084",
+    "sellerId": "seller-003",
+    "title": "Nike Reflective Windbreaker",
+    "brand": "Nike",
+    "category": "Windbreaker",
+    "era": "2000s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "nike-windbreaker"
+  },
+  {
+    "id": "item-085",
+    "sellerId": "seller-003",
+    "title": "Nike Retro Shell Windbreaker",
+    "brand": "Nike",
+    "category": "Windbreaker",
+    "era": "1990s",
+    "conditionGrade": "B",
+    "defects": [
+      "small stain on sleeve"
+    ],
+    "archetype": "nike-windbreaker"
+  },
+  {
+    "id": "item-086",
+    "sellerId": "seller-003",
+    "title": "Adidas Samba OG Trainers",
+    "brand": "Adidas",
+    "category": "Trainers",
+    "era": "2000s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "adidas-samba-trainers"
+  },
+  {
+    "id": "item-087",
+    "sellerId": "seller-003",
+    "title": "Adidas Samba Classic Trainers",
+    "brand": "Adidas",
+    "category": "Trainers",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "scuffed soles"
+    ],
+    "archetype": "adidas-samba-trainers"
+  },
+  {
+    "id": "item-088",
+    "sellerId": "seller-003",
+    "title": "Adidas Samba Suede Trainers",
+    "brand": "Adidas",
+    "category": "Trainers",
+    "era": "1990s",
+    "conditionGrade": "C",
+    "defects": [
+      "scuffed soles",
+      "loose stitching on upper",
+      "small stain"
+    ],
+    "archetype": "adidas-samba-trainers"
+  },
+  {
+    "id": "item-089",
+    "sellerId": "seller-003",
+    "title": "Adidas Samba Leather Trainers",
+    "brand": "Adidas",
+    "category": "Trainers",
+    "era": "2000s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "adidas-samba-trainers"
+  },
+  {
+    "id": "item-090",
+    "sellerId": "seller-003",
+    "title": "Adidas Samba Vintage Trainers",
+    "brand": "Adidas",
+    "category": "Trainers",
+    "era": "1990s",
+    "conditionGrade": "B",
+    "defects": [
+      "scuffed soles",
+      "small stain on toe"
+    ],
+    "archetype": "adidas-samba-trainers"
+  },
+  {
+    "id": "item-091",
+    "sellerId": "seller-004",
+    "title": "Levi's 501 Straight Leg Jeans Faded Blue",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "levis-501"
+  },
+  {
+    "id": "item-092",
+    "sellerId": "seller-004",
+    "title": "Levi's 501 Original Fit Denim Dark Wash",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "fading on thighs",
+      "hem fraying"
+    ],
+    "archetype": "levis-501"
+  },
+  {
+    "id": "item-093",
+    "sellerId": "seller-004",
+    "title": "Levi's 501 Button Fly Jeans",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "era": "1980s",
+    "conditionGrade": "C",
+    "defects": [
+      "repaired seam",
+      "heavy fading",
+      "small hole at knee"
+    ],
+    "archetype": "levis-501"
+  },
+  {
+    "id": "item-094",
+    "sellerId": "seller-004",
+    "title": "Levi's 501 High Rise Vintage Cut",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "levis-501"
+  },
+  {
+    "id": "item-095",
+    "sellerId": "seller-004",
+    "title": "Levi's 501 Classic Indigo Denim",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "whiskering fade"
+    ],
+    "archetype": "levis-501"
+  },
+  {
+    "id": "item-096",
+    "sellerId": "seller-004",
+    "title": "Levi's 501 Straight Leg Light Wash",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "era": "1990s",
+    "conditionGrade": "B",
+    "defects": [
+      "fading",
+      "repaired belt loop"
+    ],
+    "archetype": "levis-501"
+  },
+  {
+    "id": "item-097",
+    "sellerId": "seller-004",
+    "title": "Levi's 501 Selvedge Denim Made in USA",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "era": "1980s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "levis-501"
+  },
+  {
+    "id": "item-098",
+    "sellerId": "seller-004",
+    "title": "Levi's Trucker Jacket Type III Denim Blue",
+    "brand": "Levi's",
+    "category": "Jacket",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "levis-trucker-jacket"
+  },
+  {
+    "id": "item-099",
+    "sellerId": "seller-004",
+    "title": "Levi's Trucker Jacket Faded Black Denim",
+    "brand": "Levi's",
+    "category": "Jacket",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "fading",
+      "missing button"
+    ],
+    "archetype": "levis-trucker-jacket"
+  },
+  {
+    "id": "item-100",
+    "sellerId": "seller-004",
+    "title": "Levi's Trucker Jacket Vintage Wash",
+    "brand": "Levi's",
+    "category": "Jacket",
+    "era": "1980s",
+    "conditionGrade": "C",
+    "defects": [
+      "repaired seam",
+      "missing rivets",
+      "heavy fading"
+    ],
+    "archetype": "levis-trucker-jacket"
+  },
+  {
+    "id": "item-101",
+    "sellerId": "seller-004",
+    "title": "Levi's Trucker Jacket Type II Denim",
+    "brand": "Levi's",
+    "category": "Jacket",
+    "era": "1970s",
+    "conditionGrade": "B",
+    "defects": [
+      "worn cuffs",
+      "fading"
+    ],
+    "archetype": "levis-trucker-jacket"
+  },
+  {
+    "id": "item-102",
+    "sellerId": "seller-004",
+    "title": "Levi's Trucker Jacket Classic Blue Wash",
+    "brand": "Levi's",
+    "category": "Jacket",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "levis-trucker-jacket"
+  },
+  {
+    "id": "item-103",
+    "sellerId": "seller-004",
+    "title": "Levi's Trucker Jacket Sherpa Lined",
+    "brand": "Levi's",
+    "category": "Jacket",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "fading",
+      "small tear at pocket"
+    ],
+    "archetype": "levis-trucker-jacket"
+  },
+  {
+    "id": "item-104",
+    "sellerId": "seller-004",
+    "title": "Dr Martens 1460 8-Eye Boots Black Leather",
+    "brand": "Dr Martens",
+    "category": "Boots",
+    "era": "2000s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "dr-martens-boots"
+  },
+  {
+    "id": "item-105",
+    "sellerId": "seller-004",
+    "title": "Dr Martens 1461 Oxford Shoes Cherry Red",
+    "brand": "Dr Martens",
+    "category": "Shoes",
+    "era": "1990s",
+    "conditionGrade": "B",
+    "defects": [
+      "worn heels",
+      "scuffed toe"
+    ],
+    "archetype": "dr-martens-boots"
+  },
+  {
+    "id": "item-106",
+    "sellerId": "seller-004",
+    "title": "Dr Martens 1460 Boots Made in England",
+    "brand": "Dr Martens",
+    "category": "Boots",
+    "era": "1980s",
+    "conditionGrade": "C",
+    "defects": [
+      "cracked leather",
+      "worn heels",
+      "sole separation"
+    ],
+    "archetype": "dr-martens-boots"
+  },
+  {
+    "id": "item-107",
+    "sellerId": "seller-004",
+    "title": "Dr Martens Jadon Platform Boots Black",
+    "brand": "Dr Martens",
+    "category": "Boots",
+    "era": "2010s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "dr-martens-boots"
+  },
+  {
+    "id": "item-108",
+    "sellerId": "seller-004",
+    "title": "Dr Martens 1490 10-Eye Boots Oxblood",
+    "brand": "Dr Martens",
+    "category": "Boots",
+    "era": "1990s",
+    "conditionGrade": "B",
+    "defects": [
+      "scuff marks",
+      "worn heels"
+    ],
+    "archetype": "dr-martens-boots"
+  },
+  {
+    "id": "item-109",
+    "sellerId": "seller-004",
+    "title": "Dr Martens Chelsea Boots Smooth Leather",
+    "brand": "Dr Martens",
+    "category": "Boots",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "creasing",
+      "worn sole"
+    ],
+    "archetype": "dr-martens-boots"
+  },
+  {
+    "id": "item-110",
+    "sellerId": "seller-004",
+    "title": "Dr Martens 1460 Vegan Boots Black",
+    "brand": "Dr Martens",
+    "category": "Boots",
+    "era": "2010s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "dr-martens-boots"
+  },
+  {
+    "id": "item-111",
+    "sellerId": "seller-004",
+    "title": "Vintage Leather Biker Jacket Black",
+    "brand": "Schott",
+    "category": "Jacket",
+    "era": "1980s",
+    "conditionGrade": "B",
+    "defects": [
+      "cracked leather",
+      "worn cuffs"
+    ],
+    "archetype": "leather-jacket"
+  },
+  {
+    "id": "item-112",
+    "sellerId": "seller-004",
+    "title": "Leather Bomber Jacket Brown Distressed",
+    "brand": "Wilsons Leather",
+    "category": "Jacket",
+    "era": "1990s",
+    "conditionGrade": "C",
+    "defects": [
+      "cracked leather",
+      "patina",
+      "repaired lining"
+    ],
+    "archetype": "leather-jacket"
+  },
+  {
+    "id": "item-113",
+    "sellerId": "seller-004",
+    "title": "Leather Jacket Classic Black Zip-Up",
+    "brand": "Unbranded",
+    "category": "Jacket",
+    "era": "2000s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "leather-jacket"
+  },
+  {
+    "id": "item-114",
+    "sellerId": "seller-004",
+    "title": "Vintage Leather Racer Jacket Tan",
+    "brand": "Aviatrix",
+    "category": "Jacket",
+    "era": "1970s",
+    "conditionGrade": "B",
+    "defects": [
+      "patina",
+      "worn elbows"
+    ],
+    "archetype": "leather-jacket"
+  },
+  {
+    "id": "item-115",
+    "sellerId": "seller-004",
+    "title": "Leather Trench Coat Black Full Length",
+    "brand": "Unbranded",
+    "category": "Coat",
+    "era": "1990s",
+    "conditionGrade": "C",
+    "defects": [
+      "cracked leather",
+      "missing button",
+      "repaired seam"
+    ],
+    "archetype": "leather-jacket"
+  },
+  {
+    "id": "item-116",
+    "sellerId": "seller-004",
+    "title": "Leather Moto Jacket Asymmetric Zip",
+    "brand": "Schott",
+    "category": "Jacket",
+    "era": "2000s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "leather-jacket"
+  },
+  {
+    "id": "item-117",
+    "sellerId": "seller-004",
+    "title": "Vintage Leather Blazer Brown",
+    "brand": "Unbranded",
+    "category": "Jacket",
+    "era": "1980s",
+    "conditionGrade": "B",
+    "defects": [
+      "patina",
+      "light cracking"
+    ],
+    "archetype": "leather-jacket"
+  },
+  {
+    "id": "item-118",
+    "sellerId": "seller-004",
+    "title": "Vintage Levi's Silver Tab Baggy Jeans",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "vintage-levis-silver-tab"
+  },
+  {
+    "id": "item-119",
+    "sellerId": "seller-004",
+    "title": "Vintage Levi's Silver Tab Loose Fit Denim",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "era": "1990s",
+    "conditionGrade": "B",
+    "defects": [
+      "fading",
+      "hem wear"
+    ],
+    "archetype": "vintage-levis-silver-tab"
+  },
+  {
+    "id": "item-120",
+    "sellerId": "seller-004",
+    "title": "Vintage Levi's Silver Tab Wide Leg Jeans",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "era": "1990s",
+    "conditionGrade": "C",
+    "defects": [
+      "repaired seam",
+      "heavy fading",
+      "small tear"
+    ],
+    "archetype": "vintage-levis-silver-tab"
+  },
+  {
+    "id": "item-121",
+    "sellerId": "seller-004",
+    "title": "Vintage Levi's Silver Tab Straight Fit",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "fading"
+    ],
+    "archetype": "vintage-levis-silver-tab"
+  },
+  {
+    "id": "item-122",
+    "sellerId": "seller-004",
+    "title": "Vintage Levi's Silver Tab Baggy Denim Dark Wash",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "vintage-levis-silver-tab"
+  },
+  {
+    "id": "item-123",
+    "sellerId": "seller-004",
+    "title": "Vintage Levi's Silver Tab Relaxed Fit Jeans",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "era": "1990s",
+    "conditionGrade": "B",
+    "defects": [
+      "fading",
+      "worn knees"
+    ],
+    "archetype": "vintage-levis-silver-tab"
+  },
+  {
+    "id": "item-124",
+    "sellerId": "seller-004",
+    "title": "Suede Jacket Tan Classic Fit",
+    "brand": "Unbranded",
+    "category": "Jacket",
+    "era": "1980s",
+    "conditionGrade": "B",
+    "defects": [
+      "patina",
+      "light scuffing"
+    ],
+    "archetype": "suede-jacket"
+  },
+  {
+    "id": "item-125",
+    "sellerId": "seller-004",
+    "title": "Suede Bomber Jacket Brown",
+    "brand": "Members Only",
+    "category": "Jacket",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "suede-jacket"
+  },
+  {
+    "id": "item-126",
+    "sellerId": "seller-004",
+    "title": "Vintage Suede Jacket Rust Colour",
+    "brand": "Unbranded",
+    "category": "Jacket",
+    "era": "1970s",
+    "conditionGrade": "C",
+    "defects": [
+      "patina",
+      "cracked leather trim",
+      "repaired seam"
+    ],
+    "archetype": "suede-jacket"
+  },
+  {
+    "id": "item-127",
+    "sellerId": "seller-004",
+    "title": "Suede Blazer Jacket Camel",
+    "brand": "Unbranded",
+    "category": "Jacket",
+    "era": "1980s",
+    "conditionGrade": "B",
+    "defects": [
+      "light staining",
+      "worn cuffs"
+    ],
+    "archetype": "suede-jacket"
+  },
+  {
+    "id": "item-128",
+    "sellerId": "seller-004",
+    "title": "Suede Trucker-Style Jacket Dark Brown",
+    "brand": "Unbranded",
+    "category": "Jacket",
+    "era": "2000s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "suede-jacket"
+  },
+  {
+    "id": "item-129",
+    "sellerId": "seller-004",
+    "title": "Vintage Suede Jacket Fringe Detail",
+    "brand": "Unbranded",
+    "category": "Jacket",
+    "era": "1970s",
+    "conditionGrade": "B",
+    "defects": [
+      "patina",
+      "worn fringe"
+    ],
+    "archetype": "suede-jacket"
   }
 ]

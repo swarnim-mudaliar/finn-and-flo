@@ -605,5 +605,990 @@
       "Navy L in very good condition sold for £95, supporting a floor around this level for grade A items",
       "Grade A condition with no defects justifies pricing at or above the excellent-condition comp"
     ]
+  },
+  "item-051": {
+    "itemId": "item-051",
+    "estimate": 50,
+    "low": 45,
+    "high": 55,
+    "evidence": [
+      "Vintage Nike Centre Swoosh Hoodie White XL sold £52 (excellent) - closest condition match to grade A, no defects",
+      "90s Nike Fleece Hoodie Navy M sold £45 (very good) - supports upper-mid pricing",
+      "Grade A/no-defects items command top of comp range vs good/fair condition comps (£29-£41)"
+    ]
+  },
+  "item-052": {
+    "itemId": "item-052",
+    "estimate": 32,
+    "low": 28,
+    "high": 36,
+    "evidence": [
+      "Vintage Nike Swoosh Hoodie Grey L sold £34 (good condition) - closest match in colour/style",
+      "Vintage Nike Spellout Hoodie Green M sold £38 (good) and 90s Nike Air Hoodie Red S sold £41 (good) set upper bound for 'good' grade comps",
+      "Nike Vintage Faded Hoodie Black L sold £29 (fair) sets lower bound reflecting defects",
+      "Item is grade B with bobbling and a stain, pulling estimate toward the lower-mid range between 'good' and 'fair' comps"
+    ]
+  },
+  "item-053": {
+    "itemId": "item-053",
+    "estimate": 27,
+    "low": 23,
+    "high": 30,
+    "evidence": [
+      "Nike Vintage Faded Hoodie Black L sold £29 in 'fair' condition - closest match to this grade C item",
+      "Grade C item with multiple defects (cracked print, loose stitching, bobbling) should price below the 'fair' comp",
+      "Good condition comps (Vinted Grey L £34, Spellout Green M £38, Air Red S £41) set upper bound but this item lacks that condition",
+      "Very good/excellent comps (£45, £52) not relevant due to significant defects here"
+    ]
+  },
+  "item-054": {
+    "itemId": "item-054",
+    "estimate": 50,
+    "low": 45,
+    "high": 55,
+    "evidence": [
+      "Vintage Nike Centre Swoosh Hoodie White XL sold £52 (excellent condition) - closest comp for grade A item",
+      "90s Nike Fleece Hoodie Navy M sold £45 (very good) supports upper-40s baseline",
+      "Grade A with no defects justifies pricing at top of range, near the excellent-condition comp"
+    ]
+  },
+  "item-055": {
+    "itemId": "item-055",
+    "estimate": 32,
+    "low": 28,
+    "high": 36,
+    "evidence": [
+      "Comps in 'good' condition sold £34-38 (Grey L, Green M)",
+      "Fair condition Black L sold £29, close to this item's grade B with bobbling defect",
+      "Very good/excellent comps (£45-52) command higher prices but reflect better condition than grade B",
+      "Bobbling defect and grade B place this item near the lower-mid range of comps, above the 'fair' comp but below 'good' comps"
+    ]
+  },
+  "item-056": {
+    "itemId": "item-056",
+    "estimate": 34,
+    "low": 30,
+    "high": 37,
+    "evidence": [
+      "Adidas Originals Track Jacket White M (excellent) sold £35 - closest condition match for grade A item",
+      "90s Adidas Track Jacket Trefoil Red L (very good) sold £32",
+      "Grade A/no defects supports pricing at upper end of comp range, near the excellent-condition comp",
+      "Good-condition comps (£25-29) trade below this due to lower grading"
+    ]
+  },
+  "item-057": {
+    "itemId": "item-057",
+    "estimate": 23,
+    "low": 19,
+    "high": 26,
+    "evidence": [
+      "Comps average ~$28 for 'good' condition items (Vinted $25, eBay $29, eBay $27)",
+      "This 1980s jacket is grade B with a chest stain and loose cuff stitching, comparable to or slightly worse than the 'fair' condition comp (Green S, $22)",
+      "1980s era adds some collector interest vs 90s comps, but visible defects (stain, stitching) offset this and cap upside",
+      "Priced near the low end of the comp range due to condition penalties from defects"
+    ]
+  },
+  "item-058": {
+    "itemId": "item-058",
+    "estimate": 17,
+    "low": 14,
+    "high": 20,
+    "evidence": [
+      "Comps range £22-35 for good-to-excellent condition items",
+      "Vintage Adidas Track Top Green S sold for £22 in 'fair' condition - closest condition comp",
+      "This item is grade C with multiple defects (cracked print, bobbling, missing zip pull), warranting further discount below the fair-condition comp",
+      "Applied ~25-30% discount off the lowest comp to reflect compounding defects beyond typical 'fair' grading"
+    ]
+  },
+  "item-059": {
+    "itemId": "item-059",
+    "estimate": 34,
+    "low": 30,
+    "high": 38,
+    "evidence": [
+      "Adidas Originals Track Jacket White M (excellent) sold £35 - closest condition match",
+      "90s Adidas Track Jacket Trefoil Red L (very good) sold £32",
+      "Adidas Firebird Track Jacket Black XL (good) sold £29 - same archetype but lower grade",
+      "Grade A condition with no defects supports pricing at upper-middle of comp range"
+    ]
+  },
+  "item-060": {
+    "itemId": "item-060",
+    "estimate": 24,
+    "low": 20,
+    "high": 27,
+    "evidence": [
+      "Comps range £22-35 depending on condition; 'good' condition comps sold £25-29 (Blue M £25, Firebird XL £29, Purple L £27)",
+      "Grade B with a visible stain pulls this toward the lower-mid end, similar to 'fair' comp (Green S, £22)",
+      "Colourblock/retro appeal supports pricing above the lowest fair comp but below very good/excellent tier (£32-35)"
+    ]
+  },
+  "item-061": {
+    "itemId": "item-061",
+    "estimate": 50,
+    "low": 42,
+    "high": 58,
+    "evidence": [
+      "Direct comp: Vintage Manchester United 1999 Home Shirt L sold £65 in 'good' condition - most relevant benchmark",
+      "Liverpool 1996 Home Shirt (good) sold £60, Juventus 1996 Away (good) sold £70 - similar era iconic shirts in good condition trend £60-70",
+      "Item is grade B with cracked print and stain, notably worse than 'good' condition comps, warranting a 20-25% discount",
+      "Man Utd 1999 treble-winning kit carries strong collector demand, keeping value above generic vintage shirts despite defects",
+      "Estimate settles below the direct £65 comp to reflect visible print cracking and stain affecting resale appeal"
+    ]
+  },
+  "item-062": {
+    "itemId": "item-062",
+    "estimate": 42,
+    "low": 32,
+    "high": 50,
+    "evidence": [
+      "Direct comp: England 1990 Italia World Cup Shirt XL sold £78 in excellent condition - this is the key benchmark",
+      "Brazil 1994 WC shirt sold £90 but that was 'fair' condition, showing WC shirts carry premium demand",
+      "Item here is grade C with multiple defects (loose stitching, cracked print, small hole), far below 'excellent' comp",
+      "Applying ~45-50% discount off the £78 excellent-condition comp for iconic same-model shirt due to condition grade C with 3 listed defects",
+      "General good-condition club shirts (Liverpool, Man Utd) sit £60-65, but this item's poor condition pulls it well below those"
+    ]
+  },
+  "item-063": {
+    "itemId": "item-063",
+    "estimate": 80,
+    "low": 70,
+    "high": 95,
+    "evidence": [
+      "Liverpool 1996 Home Shirt (good condition) sold for £60 - this is the iconic away 'Spice Boys' shirt which typically commands a premium over the home shirt",
+      "Juventus 1996 Away Shirt (good) sold for £70, similar era/condition benchmark",
+      "England 1990 Italia World Cup Shirt (excellent) sold for £78, showing grade A/excellent condition commands ~£78-90",
+      "Item is grade A with no defects, the famous grey/green Liverpool 96 away kit is highly sought after collector's item, justifying a price at the higher end of comps"
+    ]
+  },
+  "item-064": {
+    "itemId": "item-064",
+    "estimate": 55,
+    "low": 45,
+    "high": 62,
+    "evidence": [
+      "Arsenal 1998 Away Shirt (very good) sold £55 - most directly comparable club/era, though this is grade B with bobbling so should sit at or below that",
+      "Liverpool 1996 Home (good) sold £60 - similar 90s iconic club shirt, condition benchmark",
+      "Man Utd 1999 Home (good) sold £65 - higher due to treble-winning season demand, not directly applicable",
+      "Grade B with bobbling defect warrants discount vs 'good'/'very good' comps, pulling estimate toward £50-55 range"
+    ]
+  },
+  "item-065": {
+    "itemId": "item-065",
+    "estimate": 50,
+    "low": 40,
+    "high": 58,
+    "evidence": [
+      "Juventus 1996 Away Shirt (good condition) sold for £70 - most relevant club/era comp, but that was 'good' condition vs this item's grade C",
+      "Brazil 1994 shirt sold for £90 in 'fair' condition, showing iconic/rare shirts hold value even with wear, but Juventus 1995 home is less iconic than a World Cup shirt",
+      "Liverpool 1996 (good) sold £60, Man Utd 1999 (good) sold £65 - establishes ~£60-70 baseline for good condition vintage shirts",
+      "This item has cracked print and loose stitching (grade C), meaningfully worse than 'good' comps, justifying a 25-30% discount from the ~£65-70 good-condition baseline",
+      "Juventus brand recognition and Kappa 90s aesthetic support staying above the lowest end of the range despite defects"
+    ]
+  },
+  "item-066": {
+    "itemId": "item-066",
+    "estimate": 27,
+    "low": 23,
+    "high": 30,
+    "evidence": [
+      "Y2K Rhinestone Logo Tee XS sold £28 (excellent condition) - closest comp for grade A item",
+      "Vintage Y2K Flame Print Tee M sold £24 (very good) supports mid-20s pricing",
+      "Nike branding likely commands slight premium over generic Y2K graphic tees in comps",
+      "Grade A with no defects justifies pricing at upper end of comp range"
+    ]
+  },
+  "item-067": {
+    "itemId": "item-067",
+    "estimate": 18,
+    "low": 15,
+    "high": 21,
+    "evidence": [
+      "Y2K Racing Graphic Tee Distressed L sold for £16 (fair condition), closest match by title/archetype and directly comparable to grade B with defect",
+      "Y2K Butterfly Graphic Baby Tee S sold for £19 (good condition), sets upper bound for grade B item without stain",
+      "Y2K Star Print Baby Tee XS sold for £17 (good condition), supports mid-teens to high-teens range",
+      "Vintage Y2K Cartoon Print Tee M sold for £21 (good condition) shows ceiling for clean good-condition tees, discounted here due to stain defect",
+      "Condition grade B with visible stain justifies pricing near the lower-fair comp rather than the higher very-good/excellent comps (£24-£28)"
+    ]
+  },
+  "item-068": {
+    "itemId": "item-068",
+    "estimate": 15,
+    "low": 12,
+    "high": 17,
+    "evidence": [
+      "Vintage Y2K Flame Print Tee M sold for £24 in very good condition - closest match but our item is grade C with defects",
+      "Y2K Racing Graphic Tee Distressed L sold for £16 in fair condition - most comparable condition tier",
+      "Cracked print and bobbling are notable defects that reduce desirability from the flame print comp's higher price",
+      "Grade C condition typically discounts 30-40% from good/very good condition comps"
+    ]
+  },
+  "item-069": {
+    "itemId": "item-069",
+    "estimate": 26,
+    "low": 22,
+    "high": 29,
+    "evidence": [
+      "Y2K Rhinestone Logo Tee XS sold £28 (excellent condition) - closest comp for grade A condition",
+      "Vintage Y2K Flame Print Tee M sold £24 (very good) - supports upper-mid range",
+      "Item is grade A with no defects, unbranded, so priced toward top of range but below rare/statement prints like rhinestone logo",
+      "Lower comps (fair/good condition, £16-21) reflect condition discounts not applicable here"
+    ]
+  },
+  "item-070": {
+    "itemId": "item-070",
+    "estimate": 18,
+    "low": 15,
+    "high": 21,
+    "evidence": [
+      "Y2K Butterfly Graphic Baby Tee S sold $19 (good condition) - closest comp for grade B item",
+      "Vintage Y2K Cartoon Print Tee M sold $21 (good) - similar quality tier",
+      "Y2K Star Print Baby Tee XS sold $17 (good) - supports lower end",
+      "Grade B with loose stitching defect pulls estimate toward lower-mid range vs 'very good'/'excellent' comps ($24-28)",
+      "Y2K Racing Graphic Tee Distressed L sold $16 (fair) sets floor for defect-laden items"
+    ]
+  },
+  "item-071": {
+    "itemId": "item-071",
+    "estimate": 45,
+    "low": 38,
+    "high": 52,
+    "evidence": [
+      "Direct comp: Vintage Metallica Tour Tee 1994 L sold $65 in 'good' condition - our item is same era/band but grade B with cracked print and stain, warranting significant discount",
+      "Vintage AC/DC Tour Tee Faded L (fair condition, similar defect level) sold $48 - closest condition analog",
+      "Iron Maiden Eddie Graphic Tee L (good condition) sold $42, Rolling Stones Tongue Logo Tee XL (good) sold $40 - general band-tee good-condition range $40-42",
+      "Metallica is a stronger/more sought-after band than most comps, supporting a price toward the upper-middle of the discounted range despite defects",
+      "Cracked print and stain are common/expected flaws in 30-year-old band tees and are already priced into 'fair' condition comps"
+    ]
+  },
+  "item-072": {
+    "itemId": "item-072",
+    "estimate": 30,
+    "low": 22,
+    "high": 38,
+    "evidence": [
+      "Nirvana Nevermind Graphic Tee M sold $35 in very good condition - closest brand comp, but that item lacked significant defects",
+      "Vintage AC/DC Tour Tee Faded L sold $48 in fair condition - shows even 'fair' grade items can hold value with strong band/tour appeal, but this Nirvana tee has more defects (cracked print, bobbling, small hole)",
+      "Grade C with three named defects (cracked print, bobbling, small hole) justifies a discount below the very-good Nirvana comp despite Nirvana being a highly desirable band",
+      "Other comps (Metallica $65, Pink Floyd $55, Iron Maiden $42, Rolling Stones $40) were in good-to-excellent condition, supporting that condition drives significant price variance within this archetype",
+      "Estimate reflects strong brand recognition (Nirvana) offsetting some condition penalty, landing below the very-good comp but above bottom-tier heavily damaged tees"
+    ]
+  },
+  "item-073": {
+    "itemId": "item-073",
+    "estimate": 85,
+    "low": 70,
+    "high": 110,
+    "evidence": [
+      "Vintage AC/DC Tour Tee Faded L sold for £48 in only 'fair' condition - this item is grade A with no defects, commanding a significant premium",
+      "Vintage Metallica Tour Tee 1994 (good condition) sold for £65 - AC/DC is comparably or more iconic band, and 1980s era predates the Metallica comp, adding vintage value",
+      "Vintage Pink Floyd Dark Side Tee (excellent condition) sold for £55, showing top-condition band tees from major 80s-era acts fetch premium prices",
+      "AC/DC is one of the most collected rock band merch names, and true 1980s World Tour tees in grade A condition are rare, justifying pricing above comps with lesser condition or less iconic bands",
+      "No defects and grade A condition pushes this toward the high end of the comp range, above the Metallica £65 benchmark"
+    ]
+  },
+  "item-074": {
+    "itemId": "item-074",
+    "estimate": 45,
+    "low": 35,
+    "high": 55,
+    "evidence": [
+      "Metallica 1994 tour tee (good) sold £65 - premium band/era but better condition",
+      "AC/DC faded tour tee (fair) sold £48 - closest comp for grade B/defect condition",
+      "Iron Maiden graphic tee (good) sold £42, Rolling Stones (good) sold £40 - mid-range benchmarks",
+      "Oasis Be Here Now is a highly desirable 90s Britpop tour tee, supporting upper-mid pricing despite bobbling defect and grade B condition",
+      "Bobbling defect pulls estimate down from excellent-condition comps like Pink Floyd (£55) toward fair-condition comps like AC/DC (£48)"
+    ]
+  },
+  "item-075": {
+    "itemId": "item-075",
+    "estimate": 28,
+    "low": 20,
+    "high": 35,
+    "evidence": [
+      "AC/DC Tour Tee (fair condition) sold for £48 - closest condition comp, but that's a 90s tour tee with more collectible value than a 2000s band merch tee",
+      "Rolling Stones Tongue Logo Tee (good) sold £40 - iconic band premium not applicable here to same degree",
+      "Iron Maiden (good) sold £42 - baseline for good condition generic band tee",
+      "Item is grade C with cracked print and loose collar stitching, both visible defects that reduce desirability significantly",
+      "2000s Band Merch reproduction tees carry less premium than genuine vintage tour tees from 80s/90s, so pricing toward lower end of comps",
+      "Applying ~30-40% discount off 'good' condition comps (£40-42) for the print crack and stitching issues lands estimate around £25-30"
+    ]
+  },
+  "item-076": {
+    "itemId": "item-076",
+    "estimate": 100,
+    "low": 85,
+    "high": 115,
+    "evidence": [
+      "Direct comp: Brazil 2002 World Cup Home Shirt Nike Ronaldinho sold £110 (Excellent condition) - most relevant match by team/year/brand",
+      "Grade A condition here is comparable to 'Excellent', supporting a price near the top comp",
+      "Other comps (Man Utd £85, Real Madrid £65) are lower-profile national/club shirts, confirming Brazil 2002 iconic status commands premium",
+      "Slight discount from £110 comp to account for grading variance and no explicit 'World Cup' branding in title"
+    ]
+  },
+  "item-077": {
+    "itemId": "item-077",
+    "estimate": 33,
+    "low": 28,
+    "high": 40,
+    "evidence": [
+      "Italy 2000 Euro Away Shirt Nike Vintage sold £38 in Good condition - closest direct match by team/era",
+      "Liverpool 2000/01 Treble Home Shirt sold £58 but in Fair condition, showing defects reduce price even for iconic shirts",
+      "This item is grade B with a small sleeve stain, so priced slightly below the Good-condition Italy comp",
+      "Arsenal 1998/99 Away Nike Y2K sold £42 in Very Good condition, supporting a discount for lower grade/defect here"
+    ]
+  },
+  "item-078": {
+    "itemId": "item-078",
+    "estimate": 32,
+    "low": 25,
+    "high": 40,
+    "evidence": [
+      "Liverpool 2000/01 Home Shirt (Fair condition) sold £58 - closest condition comp but Man City is a less iconic/lower-demand club",
+      "Italy 2000 Euro Away Shirt (Good) sold £38 - similar era, better condition than this item",
+      "Man City is a mid-tier club for Y2K shirt demand vs Man Utd/Brazil/Real Madrid comps which command premiums",
+      "Grade C condition with cracked print and loose hem stitching justifies discount below Fair-grade Liverpool comp",
+      "Non-mainstream club plus visible defects place this at the low end of the archetype range"
+    ]
+  },
+  "item-079": {
+    "itemId": "item-079",
+    "estimate": 70,
+    "low": 58,
+    "high": 85,
+    "evidence": [
+      "Man United 1999 Treble Home Shirt (Good condition) sold £85 - comparable iconic Adidas-era shirt, France 1998 in Grade A condition should command similar or slightly less given lower star-power but superior condition",
+      "Real Madrid 2001/02 Centenary Home Shirt (Good) sold £65 - similar tier national/club shirt, France Grade A justifies a premium over this",
+      "Italy 2000 Euro Away Shirt (Good) sold £38 and Arsenal 1998/99 Away (Very Good) sold £42 - lower-tier comps, France 1998 World Cup winners home shirt is a stronger archetype",
+      "France 1998 is a historically significant shirt (World Cup win) which supports pricing toward the upper-middle of the comp range despite lack of a star player association like Ronaldinho's Brazil 2002 (£110, Excellent)",
+      "Grade A condition with no defects supports pricing above the 'Good' condition comps of similar or lesser prestige"
+    ]
+  },
+  "item-080": {
+    "itemId": "item-080",
+    "estimate": 40,
+    "low": 32,
+    "high": 48,
+    "evidence": [
+      "Italy 2000 Euro Away Shirt (Good) sold £38 - similar tier away shirt, comparable condition",
+      "Liverpool 2000/01 Home Shirt (Fair) sold £58 but bigger club/season significance, not directly comparable",
+      "Real Madrid 2001/02 Centenary (Good) sold £65 but bigger club and iconic season inflates price vs Chelsea 2003 away",
+      "Chelsea 2003 away lacks major trophy/iconic season hype compared to Man Utd/Brazil comps, so pricing nearer lower-tier comps",
+      "Grade B with bobbling and small stain further discounts from 'Good' condition baseline toward lower end of range"
+    ]
+  },
+  "item-081": {
+    "itemId": "item-081",
+    "estimate": 65,
+    "low": 55,
+    "high": 75,
+    "evidence": [
+      "Nike 1990s Air Windrunner Style Jacket Rare Colourway sold £72 (Excellent) - closest to Grade A condition",
+      "Nike 90s Nylon Shell Jacket Hooded Vintage Swoosh sold £60 (Very Good)",
+      "Grade A / no defects justifies pricing near top of range, below the rare colourway premium",
+      "Lower condition comps (Good/Fair) at £34-50 set floor, not applicable given superior condition here"
+    ]
+  },
+  "item-082": {
+    "itemId": "item-082",
+    "estimate": 36,
+    "low": 30,
+    "high": 42,
+    "evidence": [
+      "Comparable 'Good' condition items sold at £45 and £50 (depop) - our item is grade B (below Good) with a stain, so priced lower",
+      "'Fair' condition comp sold at £34 (vinted), close proxy for grade B with defect",
+      "Higher sales (£60, £72) were for Very Good/Excellent condition items, not applicable here",
+      "Small stain on back is a modest visible defect, justifying discount from mid-range Good comps toward Fair-range pricing"
+    ]
+  },
+  "item-083": {
+    "itemId": "item-083",
+    "estimate": 30,
+    "low": 25,
+    "high": 35,
+    "evidence": [
+      "Fair condition comp 'Nike Vintage Track Windbreaker' sold for £34 - closest condition match",
+      "Good condition comps (Depop £45, £50) sit well above this grade C item due to better condition",
+      "Grade C with multiple defects (loose zip stitching, bobbling, cracked print) pushes price below the £34 Fair comp",
+      "Excellent/Very Good comps (£60-£72) not comparable given significant cosmetic/functional flaws here"
+    ]
+  },
+  "item-084": {
+    "itemId": "item-084",
+    "estimate": 55,
+    "low": 48,
+    "high": 65,
+    "evidence": [
+      "Nike 90s Nylon Shell Jacket Hooded Vintage Swoosh sold £60 (Very Good) - similar tier, item is grade A so comparable or slightly higher",
+      "Nike Y2K Reversible Windbreaker sold £50 (Good) - item's A grade justifies pricing above this",
+      "Nike 1990s Air Windrunner Rare Colourway sold £72 (Excellent) but rare colourway premium not confirmed for this item, so estimate below that",
+      "Reflective detailing is a desirable feature that supports pricing at upper-middle of comp range",
+      "Condition grade A with no defects supports pricing near top of typical comps (60-65) rather than lower Fair/Good sales (34-45)"
+    ]
+  },
+  "item-085": {
+    "itemId": "item-085",
+    "estimate": 38,
+    "low": 32,
+    "high": 45,
+    "evidence": [
+      "Comparable 'Good' condition items sold £45 (colourblock) and £50 (reversible)",
+      "Fair condition item sold for £34, closest to this grade B with a stain",
+      "Grade B with visible sleeve stain pulls price toward lower end of Good/Fair range",
+      "Excellent/Very Good comps (£60-72) not comparable due to condition gap"
+    ]
+  },
+  "item-086": {
+    "itemId": "item-086",
+    "estimate": 58,
+    "low": 50,
+    "high": 65,
+    "evidence": [
+      "Adidas Samba OG Black White UK9 sold £55 (Very Good) - this item is grade A so should exceed that",
+      "Adidas Samba OG Cream UK10 sold £62 (Very Good), a comparable ceiling",
+      "Adidas Samba Classic Leather UK7 (Excellent) sold £48, lower size/spec but strong condition",
+      "Gazelle comps excluded as different silhouette, only used as weak reference",
+      "Grade A with no defects supports pricing near upper-mid range of Samba OG comps"
+    ]
+  },
+  "item-087": {
+    "itemId": "item-087",
+    "estimate": 38,
+    "low": 32,
+    "high": 42,
+    "evidence": [
+      "Adidas Samba Green Leather UK9 Rare (Good) sold £58 - condition better, discount for grade B scuffed soles",
+      "Adidas Samba Classic Leather UK7 (Excellent) sold £48 - our item is lower grade B with defects",
+      "Adidas Samba OG Black White (Very Good) sold £55 - suggests true Samba comps trend mid-50s for good condition",
+      "Grade B with scuffed soles warrants ~25-30% discount from Good/Very Good comps, landing near £35-40"
+    ]
+  },
+  "item-088": {
+    "itemId": "item-088",
+    "estimate": 28,
+    "low": 22,
+    "high": 33,
+    "evidence": [
+      "Adidas Samba OG Black/White UK9, Very Good, sold £55 - baseline for good condition Sambas",
+      "Adidas Samba Green Leather UK9, Good, sold £58 - shows demand for good condition even with minor wear",
+      "Adidas Gazelle Grey Suede UK6, Fair, sold £35 - closest comp for lower condition grade",
+      "Item has Grade C condition with multiple defects (scuffed soles, loose stitching, stain), warranting significant discount vs Good/Very Good comps (~50% of £55-58 range)",
+      "Loose stitching and stain are notable defects that reduce buyer confidence beyond simple wear, justifying pricing near or below the Fair-grade Gazelle comp"
+    ]
+  },
+  "item-089": {
+    "itemId": "item-089",
+    "estimate": 58,
+    "low": 50,
+    "high": 65,
+    "evidence": [
+      "Adidas Samba Classic Leather UK 7 Worn Twice sold £48 (Excellent condition, closest true Samba comp)",
+      "Adidas Samba OG Black White UK 9 sold £55 (Very Good)",
+      "Adidas Samba OG Cream UK 10 sold £62 (Very Good)",
+      "Adidas Samba Green Leather UK 9 sold £58 (Good, rare colourway)",
+      "Item is Grade A (no defects), so priced at upper-mid range of Samba-specific comps, excluding lower Gazelle comps as different model"
+    ]
+  },
+  "item-090": {
+    "itemId": "item-090",
+    "estimate": 36,
+    "low": 30,
+    "high": 42,
+    "evidence": [
+      "Adidas Samba OG Black White UK9 sold £55 (Very Good) - baseline for Sambas in solid condition",
+      "Adidas Samba Green Leather UK9 sold £58 (Good) - shows Good condition still commands premium colourway pricing",
+      "Adidas Gazelle Grey Suede Fair condition sold £35 - closest comp for Grade B/defect-laden vintage trainers",
+      "Item has scuffed soles and toe stain, pulling price toward the Fair-condition Gazelle comp (£35) rather than Good/VG Samba comps (£48-58)",
+      "Samba-specific demand premium justifies pricing slightly above the Fair Gazelle comp despite condition penalty"
+    ]
+  },
+  "item-091": {
+    "itemId": "item-091",
+    "estimate": 48,
+    "low": 40,
+    "high": 55,
+    "evidence": [
+      "Levi's 501 Made in USA Dark Wash W34 L30 sold £52 (very good) - closest condition comp",
+      "Levi's 501 Distressed W33 sold £41 (good) - baseline for standard faded blue",
+      "Levi's 501 Vintage Faded Blue W32 L32 sold £38 (good) - directly matches faded blue colorway but lower grade",
+      "Grade A condition with no defects supports pricing above 'good' comps, near 'very good' tier",
+      "Excludes outlier Big E Redline Selvedge (£95) as rarer premium variant not comparable to standard 501"
+    ]
+  },
+  "item-092": {
+    "itemId": "item-092",
+    "estimate": 32,
+    "low": 27,
+    "high": 38,
+    "evidence": [
+      "Levi's 501 Vintage Faded Blue Jeans (good) sold £38 - comparable dark wash but this item has more wear/defects, so discount below",
+      "Levi's 501 Distressed Jeans (good) sold £41 - similar era but distressing intentional vs unwanted fraying here",
+      "Levi's 501 Black Denim (fair condition) sold £29 - closer analog given grade B with defects (fading, fraying)",
+      "Excludes premium comps (Big E Selvedge £95, Made in USA £52) as not representative of standard 2000s dark wash 501 in grade B",
+      "Fading on thighs and hem fraying justify pricing near the lower-mid range of standard 501 comps"
+    ]
+  },
+  "item-093": {
+    "itemId": "item-093",
+    "estimate": 26,
+    "low": 20,
+    "high": 30,
+    "evidence": [
+      "Fair condition comp (Black Denim W30 L32) sold for £29 - closest match for grade C condition",
+      "Good condition comps (Vintage Faded W32, Light Wash W28) sold £33-38, but item-093 has additional defects (repaired seam, hole at knee) warranting discount below these",
+      "1980s era typically adds premium, but heavy fading, repaired seam, and hole at knee significantly offset vintage desirability",
+      "Estimate set below the fair-condition comp due to structural defects (hole, repaired seam) beyond simple fading/wear"
+    ]
+  },
+  "item-094": {
+    "itemId": "item-094",
+    "estimate": 55,
+    "low": 45,
+    "high": 65,
+    "evidence": [
+      "Levi's 501 Made in USA Dark Wash W34 L30, very good condition, sold £52 - closest condition match",
+      "Levi's 501 Big E Redline Selvedge W36, excellent condition, sold £95 - shows premium ceiling for rare/exceptional pieces, not directly comparable",
+      "Grade A (no defects) condition on this 1990s piece justifies pricing above the 'good' condition comps (£33-41) and near/above the 'very good' comp",
+      "Standard 90s vintage cut without rare selvedge/redline features keeps this below the £95 outlier"
+    ]
+  },
+  "item-095": {
+    "itemId": "item-095",
+    "estimate": 33,
+    "low": 28,
+    "high": 38,
+    "evidence": [
+      "Excludes rare Big E selvedge (£95) as non-comparable premium item",
+      "Comparable to 'good' condition comps: W32 faded blue (£38) and light wash (£33)",
+      "Grade B with whiskering fade defect pulls price toward lower-mid range vs very good condition comp (£52)",
+      "Above 'fair' condition comp (£29) since defect is cosmetic wear pattern, not damage",
+      "Distressed W33 comp at £41 slightly higher but distressing is a style feature, not equivalent defect"
+    ]
+  },
+  "item-096": {
+    "itemId": "item-096",
+    "estimate": 32,
+    "low": 27,
+    "high": 37,
+    "evidence": [
+      "Levi's 501 Light Wash Straight Leg W28 L30 sold for £33 (good condition) - closest match in wash/style",
+      "Levi's 501 Vintage Faded Blue Jeans sold for £38 (good) but item here is grade B with repaired belt loop, warranting discount",
+      "Levi's 501 Black Denim (fair condition) sold for £29, showing lower end for grade B/C items",
+      "Grade B condition with fading and a repaired belt loop pushes estimate toward lower-mid range of comps"
+    ]
+  },
+  "item-097": {
+    "itemId": "item-097",
+    "estimate": 80,
+    "low": 65,
+    "high": 95,
+    "evidence": [
+      "Levi's 501 Big E Redline Selvedge W36 sold for £95 (excellent condition) - closest comp given rare selvedge/vintage Made in USA construction",
+      "Standard 501 vintage jeans in good/very good condition sold £33-£52, but this item lacks selvedge premium data beyond the Big E comp",
+      "Grade A with no defects and true vintage 1980s USA-made selvedge denim commands top-tier pricing similar to the Big E redline comp",
+      "Setting estimate slightly below the £95 selvedge comp to account for size/model uncertainty, with range reflecting collector demand variability"
+    ]
+  },
+  "item-098": {
+    "itemId": "item-098",
+    "estimate": 65,
+    "low": 58,
+    "high": 70,
+    "evidence": [
+      "Levi's Type III Trucker Jacket Light Wash XL sold for £62 in 'excellent' condition - closest comp to grade A",
+      "Vintage Levi's Denim Trucker Jacket Faded L sold for £58 in 'very good' condition",
+      "Sherpa lined variant sold for £75 but that includes added lining value, not directly comparable",
+      "Standard 1990s Type III trucker in grade A (no defects) should price above 'good' condition comps (£45-50) and near/at 'excellent' comp (£62)"
+    ]
+  },
+  "item-099": {
+    "itemId": "item-099",
+    "estimate": 40,
+    "low": 34,
+    "high": 45,
+    "evidence": [
+      "Levi's Trucker Jacket Black S sold $40 (fair condition) - closest comp given grade B/defects",
+      "Levi's Trucker Jacket Type III Blue M sold $45 (good) - upper bound for this grade",
+      "Faded black colorway and missing button justify discount vs good/very good comps ($50-58)",
+      "Sherpa lined and excellent condition comps ($62-75) not comparable due to added value features/condition"
+    ]
+  },
+  "item-100": {
+    "itemId": "item-100",
+    "estimate": 32,
+    "low": 26,
+    "high": 38,
+    "evidence": [
+      "Levi's Trucker Jacket Black S (fair condition) sold for £40 - closest condition comp",
+      "Most comps in good/very good/excellent condition sold £45-75, well above this grade C item",
+      "Grade C with repaired seam, missing rivets, and heavy fading warrants discount below the fair-condition comp",
+      "1980s vintage appeal offsets some defect discount but functional/structural flaws (missing rivets) cap upside"
+    ]
+  },
+  "item-101": {
+    "itemId": "item-101",
+    "estimate": 48,
+    "low": 38,
+    "high": 58,
+    "evidence": [
+      "Vintage Levi's Type II is a desirable rare model, adding premium over common Type III comps",
+      "Levi's Trucker Jacket Type III Blue M sold $45 (good condition) - baseline comp",
+      "Vintage Levi's Denim Trucker Jacket Faded L sold $58 (very good) - fading alone doesn't tank price much, but this item is graded B with worn cuffs, a step below",
+      "Levi's Trucker Jacket Black S sold $40 (fair) - shows condition floor for grade B/C items",
+      "Condition grade B with worn cuffs and fading pulls estimate toward lower-mid range of comps despite Type II rarity premium"
+    ]
+  },
+  "item-102": {
+    "itemId": "item-102",
+    "estimate": 62,
+    "low": 55,
+    "high": 68,
+    "evidence": [
+      "Levi's Type III Trucker Jacket Light Wash XL sold £62 (excellent condition) - closest comp for grade A, no sherpa/special features",
+      "Vintage Levi's Denim Trucker Jacket Faded L sold £58 (very good) supports similar range",
+      "Levi's Denim Trucker Jacket Stonewash L sold £50 (good) sets a lower bound for lesser condition",
+      "Sherpa lined comp (£75) excluded as it's a distinct, more desirable variant not matching this classic blue wash item",
+      "Grade A condition with no defects justifies pricing at the higher end of standard trucker comps"
+    ]
+  },
+  "item-103": {
+    "itemId": "item-103",
+    "estimate": 48,
+    "low": 38,
+    "high": 55,
+    "evidence": [
+      "Sherpa lined trucker comp sold for £75 in 'good' condition - premium for sherpa lining vs standard denim trucker",
+      "This item is grade B with fading and small tear, below 'good' condition, warranting significant discount",
+      "Fair condition Black S trucker sold for £40 as a low-condition benchmark",
+      "Standard trucker jackets in good condition (£45-50) set a baseline before the sherpa premium",
+      "Applying sherpa premium (~+15-20) to a fair/poor condition base (~£35-40) yields estimate around £48, discounted from the £75 comp due to visible defects"
+    ]
+  },
+  "item-104": {
+    "itemId": "item-104",
+    "estimate": 62,
+    "low": 55,
+    "high": 70,
+    "evidence": [
+      "Dr Martens 1460 Boots Smooth Black UK10, excellent condition, sold £52 - similar style but this listing is graded A (no defects), slightly higher warranted",
+      "Vintage Dr Martens Made in England Boots UK7, very good condition, sold £75 - upper end for well-preserved 1460 style boots",
+      "Dr Martens 1460 8 Eye Boots Black UK8, good condition, sold £48 - baseline for standard condition comparable model",
+      "Grade A with no defects supports pricing toward the higher-middle range of comps, reflecting minimal wear and strong resale appeal for the classic 1460 8-eye style"
+    ]
+  },
+  "item-105": {
+    "itemId": "item-105",
+    "estimate": 42,
+    "low": 35,
+    "high": 48,
+    "evidence": [
+      "Direct comp: Dr Martens 1461 Shoes Cherry Red UK9, fair condition, sold £40 - closest match in style/colorway",
+      "Grade B with worn heels and scuffed toe is comparable to or slightly better than 'fair' condition comp",
+      "Other comps (1460, Jadon, 1490) are different styles/boots selling £48-75 in good/excellent condition, less directly comparable",
+      "Given defects noted, pricing slightly above the 'fair' comp reflects grade B vs fair, but discounted from 'good' condition pricing (£48-58) due to visible wear"
+    ]
+  },
+  "item-106": {
+    "itemId": "item-106",
+    "estimate": 32,
+    "low": 25,
+    "high": 40,
+    "evidence": [
+      "Vintage MIE Dr Martens (very good) sold £75 - our item is significantly worse condition (grade C)",
+      "Fair condition 1461 sold £40 - closest condition match, but our item has additional structural defects (sole separation)",
+      "Good condition comps (£48-65) all outperform due to better condition",
+      "Sole separation and cracked leather are significant functional/cosmetic defects that push toward lower end even vs the 'fair' comp",
+      "Made in England vintage heritage adds some collector value offsetting condition issues, keeping estimate above rock-bottom"
+    ]
+  },
+  "item-107": {
+    "itemId": "item-107",
+    "estimate": 78,
+    "low": 70,
+    "high": 88,
+    "evidence": [
+      "Direct comp: Dr Martens Jadon Platform Boots Black UK6 sold £65 in 'good' condition - this item is grade A (better condition), justifying uplift",
+      "Dr Martens 1460 Smooth Black UK10 sold £52 in 'excellent' condition, but Jadon platforms typically command a premium over standard 1460s",
+      "Vintage Made in England boots sold £75 in 'very good' condition, showing strong demand for well-preserved DMs",
+      "Jadon platform style is more sought-after than basic 1460/1461 models, supporting price above the £48-58 range seen for standard styles",
+      "No defects and grade A condition support pricing near the top of the observed comp range"
+    ]
+  },
+  "item-108": {
+    "itemId": "item-108",
+    "estimate": 45,
+    "low": 38,
+    "high": 52,
+    "evidence": [
+      "Direct comp: Dr Martens 1490 10 Eye Boots Brown UK9 sold £58 in 'good' condition - closest match but grade B with defects here warrants discount",
+      "Dr Martens 1460 8 Eye Boots Black UK8 sold £48 in 'good' condition, similar model tier",
+      "Dr Martens 1461 Shoes Cherry Red sold £40 in 'fair' condition, sets a floor for lesser condition Dr Martens",
+      "1990s vintage 1490 10-eye is a desirable model, but scuff marks and worn heels align this with fair-to-good condition rather than very good/excellent comps",
+      "Excellent condition 1460 sold £52, suggesting grade B item should sit below this given visible defects"
+    ]
+  },
+  "item-109": {
+    "itemId": "item-109",
+    "estimate": 42,
+    "low": 36,
+    "high": 48,
+    "evidence": [
+      "Dr Martens 1460 8 Eye Boots UK8, good condition, sold £48 - similar grade but no defects noted",
+      "Dr Martens 1461 Shoes Cherry Red UK9, fair condition, sold £40 - closest condition match with defects",
+      "Dr Martens 1490 10 Eye Boots Brown UK9, good, sold £58 - higher due to better condition",
+      "Grade B with creasing and worn sole justifies discount below 'good' condition comps, positioned near the 'fair' condition comp but slightly higher given standard Chelsea style demand"
+    ]
+  },
+  "item-110": {
+    "itemId": "item-110",
+    "estimate": 55,
+    "low": 48,
+    "high": 65,
+    "evidence": [
+      "Dr Martens 1460 Boots Smooth Black UK10 sold £52 (excellent) - closest match, standard 1460 style",
+      "Dr Martens 1460 8 Eye Boots Black UK8 sold £48 (good condition) - lower comp due to lesser condition",
+      "Dr Martens Jadon Platform Boots Black UK6 sold £65 (good) - higher due to premium Jadon line, not directly comparable",
+      "Vegan 1460 is a standard, high-demand model; grade A (no defects) supports pricing at or slightly above the excellent-condition comp"
+    ]
+  },
+  "item-111": {
+    "itemId": "item-111",
+    "estimate": 95,
+    "low": 75,
+    "high": 115,
+    "evidence": [
+      "Comps range £60-130 for generic vintage leather biker jackets in Fair-Excellent condition, unbranded",
+      "Schott is a premium, sought-after brand for biker jackets, commanding a premium over unbranded comps like the £60-95 examples",
+      "Condition grade B with cracked leather and worn cuffs pulls value down from top of range, similar to 'Fair' condition comp at £60 but brand premium offsets this",
+      "Closest comps: 'Vintage Black Leather Jacket Zip Up 80s Style' (£60, Fair) and '90s Leather Biker Jacket Quilted Shoulders' (£68, Good) set a base, with Schott brand justifying uplift to ~£95",
+      "High end capped below top comps (£110-130) since those were Excellent/Very Good condition with no defects noted, unlike this Grade B item"
+    ]
+  },
+  "item-112": {
+    "itemId": "item-112",
+    "estimate": 50,
+    "low": 40,
+    "high": 62,
+    "evidence": [
+      "Fair-condition comp 'Vintage Black Leather Jacket Zip Up 80s Style' sold £60 - closest condition analog",
+      "Good-condition comps (Biker Jacket Belted £75, Quilted Shoulders £68) set upper bound but this item is grade C, below 'Good'",
+      "Cracked leather, repaired lining, and patina are significant defects warranting discount below the Fair comp",
+      "Wilsons Leather is a recognizable but not premium brand, keeping estimate mid-range rather than near Very Good comps (£95-£130)"
+    ]
+  },
+  "item-113": {
+    "itemId": "item-113",
+    "estimate": 80,
+    "low": 65,
+    "high": 95,
+    "evidence": [
+      "Unbranded jacket lacks premium brand markup, limiting ceiling vs branded comps",
+      "Vintage Brown Leather Biker Jacket (Good) sold $75 - similar tier, this item in better (A) condition",
+      "90s Leather Biker Jacket Quilted (Good) sold $68 - baseline for basic leather jackets",
+      "Genuine Leather Bomber (Very Good) sold $95 - upper bound given lack of standout styling features",
+      "No defects and grade A condition support pricing above the Good-condition comps but below premium styled pieces like the Aviator/Trench (which have distinctive design elements this classic zip-up lacks)"
+    ]
+  },
+  "item-114": {
+    "itemId": "item-114",
+    "estimate": 78,
+    "low": 65,
+    "high": 92,
+    "evidence": [
+      "Genuine Leather Bomber Jacket Vintage Tan sold £95 (Very Good) - closest tan/style match but better condition",
+      "Vintage Aviator Style Leather Jacket Shearling Collar sold £130 (Very Good) - premium aviator style, higher condition, not directly comparable",
+      "Vintage Brown Leather Biker Jacket 90s Belted sold £75 (Good) - similar tone, grade B item likely tracks near this",
+      "90s Leather Biker Jacket Quilted Shoulders sold £68 (Good) - reflects lower end for Grade B/used pieces",
+      "Condition grade B with patina and worn elbows justifies discount from top-tier Very Good comps toward the £75-95 range, landing near £78 estimate"
+    ]
+  },
+  "item-115": {
+    "itemId": "item-115",
+    "estimate": 45,
+    "low": 35,
+    "high": 55,
+    "evidence": [
+      "Closest style comp: 'Vintage Leather Trench Coat Black Long' sold for £110 in Excellent condition - our item is unbranded, grade C with cracked leather, missing button, and repaired seam, warranting a heavy discount.",
+      "'Vintage Black Leather Jacket Zip Up 80s Style' sold for £60 in Fair condition - similar low-grade condition benchmark, though trench coats typically carry slight premium over jackets.",
+      "Multiple defects (cracked leather, missing button, repaired seam) stack discounts beyond typical 'Fair' grade comps, pushing estimate below the £60 Fair-condition comp.",
+      "Full-length trench style retains some value over standard biker/bomber jackets, keeping estimate above the lowest comps despite condition issues."
+    ]
+  },
+  "item-116": {
+    "itemId": "item-116",
+    "estimate": 190,
+    "low": 160,
+    "high": 230,
+    "evidence": [
+      "Comps provided are generic unbranded/vintage leather jackets selling £60-130, but this is a Schott, a premium recognized moto jacket brand with strong resale demand",
+      "Schott moto jackets typically command significant premium over generic vintage leather jackets due to brand reputation and quality construction",
+      "Condition grade A with no defects supports upper-range pricing within brand-adjusted comp set",
+      "Aviator/shearling comp at £130 (Very Good) sets a ceiling for generic vintage leather; branded Schott in A condition should exceed this by 40-70%",
+      "Asymmetric zip moto styling is a classic, in-demand silhouette adding to resale appeal"
+    ]
+  },
+  "item-117": {
+    "itemId": "item-117",
+    "estimate": 62,
+    "low": 50,
+    "high": 70,
+    "evidence": [
+      "Vintage Black Leather Jacket Zip Up 80s Style sold £60 in Fair condition - closest comp for grade B with defects",
+      "90s Leather Biker Jacket Quilted Shoulders sold £68 in Good condition, slightly better condition than this item",
+      "Vintage Brown Leather Biker Jacket sold £75 in Good condition - upper bound reference but this item has patina/cracking so discounted below",
+      "Unbranded status and blazer cut (less iconic than biker/bomber styles) supports mid-lower pricing",
+      "Patina and light cracking justify discount versus Good/Very Good comps toward the Fair-condition price point"
+    ]
+  },
+  "item-118": {
+    "itemId": "item-118",
+    "estimate": 70,
+    "low": 62,
+    "high": 78,
+    "evidence": [
+      "Vintage Levi's Silver Tab Wide Leg W36 (Very Good) sold £65 - closest condition comp for baggy jeans",
+      "Levi's Silver Tab Jacket (Excellent) sold £80, showing top-grade items command premium",
+      "Good-condition baggy jeans (W34, W30) sold £58 and £50, so Grade A (no defects) should sit above these",
+      "Fair condition items (W32, W38) sold £42-45, confirming condition heavily impacts price",
+      "Grade A with no defects justifies pricing near/above the Very Good comp, slightly below the jacket's excellent-grade ceiling"
+    ]
+  },
+  "item-119": {
+    "itemId": "item-119",
+    "estimate": 46,
+    "low": 40,
+    "high": 52,
+    "evidence": [
+      "Levi's Silver Tab Loose Fit W32 L32 (Fair) sold $45 - closest match in fit type and condition",
+      "Levi's Silver Tab Relaxed Fit W38 (Fair) sold $42 - similar condition grade",
+      "Levi's Silver Tab Baggy W30 (Good) sold $50 - slightly better condition than this item",
+      "Item is grade B with fading and hem wear, placing it between the Fair and Good comps",
+      "Higher comps (Very Good/Excellent, $65-80) not applicable due to condition gap"
+    ]
+  },
+  "item-120": {
+    "itemId": "item-120",
+    "estimate": 36,
+    "low": 30,
+    "high": 42,
+    "evidence": [
+      "Fair condition comps: Loose Fit W32 sold £45, Relaxed Fit W38 sold £42 - closest baseline for grade C",
+      "Good condition comps (Baggy W34 £58, Baggy W30 £50) set ceiling, but this item is below 'Fair' due to repaired seam, heavy fading, and small tear",
+      "Grade C with multiple defects (repair, tear, heavy fade) warrants discount below the Fair-condition £42-45 range",
+      "Estimate ~£36 reflects further deduction from Fair comps for the tear and repair, which typically hurt resale more than fading alone"
+    ]
+  },
+  "item-121": {
+    "itemId": "item-121",
+    "estimate": 46,
+    "low": 40,
+    "high": 50,
+    "evidence": [
+      "Levi's Silver Tab Loose Fit W32L32, Fair condition, sold $45 - closest comp for grade B with fading",
+      "Levi's Silver Tab Relaxed Fit W38, Fair condition, sold $42 - similar low-grade comp",
+      "Good condition jeans (W34, W30) sold $58/$50, but this item is lower grade B with fading defect, so priced below those",
+      "Excluding jacket comp ($80) as different item type"
+    ]
+  },
+  "item-122": {
+    "itemId": "item-122",
+    "estimate": 70,
+    "low": 62,
+    "high": 78,
+    "evidence": [
+      "Vintage Levi's Silver Tab Wide Leg W36 (Very Good) sold £65 - closest condition comp for baggy jeans",
+      "Levi's Silver Tab Jacket (Excellent) sold £80, but jackets typically trend higher than jeans",
+      "Good condition jeans comps (Baggy W34 £58, Baggy W30 £50) sit below grade A due to lower condition rating",
+      "Grade A with no defects justifies premium above the Good/Fair tier comps (£42-58), landing near the Very Good £65 comp plus a small uplift for pristine, no-defect condition"
+    ]
+  },
+  "item-123": {
+    "itemId": "item-123",
+    "estimate": 45,
+    "low": 38,
+    "high": 50,
+    "evidence": [
+      "Levi's Silver Tab Relaxed Fit Jeans W38 90s sold £42 (Fair condition) - closest match in fit and grade",
+      "Levi's Silver Tab Loose Fit Denim W32 L32 sold £45 (Fair condition) - similar low-grade comp",
+      "Jacket and Very Good/Excellent condition comps (£65-£80) excluded as not comparable to Grade B jeans",
+      "Item has fading and worn knees, similar to 'Fair' condition comps rather than 'Good'/'Very Good' ones",
+      "Estimate set slightly below Fair-condition average given visible defects noted"
+    ]
+  },
+  "item-124": {
+    "itemId": "item-124",
+    "estimate": 62,
+    "low": 55,
+    "high": 70,
+    "evidence": [
+      "Vintage Tan Suede Jacket 70s Style Collared sold £70 (Good condition) - similar tan colorway, this item is grade B so slightly below",
+      "Suede Trucker Jacket Vintage Brown 90s sold £62 (Good) - comparable condition tier",
+      "Vintage Suede Bomber Jacket Brown 80s sold £55 (Fair) - sets lower bound for defect-laden pieces",
+      "Higher comps (Blazer £78 Excellent, Fringe £90 Very Good, Coat £105 Very Good) reflect better condition or distinct styling, not directly comparable to grade B with patina/scuffing",
+      "Grade B with patina and light scuffing pulls estimate toward the Good-condition comps rather than Very Good/Excellent tier"
+    ]
+  },
+  "item-125": {
+    "itemId": "item-125",
+    "estimate": 85,
+    "low": 75,
+    "high": 95,
+    "evidence": [
+      "Vintage Suede Blazer Jacket Tan Fitted sold £78 (Excellent condition) - closest condition match",
+      "Suede Fringe Jacket Vintage Western Style sold £90 (Very Good) - similar tier",
+      "Grade A condition with no defects supports pricing at upper-mid range of comps",
+      "Suede Trucker Jacket Brown 90s sold £62 (Good) sets lower bound given better condition here",
+      "Bomber silhouette and brown suede align well with mid-to-upper comps rather than lower Fair-grade sales"
+    ]
+  },
+  "item-126": {
+    "itemId": "item-126",
+    "estimate": 45,
+    "low": 38,
+    "high": 52,
+    "evidence": [
+      "Comparable to Suede Bomber Jacket (Fair, £55) but this item has more defects (cracked trim, repaired seam) so priced below that",
+      "Good condition comps (Tan Suede Jacket £70, Trucker £62) set a ceiling well above this Grade C item",
+      "Grade C condition with multiple defects (patina, cracked leather trim, repaired seam) warrants significant discount from Good/Very Good comps",
+      "Unbranded 1970s suede jacket lacks designer premium seen in higher comps like the Camel coat (£105)"
+    ]
+  },
+  "item-127": {
+    "itemId": "item-127",
+    "estimate": 58,
+    "low": 48,
+    "high": 65,
+    "evidence": [
+      "Vintage Suede Blazer Jacket Tan Fitted sold £78 in Excellent condition - closest archetype match but our item is grade B, discount applied",
+      "Vintage Tan Suede Jacket 70s Style sold £70 in Good condition, similar tone/era",
+      "Vintage Suede Bomber Jacket Brown 80s sold £55 in Fair condition - comparable defect level (staining/wear) justifies similar low-end pricing",
+      "Suede Trucker Jacket sold £62 in Good condition, slightly above our grade due to no noted defects",
+      "Condition grade B with light staining and worn cuffs pulls estimate toward lower-middle of comp range, above the Fair-condition comp but below Good/Very Good tier"
+    ]
+  },
+  "item-128": {
+    "itemId": "item-128",
+    "estimate": 80,
+    "low": 70,
+    "high": 90,
+    "evidence": [
+      "Suede Trucker Jacket Vintage Brown 90s sold £62 (Good condition) - direct archetype match, our item is grade A so higher",
+      "Vintage Suede Blazer Jacket Tan Fitted sold £78 (Excellent condition) - closest condition comp",
+      "Suede Fringe Jacket Vintage Western Style sold £90 (Very Good) - upper bound reference",
+      "No defects and unbranded but clean trucker style justifies mid-to-upper range pricing"
+    ]
+  },
+  "item-129": {
+    "itemId": "item-129",
+    "estimate": 65,
+    "low": 55,
+    "high": 75,
+    "evidence": [
+      "Suede Fringe Jacket Vintage Western Style sold £90 (Very Good) - most similar archetype with fringe detail, but our item is condition B with patina/worn fringe, warranting discount",
+      "Vintage Tan Suede Jacket 70s Style sold £70 (Good) - close era/style comp, similar condition tier",
+      "Suede Trucker Jacket Vintage Brown 90s sold £62 (Good) - supports lower-mid range for Good/B-grade suede",
+      "Vintage Suede Bomber Jacket sold £55 (Fair) - sets floor for lesser condition suede jackets",
+      "Applied discount from Very Good/Excellent comps due to grade B defects (patina, worn fringe) reducing desirability vs pristine examples"
+    ]
   }
 }

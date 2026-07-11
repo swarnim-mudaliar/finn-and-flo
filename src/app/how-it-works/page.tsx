@@ -103,7 +103,7 @@ export default function HowItWorks() {
             border="border-finn/25"
             role="buys for the reseller"
             lines={[
-              'Takes your brief — “workwear my shop can flip fast, £180 max” — scouts the whole catalog, and picks the bundle himself.',
+              'Takes your brief — “workwear my shop can flip fast, £180 max” — scouts every supplier’s stock, and picks the supplier and the bundle himself.',
               'Your spend ceiling becomes a hard cap enforced in code, alongside the maximum derived from the shop’s margins.',
               'Haggles evidence-first: every offer anchored to the oracle’s comps — and declines upsells that don’t serve the brief.',
             ]}

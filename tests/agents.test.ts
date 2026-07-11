@@ -9,7 +9,8 @@ function neg(over: Partial<NegotiationState> = {}): NegotiationState {
     id: 'n-prompt-test',
     buyerId: market.buyers[0].id,
     sellerId: market.sellers[0].id,
-    bundleItemIds: market.items.slice(0, 3).map((i) => i.id),
+    // A negotiation is with one supplier — bundle from that seller's own stock.
+    bundleItemIds: market.itemsOf(market.sellers[0].id).slice(0, 3).map((i) => i.id),
     turn: 'buyer',
     status: 'active',
     round: 0,
@@ -20,14 +21,20 @@ function neg(over: Partial<NegotiationState> = {}): NegotiationState {
 }
 
 describe('buildSystemPrompt', () => {
-  it('gives Flo an upsell shelf of items outside the bundle', () => {
-    const p = buildSystemPrompt(getMarket(), neg(), 'seller');
+  it('gives Flo an upsell shelf of the seller\'s own items outside the bundle', () => {
+    const market = getMarket();
+    const n = neg();
+    const p = buildSystemPrompt(market, n, 'seller');
     expect(p).toContain('UPSELL');
     expect(p).toContain('upsell shelf');
-    // shelf must not contain bundle items
-    const bundleIds = neg().bundleItemIds;
     const shelfSection = p.split('upsell shelf')[1].split('PRIVATE')[0];
-    for (const id of bundleIds) expect(shelfSection).not.toContain(`- ${id}:`);
+    // shelf must not contain bundle items
+    for (const id of n.bundleItemIds) expect(shelfSection).not.toContain(`- ${id}:`);
+    // shelf must contain ONLY the negotiation seller's items
+    const sellerIds = new Set(market.itemsOf(n.sellerId).map((i) => i.id));
+    const shelfIds = [...shelfSection.matchAll(/- (item-\d+):/g)].map((m) => m[1]);
+    expect(shelfIds.length).toBeGreaterThan(0);
+    for (const id of shelfIds) expect(sellerIds.has(id)).toBe(true);
   });
 
   it('includes the owner brief and scout notes in Finn prompt when present', () => {
@@ -65,22 +72,47 @@ describe('brief spend ceiling', () => {
 });
 
 describe('scoutBundle', () => {
-  it('returns validated item ids and filters hallucinated ones', async () => {
+  it('returns the chosen supplier plus validated item ids, filtering hallucinated ones', async () => {
     const market = getMarket();
-    const real = market.items.slice(0, 3).map((i) => i.id);
+    const seller = market.sellers[0];
+    const real = market.itemsOf(seller.id).slice(0, 3).map((i) => i.id);
     const llm = vi.fn().mockResolvedValue({
+      sellerId: seller.id,
       itemIds: [...real, 'item-999-fake'],
       rationale: 'good velocity',
       openingPlan: 'open at 30%',
     });
     const r = await scoutBundle(market, market.buyers[0].id, 'workwear please', llm as never);
+    expect(r.sellerId).toBe(seller.id);
     expect(r.itemIds).toEqual(real);
     expect(r.rationale).toBe('good velocity');
   });
 
+  it('filters out items belonging to a supplier other than the one chosen', async () => {
+    const market = getMarket();
+    const chosen = market.sellers[0];
+    const other = market.sellers[1];
+    const own = market.itemsOf(chosen.id).slice(0, 2).map((i) => i.id);
+    const foreign = market.itemsOf(other.id).slice(0, 2).map((i) => i.id);
+    const llm = vi.fn().mockResolvedValue({
+      sellerId: chosen.id,
+      itemIds: [...own, ...foreign],
+      rationale: 'mixed picks',
+      openingPlan: 'open low',
+    });
+    const r = await scoutBundle(market, market.buyers[0].id, 'brief', llm as never);
+    expect(r.itemIds).toEqual(own);
+    for (const id of foreign) expect(r.itemIds).not.toContain(id);
+  });
+
   it('throws when no valid ids survive', async () => {
     const market = getMarket();
-    const llm = vi.fn().mockResolvedValue({ itemIds: ['nope'], rationale: 'x', openingPlan: 'y' });
+    const llm = vi.fn().mockResolvedValue({
+      sellerId: market.sellers[0].id,
+      itemIds: ['nope'],
+      rationale: 'x',
+      openingPlan: 'y',
+    });
     await expect(scoutBundle(market, market.buyers[0].id, 'brief', llm as never)).rejects.toThrow();
   });
 });

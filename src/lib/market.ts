@@ -81,6 +81,10 @@ export class Market {
     return this.relationships.find((r) => r.buyerId === buyerId && r.sellerId === sellerId);
   }
 
+  itemsOf(sellerId: string) {
+    return this.items.filter((i) => i.sellerId === sellerId);
+  }
+
   bundleValue(itemIds: string[]): number {
     return Math.round(itemIds.reduce((sum, id) => sum + (this.oracle[id]?.estimate ?? 0), 0));
   }
@@ -109,7 +113,7 @@ export class Market {
       bundleOracleValue: (ids) => this.bundleValue(ids),
       buyerMax: (ids) => this.effectiveBuyerMax(neg, ids),
       sellerFloor: (ids) => this.sellerFloor(neg.sellerId, ids),
-      inventoryIds: new Set(this.items.map((i) => i.id)),
+      inventoryIds: new Set(this.itemsOf(neg.sellerId).map((i) => i.id)),
     };
   }
 }

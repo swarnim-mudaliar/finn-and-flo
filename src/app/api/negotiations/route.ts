@@ -12,6 +12,16 @@ export async function POST(req: Request): Promise<Response> {
   const market = getMarket();
   if (!itemIds?.length) return Response.json({ error: 'itemIds required' }, { status: 400 });
 
+  // A negotiation is with a single supplier — every item must belong to that seller.
+  const sellerItemIds = new Set(market.itemsOf(sellerId).map((i) => i.id));
+  const foreign = itemIds.filter((id) => !sellerItemIds.has(id));
+  if (foreign.length > 0) {
+    return Response.json(
+      { error: `items do not belong to ${sellerId}: ${foreign.join(', ')}` },
+      { status: 400 }
+    );
+  }
+
   // Public-deployment cost guard: each negotiation is ~10 live LLM calls. Cap the
   // total this server will run; replays stay free and unlimited.
   if (market.negotiations.size >= 60) {

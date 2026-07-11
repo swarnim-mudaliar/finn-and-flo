@@ -31,9 +31,9 @@ describe('runNegotiation', () => {
     const market = getMarket();
     const buyer = market.buyers[0];
     const seller = market.sellers[0];
-    // Widen the slice so the fake accept price (£60) is within buyer max
-    // (first 3 items give a max of £49; first 5 give £118).
-    const itemIds = market.items.slice(0, 5).map((i) => i.id);
+    // Widen the slice so the fake accept price is within buyer max, and keep all
+    // items with the negotiation's seller (a negotiation is single-supplier).
+    const itemIds = market.itemsOf(seller.id).slice(0, 5).map((i) => i.id);
     const neg: NegotiationState = {
       id: 'n-test', buyerId: buyer.id, sellerId: seller.id, bundleItemIds: itemIds,
       turn: 'buyer', status: 'active', round: 0, roundCap: 8,
@@ -71,7 +71,7 @@ describe('runNegotiation', () => {
     const market = getMarket();
     const neg: NegotiationState = {
       id: 'n-reject', buyerId: market.buyers[0].id, sellerId: market.sellers[0].id,
-      bundleItemIds: market.items.slice(0, 3).map((i) => i.id),
+      bundleItemIds: market.itemsOf(market.sellers[0].id).slice(0, 3).map((i) => i.id),
       turn: 'seller', status: 'pending_approval', agreedPrice: 70, round: 4, roundCap: 8,
       control: { buyer: 'human', seller: 'human' }, // humans hold both sides so no LLM runs
       approvals: {},

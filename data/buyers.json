@@ -30,5 +30,22 @@
     "salesNotes": "Chore coats and waxed jackets in French/British brands (Le Laboureur, Barbour) consistently sell within 2 weeks at £70-£120, strong repeat customer base. Canvas trousers sell steadily but slower, roughly 3-4 weeks average, priced £45-£65. Wool jumpers with moth damage or synthetic blends sit unsold for months - only pure wool moves. Boots sell well but only larger sizes (9-11) shift quickly, smaller sizes languish.",
     "budget": 800,
     "targetMarginPct": 45
+  },
+  {
+    "id": "buyer-003",
+    "shopName": "Camden Ridge Vintage Menswear",
+    "persona": "We're a London menswear vintage store curating clean, well-made pieces for guys who care about quality over quantity. Our buyers are stylists and collectors who'd rather pay a bit more for a mint Levi's trucker jacket than dig through a bargain bin of tatty stock.",
+    "categoryDemand": {
+      "denim jackets": 8,
+      "denim jeans": 10,
+      "leather jackets": 6,
+      "outdoor/workwear jackets": 7,
+      "boots": 9,
+      "flannel shirts": 4,
+      "knitwear": 3
+    },
+    "salesNotes": "Last 6 months: Levi's and Wrangler denim jackets in grade A/B sell within days at £45-£75, especially trucker styles; anything with heavy fading or holes sits for weeks even discounted. Leather biker and bomber jackets move fast at £60-£110 if clean, but cracked or stiff leather is dead stock. Workwear (Carhartt, Dickies, vintage chore coats) is our strongest riser - clean examples at £40-£65 sell same week. Boots (Red Wing, Dr Martens) move well at £50-£90 if soles/uppers are solid; scuffed or resoled pairs get marked down 30% and still linger. Overall trend: customers will pay a premium for curated, clean-grade pieces but ignore anything needing repair work, even at low prices.",
+    "budget": 600,
+    "targetMarginPct": 50
   }
 ]

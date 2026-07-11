@@ -7,9 +7,8 @@ import type { NegotiationState } from '@/lib/types';
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request): Promise<Response> {
-  const { buyerId, sellerId, brief } = (await req.json()) as {
+  const { buyerId, brief } = (await req.json()) as {
     buyerId: string;
-    sellerId: string;
     brief: string;
   };
   const market = getMarket();
@@ -34,11 +33,15 @@ export async function POST(req: Request): Promise<Response> {
   void (async () => {
     try {
       const scout = await scoutBundle(market, buyerId, brief.trim());
+      const sellerId = scout.sellerId;
+      const sellerName = market.seller(sellerId).warehouseName;
       log.append({
         negotiationId: id,
         visibility: 'buyer_private',
         type: 'scout_report',
         payload: {
+          sellerId,
+          sellerName,
           rationale: scout.rationale,
           openingPlan: scout.openingPlan,
           itemIds: scout.itemIds,

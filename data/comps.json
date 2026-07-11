@@ -718,5 +718,293 @@
     "soldDate": "2026-07-07",
     "condition": "excellent",
     "source": "depop"
+  },
+  {
+    "archetype": "football-shirt-y2k",
+    "title": "Man United 1999 Treble Home Shirt Umbro Vintage",
+    "soldPrice": 85,
+    "soldDate": "2026-05-02",
+    "condition": "Good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "football-shirt-y2k",
+    "title": "Arsenal 1998/99 Away Shirt Nike Y2K",
+    "soldPrice": 42,
+    "soldDate": "2026-06-10",
+    "condition": "Very Good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "football-shirt-y2k",
+    "title": "Brazil 2002 World Cup Home Shirt Nike Ronaldinho",
+    "soldPrice": 110,
+    "soldDate": "2026-04-28",
+    "condition": "Excellent",
+    "source": "depop"
+  },
+  {
+    "archetype": "football-shirt-y2k",
+    "title": "Real Madrid 2001/02 Centenary Home Shirt Zidane",
+    "soldPrice": 65,
+    "soldDate": "2026-06-25",
+    "condition": "Good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "football-shirt-y2k",
+    "title": "Liverpool 2000/01 Treble Season Home Shirt Reebok",
+    "soldPrice": 58,
+    "soldDate": "2026-05-19",
+    "condition": "Fair",
+    "source": "vinted"
+  },
+  {
+    "archetype": "football-shirt-y2k",
+    "title": "Italy 2000 Euro Away Shirt Nike Vintage",
+    "soldPrice": 38,
+    "soldDate": "2026-07-02",
+    "condition": "Good",
+    "source": "depop"
+  },
+  {
+    "archetype": "nike-windbreaker",
+    "title": "Vintage Nike 90s Full Zip Windbreaker Colourblock",
+    "soldPrice": 45,
+    "soldDate": "2026-05-15",
+    "condition": "Good",
+    "source": "depop"
+  },
+  {
+    "archetype": "nike-windbreaker",
+    "title": "Nike Y2K Shell Jacket Swoosh Spellout Nylon",
+    "soldPrice": 38,
+    "soldDate": "2026-06-01",
+    "condition": "Very Good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "nike-windbreaker",
+    "title": "Nike 1990s Air Windrunner Style Jacket Rare Colourway",
+    "soldPrice": 72,
+    "soldDate": "2026-04-20",
+    "condition": "Excellent",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "nike-windbreaker",
+    "title": "Nike Vintage Track Windbreaker Blue Yellow 90s",
+    "soldPrice": 34,
+    "soldDate": "2026-06-30",
+    "condition": "Fair",
+    "source": "vinted"
+  },
+  {
+    "archetype": "nike-windbreaker",
+    "title": "Nike Y2K Reversible Windbreaker Jacket",
+    "soldPrice": 50,
+    "soldDate": "2026-05-27",
+    "condition": "Good",
+    "source": "depop"
+  },
+  {
+    "archetype": "nike-windbreaker",
+    "title": "Nike 90s Nylon Shell Jacket Hooded Vintage Swoosh",
+    "soldPrice": 60,
+    "soldDate": "2026-07-05",
+    "condition": "Very Good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "adidas-samba-trainers",
+    "title": "Adidas Samba OG Black White UK 9",
+    "soldPrice": 55,
+    "soldDate": "2026-06-12",
+    "condition": "Very Good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "adidas-samba-trainers",
+    "title": "Adidas Gazelle Vintage Suede Trainers UK 8",
+    "soldPrice": 40,
+    "soldDate": "2026-05-08",
+    "condition": "Good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "adidas-samba-trainers",
+    "title": "Adidas Samba Classic Leather UK 7 Worn Twice",
+    "soldPrice": 48,
+    "soldDate": "2026-06-28",
+    "condition": "Excellent",
+    "source": "depop"
+  },
+  {
+    "archetype": "adidas-samba-trainers",
+    "title": "Adidas Samba OG Cream UK 10",
+    "soldPrice": 62,
+    "soldDate": "2026-04-30",
+    "condition": "Very Good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "adidas-samba-trainers",
+    "title": "Adidas Gazelle Grey Suede UK 6 Vintage",
+    "soldPrice": 35,
+    "soldDate": "2026-06-05",
+    "condition": "Fair",
+    "source": "vinted"
+  },
+  {
+    "archetype": "adidas-samba-trainers",
+    "title": "Adidas Samba Green Leather UK 9 Rare Colourway",
+    "soldPrice": 58,
+    "soldDate": "2026-07-01",
+    "condition": "Good",
+    "source": "depop"
+  },
+  {
+    "archetype": "leather-jacket",
+    "title": "Vintage Brown Leather Biker Jacket 90s Belted",
+    "soldPrice": 75,
+    "soldDate": "2026-05-22",
+    "condition": "Good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "leather-jacket",
+    "title": "Vintage Black Leather Jacket Zip Up 80s Style",
+    "soldPrice": 60,
+    "soldDate": "2026-06-14",
+    "condition": "Fair",
+    "source": "vinted"
+  },
+  {
+    "archetype": "leather-jacket",
+    "title": "Genuine Leather Bomber Jacket Vintage Tan",
+    "soldPrice": 95,
+    "soldDate": "2026-04-25",
+    "condition": "Very Good",
+    "source": "depop"
+  },
+  {
+    "archetype": "leather-jacket",
+    "title": "Vintage Leather Trench Coat Black Long",
+    "soldPrice": 110,
+    "soldDate": "2026-06-20",
+    "condition": "Excellent",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "leather-jacket",
+    "title": "90s Leather Biker Jacket Quilted Shoulders",
+    "soldPrice": 68,
+    "soldDate": "2026-05-30",
+    "condition": "Good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "leather-jacket",
+    "title": "Vintage Aviator Style Leather Jacket Shearling Collar",
+    "soldPrice": 130,
+    "soldDate": "2026-07-04",
+    "condition": "Very Good",
+    "source": "depop"
+  },
+  {
+    "archetype": "vintage-levis-silver-tab",
+    "title": "Levi's Silver Tab Baggy Jeans 90s Vintage W34",
+    "soldPrice": 58,
+    "soldDate": "2026-05-10",
+    "condition": "Good",
+    "source": "depop"
+  },
+  {
+    "archetype": "vintage-levis-silver-tab",
+    "title": "Levi's Silver Tab Loose Fit Denim W32 L32",
+    "soldPrice": 45,
+    "soldDate": "2026-06-08",
+    "condition": "Fair",
+    "source": "vinted"
+  },
+  {
+    "archetype": "vintage-levis-silver-tab",
+    "title": "Vintage Levi's Silver Tab Wide Leg Jeans W36",
+    "soldPrice": 65,
+    "soldDate": "2026-04-22",
+    "condition": "Very Good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "vintage-levis-silver-tab",
+    "title": "Levi's Silver Tab Jacket Denim 90s Y2K",
+    "soldPrice": 80,
+    "soldDate": "2026-06-27",
+    "condition": "Excellent",
+    "source": "depop"
+  },
+  {
+    "archetype": "vintage-levis-silver-tab",
+    "title": "Levi's Silver Tab Baggy Denim Jeans W30 Vintage",
+    "soldPrice": 50,
+    "soldDate": "2026-05-18",
+    "condition": "Good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "vintage-levis-silver-tab",
+    "title": "Levi's Silver Tab Relaxed Fit Jeans W38 90s",
+    "soldPrice": 42,
+    "soldDate": "2026-07-03",
+    "condition": "Fair",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "suede-jacket",
+    "title": "Vintage Tan Suede Jacket 70s Style Collared",
+    "soldPrice": 70,
+    "soldDate": "2026-05-14",
+    "condition": "Good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "suede-jacket",
+    "title": "Vintage Suede Bomber Jacket Brown 80s",
+    "soldPrice": 55,
+    "soldDate": "2026-06-02",
+    "condition": "Fair",
+    "source": "vinted"
+  },
+  {
+    "archetype": "suede-jacket",
+    "title": "Suede Fringe Jacket Vintage Western Style",
+    "soldPrice": 90,
+    "soldDate": "2026-04-29",
+    "condition": "Very Good",
+    "source": "depop"
+  },
+  {
+    "archetype": "suede-jacket",
+    "title": "Vintage Suede Blazer Jacket Tan Fitted",
+    "soldPrice": 78,
+    "soldDate": "2026-06-24",
+    "condition": "Excellent",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "suede-jacket",
+    "title": "Suede Trucker Jacket Vintage Brown 90s",
+    "soldPrice": 62,
+    "soldDate": "2026-05-31",
+    "condition": "Good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "suede-jacket",
+    "title": "Vintage Suede Coat Long Line Camel",
+    "soldPrice": 105,
+    "soldDate": "2026-07-06",
+    "condition": "Very Good",
+    "source": "depop"
   }
 ]

@@ -22,5 +22,53 @@
     "sellerId": "seller-002",
     "pastDeals": 0,
     "notes": "First contact, no prior deal history. No established negotiation pattern or payment track record yet; treat as new/unverified counterparty."
+  },
+  {
+    "buyerId": "buyer-001",
+    "sellerId": "seller-003",
+    "pastDeals": 1,
+    "notes": "New relationship, only one deal so far. Opened 25% under ask, settled in 4 rounds, payment took 5 days to clear."
+  },
+  {
+    "buyerId": "buyer-001",
+    "sellerId": "seller-004",
+    "pastDeals": 0,
+    "notes": "Brand-new pairing, no deal history yet. First contact made, terms not yet tested."
+  },
+  {
+    "buyerId": "buyer-002",
+    "sellerId": "seller-003",
+    "pastDeals": 2,
+    "notes": "Early-stage relationship. Buyer typically opens 30% under ask, negotiates over 6-7 rounds, pays via bank transfer within 3 days."
+  },
+  {
+    "buyerId": "buyer-002",
+    "sellerId": "seller-004",
+    "pastDeals": 0,
+    "notes": "No prior deals. Newly introduced pairing, no negotiation pattern established yet."
+  },
+  {
+    "buyerId": "buyer-003",
+    "sellerId": "seller-001",
+    "pastDeals": 1,
+    "notes": "New pairing for this London vintage menswear buyer. Single deal closed after opening 35% under ask, 5 rounds, paid same day."
+  },
+  {
+    "buyerId": "buyer-003",
+    "sellerId": "seller-002",
+    "pastDeals": 2,
+    "notes": "Brand-new relationship building. Buyer opened 40% under ask both times, closed within 6 rounds, reliable same-day payment via card."
+  },
+  {
+    "buyerId": "buyer-003",
+    "sellerId": "seller-003",
+    "pastDeals": 3,
+    "notes": "A handful of deals so far. Buyer consistently opens 30% under ask on denim/leather lots, closes in 5-6 rounds, pays same day, building trust steadily."
+  },
+  {
+    "buyerId": "buyer-003",
+    "sellerId": "seller-004",
+    "pastDeals": 7,
+    "notes": "Warm repeat relationship, buyer's go-to seller for outdoor and leather stock. Opens around 20% under ask (softer than usual due to trust), closes fast within 3-4 rounds, always pays same day via bank transfer. Strong repeat-buyer status with priority access to new drops."
   }
 ]

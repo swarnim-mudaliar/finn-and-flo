@@ -8,6 +8,7 @@
     "demo": "next build && next start",
     "test": "vitest run",
     "generate-data": "tsx scripts/generate-data.ts",
+    "expand-data": "tsx scripts/expand-data.ts",
     "price-inventory": "tsx scripts/price-inventory.ts"
   },
   "dependencies": {

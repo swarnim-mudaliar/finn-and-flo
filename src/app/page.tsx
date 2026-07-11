@@ -6,7 +6,6 @@ import { Nav } from '@/components/Nav';
 
 interface MarketInfo {
   buyers: { id: string; shopName: string; persona: string }[];
-  sellers: { id: string; warehouseName: string; persona: string }[];
 }
 
 const EXAMPLES = [
@@ -19,7 +18,6 @@ export default function Home() {
   const router = useRouter();
   const [market, setMarket] = useState<MarketInfo | null>(null);
   const [buyerId, setBuyerId] = useState('');
-  const [sellerId, setSellerId] = useState('');
   const [brief, setBrief] = useState('');
   const [sending, setSending] = useState(false);
 
@@ -29,17 +27,16 @@ export default function Home() {
       .then((m: MarketInfo) => {
         setMarket(m);
         setBuyerId(m.buyers[0]?.id ?? '');
-        setSellerId(m.sellers[0]?.id ?? '');
       });
   }, []);
 
   async function send(): Promise<void> {
-    if (!brief.trim() || !buyerId || !sellerId) return;
+    if (!brief.trim() || !buyerId) return;
     setSending(true);
     const res = await fetch('/api/brief', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ buyerId, sellerId, brief }),
+      body: JSON.stringify({ buyerId, brief }),
     });
     const { id, error } = await res.json();
     setSending(false);
@@ -60,9 +57,9 @@ export default function Home() {
         </h1>
         <p className="mt-4 max-w-xl text-center text-[15px] leading-relaxed text-muted">
           Tell <span className="text-finn">Finn</span> what your shop is hunting for. He scouts
-          the catalog, picks the bundle, and negotiates with <span className="text-flo">Flo</span>{' '}
-          — the supplier&apos;s agent, who will absolutely try to upsell him. You only make the
-          final calls.
+          every supplier&apos;s stock, picks the supplier and the bundle, and negotiates with{' '}
+          <span className="text-flo">Flo</span> — the supplier&apos;s agent, who will absolutely
+          try to upsell him. You only make the final calls.
         </p>
 
         <div className="mt-8 w-full max-w-2xl rounded-2xl border border-finn/25 bg-panel p-5">
@@ -86,26 +83,17 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="mt-4 grid grid-cols-2 gap-3">
-            <div>
-              <div className="microlabel mb-1.5">Buying for</div>
-              <select value={buyerId} onChange={(e) => setBuyerId(e.target.value)} className={select}>
-                {market?.buyers.map((b) => (
-                  <option key={b.id} value={b.id}>
-                    {b.shopName}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <div className="microlabel mb-1.5">Sourcing from</div>
-              <select value={sellerId} onChange={(e) => setSellerId(e.target.value)} className={select}>
-                {market?.sellers.map((s) => (
-                  <option key={s.id} value={s.id}>
-                    {s.warehouseName}
-                  </option>
-                ))}
-              </select>
+          <div className="mt-4">
+            <div className="microlabel mb-1.5">Buying for</div>
+            <select value={buyerId} onChange={(e) => setBuyerId(e.target.value)} className={select}>
+              {market?.buyers.map((b) => (
+                <option key={b.id} value={b.id}>
+                  {b.shopName}
+                </option>
+              ))}
+            </select>
+            <div className="mt-1.5 text-[11px] text-faint">
+              Finn scouts every supplier&apos;s stock and picks the supplier himself.
             </div>
           </div>
 

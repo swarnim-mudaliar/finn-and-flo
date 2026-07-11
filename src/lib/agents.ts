@@ -61,7 +61,7 @@ invoke_mediator only PROPOSES sealed-bid mediation — it happens solely if the 
     const s = market.seller(neg.sellerId);
     const floor = market.sellerFloor(neg.sellerId, neg.bundleItemIds);
     const inBundle = new Set(neg.bundleItemIds);
-    const warehouse = market.items.filter((i) => !inBundle.has(i.id)).slice(0, 10);
+    const warehouse = market.itemsOf(neg.sellerId).filter((i) => !inBundle.has(i.id)).slice(0, 10);
     const upsell = warehouse.length
       ? `
 Your wider warehouse stock (NOT in this bundle — your upsell shelf):
@@ -116,28 +116,8 @@ ${guard}
 ${shared}`;
 }
 
-const SCOUT_SCHEMA = {
-  type: 'object',
-  properties: {
-    itemIds: {
-      type: 'array',
-      items: { type: 'string' },
-      description: '3-6 item ids from the catalog that best serve the brief',
-    },
-    rationale: {
-      type: 'string',
-      description: 'Why these items: fit to the brief, demand profile, margins, condition trade-offs',
-    },
-    openingPlan: { type: 'string', description: 'One-line negotiation opening strategy' },
-    briefBudgetMax: {
-      type: 'number',
-      description: 'Spend ceiling stated in the brief, in GBP (e.g. "£150 max" → 150). OMIT entirely if the brief states no ceiling.',
-    },
-  },
-  required: ['itemIds', 'rationale', 'openingPlan'],
-};
-
 const ScoutZod = z.object({
+  sellerId: z.string(),
   itemIds: z.array(z.string()).min(1),
   rationale: z.string(),
   openingPlan: z.string(),
@@ -145,13 +125,15 @@ const ScoutZod = z.object({
 });
 
 export interface ScoutResult {
+  sellerId: string;
   itemIds: string[];
   rationale: string;
   openingPlan: string;
   briefBudgetMax?: number;
 }
 
-// Finn reads the human's brief, scans the WHOLE catalog, and picks the bundle himself.
+// Finn reads the human's brief, scouts EVERY supplier's stock, and picks BOTH the
+// supplier and the bundle himself.
 export async function scoutBundle(
   market: Market,
   buyerId: string,
@@ -159,15 +141,49 @@ export async function scoutBundle(
   llm: typeof callWithTool = callWithTool
 ): Promise<ScoutResult> {
   const b = market.buyer(buyerId);
+  const sellerIds = market.sellers.map((s) => s.id);
+  const catalog = market.sellers
+    .map((s) => {
+      const ids = market.itemsOf(s.id).map((i) => i.id);
+      return `━━ SUPPLIER ${s.id} — ${s.warehouseName}\n${s.persona}\n${itemTable(market, ids)}`;
+    })
+    .join('\n\n');
+  const scoutSchema = {
+    type: 'object',
+    properties: {
+      sellerId: {
+        type: 'string',
+        enum: sellerIds,
+        description: 'The id of the ONE supplier you chose to buy from',
+      },
+      itemIds: {
+        type: 'array',
+        items: { type: 'string' },
+        description: "3-6 item ids from the CHOSEN supplier's stock only that best serve the brief",
+      },
+      rationale: {
+        type: 'string',
+        description: 'Why this supplier and these items: fit to the brief, demand profile, margins, condition trade-offs',
+      },
+      openingPlan: { type: 'string', description: 'One-line negotiation opening strategy' },
+      briefBudgetMax: {
+        type: 'number',
+        description: 'Spend ceiling stated in the brief, in GBP (e.g. "£150 max" → 150). OMIT entirely if the brief states no ceiling.',
+      },
+    },
+    required: ['sellerId', 'itemIds', 'rationale', 'openingPlan'],
+  };
   const raw = await llm({
     tier: 'sonnet',
     system: `You are Finn, an AI buying agent for ${b.shopName}, a secondhand fashion reseller.
 Shop demand profile: ${b.salesNotes}
 Weekly sell-through by category: ${JSON.stringify(b.categoryDemand)}
 Budget: £${b.budget}. Required resale margin: ${b.targetMarginPct}%.
-Your owner gave you a brief. Scout the supplier catalog and pick the 3-6 items that best
-serve the brief AND the shop's economics (favour fast sell-through, sane defect risk,
-room for margin at wholesale prices ~25-45% of oracle resale value). Then plan your opening.
+Your owner gave you a brief. You scout EVERY supplier's stock yourself. Compare the
+suppliers' stock and pick the ONE supplier whose inventory best serves the brief, then pick
+3-6 items from THAT supplier only (a single negotiation is with a single supplier — never
+mix items across suppliers). Favour fast sell-through, sane defect risk, and room for margin
+at wholesale prices ~25-45% of oracle resale value. Then plan your opening.
 If the brief states a spend ceiling, report it as briefBudgetMax (it becomes your HARD cap)
 and size the bundle so a realistic winning price (~30-45% of total oracle value) fits inside
 it — do not pick a bundle you cannot afford to win.`,
@@ -176,20 +192,22 @@ it — do not pick a bundle you cannot afford to win.`,
         role: 'user',
         content: `THE BRIEF: "${brief}"
 
-Supplier catalog (with oracle resale estimates):
-${itemTable(market, market.items.map((i) => i.id))}
+Suppliers and their stock (with oracle resale estimates), grouped by supplier:
+${catalog}
 
-Pick the bundle and report.`,
+Pick the single best supplier, then the bundle from that supplier, and report.`,
       },
     ],
     toolName: 'propose_bundle',
-    toolDescription: 'Propose the bundle to pursue and the scouting rationale',
-    inputSchema: SCOUT_SCHEMA,
+    toolDescription: 'Propose the supplier and bundle to pursue plus the scouting rationale',
+    inputSchema: scoutSchema,
   });
   const parsed = ScoutZod.parse(raw);
-  const valid = new Set(market.items.map((i) => i.id));
-  const itemIds = parsed.itemIds.filter((id) => valid.has(id)).slice(0, 8);
-  if (itemIds.length === 0) throw new Error('scout returned no valid item ids');
+  // Every returned item must belong to the chosen supplier — filter out any foreign or
+  // hallucinated ids, and refuse a scout that leaves us with nothing.
+  const sellerItemIds = new Set(market.itemsOf(parsed.sellerId).map((i) => i.id));
+  const itemIds = parsed.itemIds.filter((id) => sellerItemIds.has(id)).slice(0, 8);
+  if (itemIds.length === 0) throw new Error('scout returned no valid item ids for the chosen supplier');
   return { ...parsed, itemIds };
 }
 

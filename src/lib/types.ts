@@ -3,6 +3,7 @@ export type Visibility = 'public' | 'buyer_private' | 'seller_private';
 
 export interface Item {
   id: string;
+  sellerId: string;
   title: string;
   brand: string;
   category: string;

@@ -92,11 +92,16 @@ function WarRoom({ scope, initialNeg }: { scope?: 'buyer' | 'seller'; initialNeg
   async function start(): Promise<void> {
     if (!market) return;
     setStarting(true);
-    const itemIds = market.items.slice(0, 5).map((i) => i.id);
+    const sellerId = market.sellers[0].id;
+    // A negotiation is with a single supplier — quick-start from that supplier's own stock.
+    const itemIds = market.items
+      .filter((i) => i.sellerId === sellerId)
+      .slice(0, 5)
+      .map((i) => i.id);
     const res = await fetch('/api/negotiations', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ buyerId: market.buyers[0].id, sellerId: market.sellers[0].id, itemIds }),
+      body: JSON.stringify({ buyerId: market.buyers[0].id, sellerId, itemIds }),
     });
     const { id } = await res.json();
     setNegId(id);
@@ -109,7 +114,7 @@ function WarRoom({ scope, initialNeg }: { scope?: 'buyer' | 'seller'; initialNeg
     const res = await fetch('/api/brief', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ buyerId: market.buyers[0].id, sellerId: market.sellers[0].id, brief }),
+      body: JSON.stringify({ buyerId: market.buyers[0].id, brief }),
     });
     const { id } = await res.json();
     if (id) setNegId(id);

@@ -137,7 +137,12 @@ export function SidePane({
           ) : e.type === 'scout_report' ? (
             <div key={e.seq} className={`animate-rise rounded-xl border ${meta.border} bg-panel-2 p-3`}>
               <div className="microlabel mb-1">Scout report · {(e.payload.itemIds as string[])?.length} items picked</div>
-              <div className="font-display text-[13px] leading-relaxed italic text-cream/80">
+              {e.payload.sellerName !== undefined && (
+                <div className="mb-1.5 text-[12px] text-cream/70">
+                  Supplier chosen: <span className="text-cream/90">{e.payload.sellerName as string}</span>
+                </div>
+              )}
+              <div className="text-[13px] leading-relaxed text-cream/80">
                 {e.payload.rationale as string}
               </div>
               <div className="mt-2 border-t border-line pt-2 text-[12px] text-muted">
@@ -174,7 +179,7 @@ export function SidePane({
           ) : (
             <div
               key={e.seq}
-              className={`animate-rise border-l-2 ${meta.border} pl-3 font-display text-[13.5px] leading-relaxed italic text-cream/75`}
+              className={`animate-rise border-l-2 ${meta.border} pl-3 text-[13px] leading-relaxed text-cream/75`}
             >
               {e.payload.text as string}
             </div>

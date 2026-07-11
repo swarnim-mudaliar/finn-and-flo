@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { MarketEvent } from '@/lib/types';
 
-export function useEvents(): MarketEvent[] {
+export function useEvents(side?: 'buyer' | 'seller'): MarketEvent[] {
   const [events, setEvents] = useState<MarketEvent[]>([]);
   const lastSeq = useRef(0);
 
@@ -16,7 +16,8 @@ export function useEvents(): MarketEvent[] {
     // drop) so a dropped SSE resumes from lastSeq.current — only the delta is re-sent.
     function connect(): void {
       if (stopped) return;
-      es = new EventSource(`/api/stream?since=${lastSeq.current}`);
+      const scope = side ? `&side=${side}` : '';
+      es = new EventSource(`/api/stream?since=${lastSeq.current}${scope}`);
       es.onmessage = (m) => {
         const e = JSON.parse(m.data) as MarketEvent;
         lastSeq.current = Math.max(lastSeq.current, e.seq);

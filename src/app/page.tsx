@@ -14,7 +14,21 @@ interface MarketInfo {
 }
 
 export default function Home() {
-  const events = useEvents();
+  // Judge mode: /?side=seller renders ONLY that side's pane and opens a server-scoped
+  // SSE stream — the opposing side's private events never even reach this browser.
+  // Hand the judge this URL for the takeover beat; Finn's max stays off their screen.
+  const [scope, setScope] = useState<'buyer' | 'seller' | undefined>(undefined);
+  const [scopeReady, setScopeReady] = useState(false);
+  useEffect(() => {
+    const s = new URLSearchParams(window.location.search).get('side');
+    if (s === 'buyer' || s === 'seller') setScope(s);
+    setScopeReady(true);
+  }, []);
+  return scopeReady ? <WarRoom scope={scope} /> : null;
+}
+
+function WarRoom({ scope }: { scope?: 'buyer' | 'seller' }) {
+  const events = useEvents(scope);
   const [market, setMarket] = useState<MarketInfo | null>(null);
   const [negId, setNegId] = useState('');
   const [starting, setStarting] = useState(false);
@@ -93,12 +107,16 @@ export default function Home() {
         </div>
       </header>
       {activeNeg ? (
-        <div className="grid min-h-0 flex-1 grid-cols-3 gap-3">
-          <SidePane side="seller" negotiationId={activeNeg} events={events}
-            humanControlled={controls.seller} principal={principals.sellerWarehouse} />
+        <div className={`grid min-h-0 flex-1 gap-3 ${scope ? 'grid-cols-2' : 'grid-cols-3'}`}>
+          {(!scope || scope === 'seller') && (
+            <SidePane side="seller" negotiationId={activeNeg} events={events}
+              humanControlled={controls.seller} principal={principals.sellerWarehouse} />
+          )}
           <PublicChat negotiationId={activeNeg} events={events} />
-          <SidePane side="buyer" negotiationId={activeNeg} events={events}
-            humanControlled={controls.buyer} principal={principals.buyerShop} />
+          {(!scope || scope === 'buyer') && (
+            <SidePane side="buyer" negotiationId={activeNeg} events={events}
+              humanControlled={controls.buyer} principal={principals.buyerShop} />
+          )}
         </div>
       ) : (
         <div className="flex flex-1 items-center justify-center text-zinc-500">

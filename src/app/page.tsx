@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Nav } from '@/components/Nav';
+import { RaceToggle } from '@/components/RaceToggle';
 
 interface MarketInfo {
   buyers: { id: string; shopName: string; persona: string }[];
@@ -19,6 +20,7 @@ export default function Home() {
   const [market, setMarket] = useState<MarketInfo | null>(null);
   const [buyerId, setBuyerId] = useState('');
   const [brief, setBrief] = useState('');
+  const [race, setRace] = useState(false);
   const [sending, setSending] = useState(false);
 
   useEffect(() => {
@@ -36,7 +38,7 @@ export default function Home() {
     const res = await fetch('/api/brief', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ buyerId, brief }),
+      body: JSON.stringify({ buyerId, brief, race }),
     });
     const { id, error } = await res.json();
     setSending(false);
@@ -95,6 +97,10 @@ export default function Home() {
             <div className="mt-1.5 text-[11px] text-faint">
               Finn scouts every supplier&apos;s stock and picks the supplier himself.
             </div>
+          </div>
+
+          <div className="mt-4">
+            <RaceToggle value={race} onChange={setRace} />
           </div>
 
           <div className="mt-5 flex items-center justify-between">

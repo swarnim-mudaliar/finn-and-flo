@@ -2,6 +2,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Nav } from '@/components/Nav';
 import { PublicChat } from '@/components/PublicChat';
+import { RaceStrip } from '@/components/RaceStrip';
+import { RaceToggle } from '@/components/RaceToggle';
 import { SidePane } from '@/components/SidePane';
 import { useEvents } from '@/hooks/useEvents';
 import type { Item, OraclePrice, Side } from '@/lib/types';
@@ -38,6 +40,7 @@ function WarRoom({ scope, initialNeg }: { scope?: 'buyer' | 'seller'; initialNeg
   const [negId, setNegId] = useState(initialNeg ?? '');
   const [starting, setStarting] = useState(false);
   const [brief, setBrief] = useState('');
+  const [race, setRace] = useState(false);
 
   useEffect(() => {
     fetch('/api/market').then((r) => r.json()).then(setMarket);
@@ -122,7 +125,7 @@ function WarRoom({ scope, initialNeg }: { scope?: 'buyer' | 'seller'; initialNeg
     const res = await fetch('/api/brief', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ buyerId: market.buyers[0].id, brief }),
+      body: JSON.stringify({ buyerId: market.buyers[0].id, brief, race }),
     });
     const { id } = await res.json();
     if (id) setNegId(id);
@@ -183,28 +186,34 @@ function WarRoom({ scope, initialNeg }: { scope?: 'buyer' | 'seller'; initialNeg
       )}
 
       {activeNeg ? (
-        <div className={`grid min-h-0 flex-1 gap-4 ${scope ? 'grid-cols-2' : 'grid-cols-3'}`}>
-          {(!scope || scope === 'seller') && (
-            <SidePane
-              side="seller"
-              negotiationId={activeNeg}
-              events={events}
-              humanControlled={controls.seller}
-              principal={principals.sellerWarehouse}
-              thinking={status === 'active' && !awaitingCap && turn === 'seller' && !controls.seller}
-            />
+        <div className="flex min-h-0 flex-1 flex-col gap-3">
+          {scope !== 'seller' && (
+            <RaceStrip events={events} activeNeg={activeNeg} onSelect={setNegId} />
           )}
-          <PublicChat negotiationId={activeNeg} events={events} market={market} />
-          {(!scope || scope === 'buyer') && (
-            <SidePane
-              side="buyer"
-              negotiationId={activeNeg}
-              events={events}
-              humanControlled={controls.buyer}
-              principal={principals.buyerShop}
-              thinking={status === 'active' && !awaitingCap && turn === 'buyer' && !controls.buyer}
-            />
-          )}
+          <div className={`grid min-h-0 flex-1 gap-4 ${scope ? 'grid-cols-2' : 'grid-cols-3'}`}>
+            {(!scope || scope === 'seller') && (
+              <SidePane
+                side="seller"
+                negotiationId={activeNeg}
+                events={events}
+                humanControlled={controls.seller}
+                principal={principals.sellerWarehouse}
+                thinking={status === 'active' && !awaitingCap && turn === 'seller' && !controls.seller}
+              />
+            )}
+            <PublicChat negotiationId={activeNeg} events={events} market={market} />
+            {(!scope || scope === 'buyer') && (
+              <SidePane
+                side="buyer"
+                negotiationId={activeNeg}
+                events={events}
+                humanControlled={controls.buyer}
+                principal={principals.buyerShop}
+                thinking={status === 'active' && !awaitingCap && turn === 'buyer' && !controls.buyer}
+                market={market}
+              />
+            )}
+          </div>
         </div>
       ) : (
         <div className="flex flex-1 flex-col items-center justify-center gap-3">
@@ -225,6 +234,9 @@ function WarRoom({ scope, initialNeg }: { scope?: 'buyer' | 'seller'; initialNeg
               rows={3}
               className="w-full rounded-xl border border-line-2 bg-night px-3 py-2.5 text-[14px] text-cream placeholder:text-faint focus:border-finn/50 focus:outline-none"
             />
+            <div className="mt-3">
+              <RaceToggle value={race} onChange={setRace} />
+            </div>
             <div className="mt-3 flex items-center justify-between">
               <button
                 onClick={start}

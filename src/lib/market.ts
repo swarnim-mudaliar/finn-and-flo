@@ -61,6 +61,10 @@ export class Market {
         const p = e.payload as { status: NegotiationStatus; agreedPrice?: number };
         neg.status = p.status;
         if (p.agreedPrice !== undefined) neg.agreedPrice = p.agreedPrice;
+      } else if (e.type === 'race_created') {
+        // Race grouping lives in buyer-private events (the public room stays
+        // race-agnostic); each member carries its own copy.
+        neg.raceId = (e.payload as { raceId: string }).raceId;
       }
     }
   }

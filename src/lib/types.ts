@@ -102,6 +102,8 @@ export interface NegotiationState {
   capDeclined?: boolean;
   /** Provisional agreement came from mediation (affects final status on approval). */
   mediated?: boolean;
+  /** Set when this negotiation is one lane of a multi-supplier race for the same brief. */
+  raceId?: string;
 }
 
 export interface MarketEvent {

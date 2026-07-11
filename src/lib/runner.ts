@@ -391,7 +391,13 @@ export interface ScoutPlan {
 
 // Create and launch a negotiation from a completed scout (directly for a good
 // match, or after the owner approves a substitute via /api/scout-decision).
-export function startNegotiationFromScout(negId: string, plan: ScoutPlan): void {
+// Race lanes pass raceId and defer the run until every lane exists, so RACE INTEL
+// never sees a half-created race.
+export function startNegotiationFromScout(
+  negId: string,
+  plan: ScoutPlan,
+  opts: { raceId?: string; deferRun?: boolean } = {}
+): void {
   const market = getMarket();
   const neg: NegotiationState = {
     id: negId,
@@ -408,6 +414,7 @@ export function startNegotiationFromScout(negId: string, plan: ScoutPlan): void 
     round: 0,
     roundCap: 8,
     control: { buyer: 'agent', seller: 'agent' },
+    raceId: opts.raceId,
   };
   market.negotiations.set(negId, neg);
   getEventLog().append({
@@ -423,7 +430,41 @@ export function startNegotiationFromScout(negId: string, plan: ScoutPlan): void 
       sellerWarehouse: market.seller(plan.sellerId).warehouseName,
     },
   });
-  void runNegotiation(negId);
+  if (!opts.deferRun) void runNegotiation(negId);
+}
+
+// The owner picked the race winner: buyer-approve it, and Finn walks away from every
+// other lane with a courteous close. All of it is ordinary events, so replays and the
+// seller-scoped stream stay consistent.
+export function settleRace(winnerNegId: string): { ok: boolean; error?: string } {
+  const market = getMarket();
+  const log = getEventLog();
+  const winner = market.negotiations.get(winnerNegId);
+  if (!winner) return { ok: false, error: 'unknown negotiation' };
+  if (!winner.raceId) return { ok: false, error: 'negotiation is not part of a race' };
+  if (winner.status !== 'pending_approval') {
+    return { ok: false, error: 'the chosen lane has no handshake awaiting approval' };
+  }
+
+  const members = [...market.negotiations.values()].filter((n) => n.raceId === winner.raceId);
+  for (const m of members) {
+    if (m.id === winnerNegId) continue;
+    if (m.status === 'deal' || m.status === 'mediated_deal' || m.status === 'walked_away' || m.status === 'mediation_no_deal') continue;
+    applyAndEmit(m.id, 'buyer', {
+      action: 'walk_away',
+      message: 'We’ve committed this order to another supplier — thank you for working it with us.',
+      privateReasoning: `Race settled: the owner chose ${market.seller(winner.sellerId).warehouseName}.`,
+    }, []);
+  }
+  for (const m of members) {
+    log.append({
+      negotiationId: m.id,
+      visibility: 'buyer_private',
+      type: 'race_settled',
+      payload: { raceId: winner.raceId, winner: winnerNegId },
+    });
+  }
+  return approveDeal(winnerNegId, 'buyer', true);
 }
 
 // An owner reopens an escalated negotiation by taking their side over.

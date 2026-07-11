@@ -1,6 +1,9 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import type { MarketEvent, Side } from '@/lib/types';
+import { deriveRace, raceReadyToPick } from '@/lib/race';
+import { bundleOracle } from '@/lib/summary';
+import type { MarketData } from './PublicChat';
 import { MoveForm } from './MoveForm';
 
 async function post(url: string, body: Record<string, unknown>): Promise<void> {
@@ -38,6 +41,7 @@ export function SidePane({
   humanControlled,
   principal,
   thinking,
+  market,
 }: {
   side: Side;
   negotiationId: string;
@@ -45,6 +49,7 @@ export function SidePane({
   humanControlled: boolean;
   principal: string;
   thinking: boolean;
+  market?: MarketData | null;
 }) {
   const meta = META[side];
   const vis = side === 'buyer' ? 'buyer_private' : 'seller_private';
@@ -81,6 +86,11 @@ export function SidePane({
     ((scoutRep.payload as { matchQuality?: string }).matchQuality ?? 'good') !== 'good' &&
     !all.some((e) => e.type === 'scout_decision') &&
     !all.some((e) => e.type === 'negotiation_created');
+  // Race: while an unsettled race is running, the race-results card is the buyer's ONLY
+  // approval surface — approving one lane in isolation would leave the losers dangling.
+  const race = side === 'buyer' ? deriveRace(events, negotiationId) : null;
+  const raceGatesApproval = race !== null && !race.settled;
+  const racePickOpen = race !== null && raceReadyToPick(race);
   const suggestedCap = capOpen ? ((capReq!.payload as { suggestedCap: number }).suggestedCap ?? 0) : 0;
   const [capValue, setCapValue] = useState('');
   useEffect(() => {
@@ -243,7 +253,55 @@ export function SidePane({
         </div>
       )}
 
-      {lastStatus === 'pending_approval' && !myDecisionMade && (
+      {racePickOpen && market && race && (
+        <div className="border-t border-finn/30 bg-finn-deep/40 p-3">
+          <div className="microlabel mb-1 !text-finn">Race results — take ONE deal</div>
+          <div className="mb-2 text-[12px] leading-relaxed text-cream/75">
+            Every store has stopped moving. Pick the winner; Finn thanks and closes the rest.
+          </div>
+          <div className="space-y-1.5">
+            {race.members.map((m) => {
+              const oracle = bundleOracle(m.bundleItemIds, market.oracle);
+              const shake = m.status === 'pending_approval';
+              const pct = shake && oracle > 0 ? Math.round(((m.agreedPrice ?? 0) / oracle) * 100) : 0;
+              return (
+                <div
+                  key={m.id}
+                  className={`flex items-center justify-between gap-2 rounded-lg border px-2.5 py-2 ${
+                    shake ? 'border-deal/30 bg-deal-deep/30' : 'border-line bg-panel'
+                  }`}
+                >
+                  <div className="min-w-0">
+                    <div className="truncate text-[12.5px] text-cream/85">{m.sellerWarehouse}</div>
+                    <div className="font-mono text-[11px] tabular-nums text-muted">
+                      {shake ? (
+                        <>
+                          <span className="text-deal">£{m.agreedPrice}</span> · oracle £{oracle} ·{' '}
+                          {pct}% of resale · {m.bundleItemIds.length} items
+                        </>
+                      ) : m.status === 'escalated' ? (
+                        'deadlocked — no handshake'
+                      ) : (
+                        'no deal'
+                      )}
+                    </div>
+                  </div>
+                  {shake && (
+                    <button
+                      onClick={() => post('/api/race-pick', { winnerNegotiationId: m.id })}
+                      className="shrink-0 rounded-lg bg-deal px-3 py-1.5 text-[12px] font-semibold text-night hover:opacity-90"
+                    >
+                      Take this deal
+                    </button>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {lastStatus === 'pending_approval' && !myDecisionMade && !raceGatesApproval && (
         <div className="border-t border-deal/30 bg-deal-deep/40 p-3">
           <div className="microlabel mb-2 !text-deal">
             {side === 'seller' && !humanControlled

@@ -25,6 +25,7 @@ export async function POST(req: Request): Promise<Response> {
     type: 'negotiation_created',
     payload: {
       buyerId, sellerId, itemIds,
+      roundCap: neg.roundCap,
       oracleValue: market.bundleValue(itemIds),
       buyerShop: market.buyer(buyerId).shopName,
       sellerWarehouse: market.seller(sellerId).warehouseName,

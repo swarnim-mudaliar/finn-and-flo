@@ -6,23 +6,35 @@ export function MoveForm({ negotiationId, side }: { negotiationId: string; side:
   const [action, setAction] = useState('counter');
   const [price, setPrice] = useState('');
   const [message, setMessage] = useState('');
+  const [bundle, setBundle] = useState('');
+  const [reasoning, setReasoning] = useState('');
   const [error, setError] = useState('');
 
   async function submit(): Promise<void> {
     setError('');
+    const bundleItemIds = bundle.trim()
+      ? bundle.split(',').map((s) => s.trim()).filter(Boolean)
+      : undefined;
     const res = await fetch('/api/move', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
         negotiationId,
         side,
-        move: { action, price: price ? Number(price) : undefined, message: message || `${action} £${price}` },
+        move: {
+          action,
+          price: price ? Number(price) : undefined,
+          bundleItemIds,
+          message: message || `${action} £${price}`,
+          privateReasoning: reasoning.trim() || undefined,
+        },
       }),
     });
     if (!res.ok) {
       setError((await res.json()).error ?? 'invalid move');
     } else {
       setMessage('');
+      setReasoning('');
     }
   }
 
@@ -38,7 +50,13 @@ export function MoveForm({ negotiationId, side }: { negotiationId: string; side:
         <input value={price} onChange={(e) => setPrice(e.target.value)} placeholder="£" type="number"
           className="w-24 rounded bg-zinc-800 p-2 text-sm" />
       </div>
+      <input value={bundle} onChange={(e) => setBundle(e.target.value)}
+        placeholder="Restructure bundle (item ids, comma-separated — leave blank to keep)"
+        className="w-full rounded bg-zinc-800 p-2 text-sm" />
       <textarea value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Say something…"
+        className="w-full rounded bg-zinc-800 p-2 text-sm" rows={2} />
+      <textarea value={reasoning} onChange={(e) => setReasoning(e.target.value)}
+        placeholder="Private reasoning (only your side sees this)…"
         className="w-full rounded bg-zinc-800 p-2 text-sm" rows={2} />
       <button onClick={submit} className="rounded bg-amber-500 px-3 py-1.5 text-sm font-semibold text-black">
         Send move

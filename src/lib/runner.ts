@@ -3,7 +3,7 @@ import { getEventLog } from './eventlog';
 import type { callWithTool } from './llm';
 import { getMarket } from './market';
 import { mediate } from './mediator';
-import { applyMove, validateMove } from './negotiation';
+import { applyMove, validateMove, type ValidationResult } from './negotiation';
 import type { MoveInput, NegotiationState, Side } from './types';
 
 interface Deps {
@@ -84,11 +84,21 @@ export async function stepAgent(negId: string, deps: Deps = {}): Promise<void> {
   if (!neg || neg.status !== 'active') return;
   const side = neg.turn;
 
-  let move = await generateMove(market, neg, side, undefined, deps.llm);
-  let result = validateMove(neg, side, move, market.validationCtx(neg));
-  if (!result.ok) {
-    move = await generateMove(market, neg, side, result.reason, deps.llm);
+  let move: MoveInput = defaultMove(negId, side);
+  let result: ValidationResult = { ok: false, reason: 'no move generated yet' };
+  // A live Haiku 529/overload, network blip, or a malformed tool response that fails
+  // MoveZod.parse throws here. Catch it so the negotiation falls through to the safe
+  // default/mediator path below instead of leaking an unhandled rejection out of
+  // `void runNegotiation()` and freezing the panel with no recovery trigger.
+  try {
+    move = await generateMove(market, neg, side, undefined, deps.llm);
     result = validateMove(neg, side, move, market.validationCtx(neg));
+    if (!result.ok) {
+      move = await generateMove(market, neg, side, result.reason, deps.llm);
+      result = validateMove(neg, side, move, market.validationCtx(neg));
+    }
+  } catch {
+    result = { ok: false, reason: 'llm call failed' };
   }
   if (!result.ok) {
     move = defaultMove(negId, side);

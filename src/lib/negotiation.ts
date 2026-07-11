@@ -2,8 +2,11 @@ import type { MoveInput, NegotiationState, Side } from './types';
 
 export interface ValidationCtx {
   bundleOracleValue: (itemIds: string[]) => number;
-  buyerMax: number;
-  sellerFloor: number;
+  // Reservation prices are functions of the item set so a RESTRUCTURING move
+  // (different bundle than the negotiation's current one) is validated against the
+  // reservation of the bundle it actually proposes — not the stale pre-restructure bundle.
+  buyerMax: (itemIds: string[]) => number;
+  sellerFloor: (itemIds: string[]) => number;
   inventoryIds: Set<string>;
 }
 
@@ -22,7 +25,10 @@ export function validateMove(
   const priced = move.action === 'offer' || move.action === 'counter';
   const atCap = state.round >= state.roundCap;
 
-  if (priced && atCap) {
+  // At the round cap only closure moves are legal. `reject` is capped too: otherwise two
+  // agents that keep rejecting increment the round past the cap forever and only terminate
+  // via the guard=60 fallback, burning dozens of live LLM calls on one stuck negotiation.
+  if (atCap && (priced || move.action === 'reject')) {
     return { ok: false, reason: 'round cap reached: accept, walk_away, or invoke_mediator only' };
   }
 
@@ -31,11 +37,12 @@ export function validateMove(
       return { ok: false, reason: 'nothing to accept' };
     }
     const p = state.lastOffer.price;
-    if (side === 'buyer' && p > ctx.buyerMax) {
-      return { ok: false, reason: `accepting £${p} exceeds your maximum of £${ctx.buyerMax}` };
+    const acceptBundle = state.lastOffer.bundleItemIds;
+    if (side === 'buyer' && p > ctx.buyerMax(acceptBundle)) {
+      return { ok: false, reason: `accepting £${p} exceeds your maximum of £${ctx.buyerMax(acceptBundle)}` };
     }
-    if (side === 'seller' && p < ctx.sellerFloor) {
-      return { ok: false, reason: `accepting £${p} is below your floor of £${ctx.sellerFloor}` };
+    if (side === 'seller' && p < ctx.sellerFloor(acceptBundle)) {
+      return { ok: false, reason: `accepting £${p} is below your floor of £${ctx.sellerFloor(acceptBundle)}` };
     }
     return { ok: true, warnings };
   }
@@ -53,11 +60,11 @@ export function validateMove(
     if (v > 0 && (move.price < v * 0.1 || move.price > v * 5)) {
       return { ok: false, reason: `price £${move.price} is outside a sane range for a bundle worth ~£${v}` };
     }
-    if (side === 'buyer' && move.price > ctx.buyerMax) {
-      return { ok: false, reason: `offer of £${move.price} exceeds your maximum of £${ctx.buyerMax}` };
+    if (side === 'buyer' && move.price > ctx.buyerMax(bundle)) {
+      return { ok: false, reason: `offer of £${move.price} exceeds your maximum of £${ctx.buyerMax(bundle)}` };
     }
-    if (side === 'seller' && move.price < ctx.sellerFloor) {
-      return { ok: false, reason: `ask of £${move.price} is below your floor of £${ctx.sellerFloor}` };
+    if (side === 'seller' && move.price < ctx.sellerFloor(bundle)) {
+      return { ok: false, reason: `ask of £${move.price} is below your floor of £${ctx.sellerFloor(bundle)}` };
     }
     // Soft signals: concession-direction oddities are warnings, never rejections —
     // bundles change mid-negotiation and strict trajectory checks kill restructuring.

@@ -17,10 +17,13 @@ export class EventLog {
     }
   }
 
-  append(e: Omit<MarketEvent, 'seq' | 'ts'>): MarketEvent {
+  // `persist: false` keeps an event live-only (subscribers + in-session backfill) without
+  // writing it to disk — used for replays so they never permanently pollute events.jsonl
+  // and reappear in every future backfill / war-room dropdown.
+  append(e: Omit<MarketEvent, 'seq' | 'ts'>, opts: { persist?: boolean } = {}): MarketEvent {
     const event: MarketEvent = { ...e, seq: ++this.seq, ts: Date.now() };
     this.events.push(event);
-    if (this.filePath) {
+    if (this.filePath && (opts.persist ?? true)) {
       fs.mkdirSync(path.dirname(this.filePath), { recursive: true });
       fs.appendFileSync(this.filePath, JSON.stringify(event) + '\n');
     }

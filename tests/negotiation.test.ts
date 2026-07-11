@@ -19,8 +19,8 @@ function state(over: Partial<NegotiationState> = {}): NegotiationState {
 
 const ctx: ValidationCtx = {
   bundleOracleValue: (ids) => ids.length * 50, // £50/item
-  buyerMax: 60,
-  sellerFloor: 30,
+  buyerMax: () => 60,
+  sellerFloor: () => 30,
   inventoryIds: new Set(['i1', 'i2', 'i3']),
 };
 
@@ -102,6 +102,57 @@ describe('validateMove — soft signals warn, never reject', () => {
     const r = validateMove(s, 'buyer', offer(40), ctx);
     expect(r.ok).toBe(true);
     if (r.ok) expect(r.warnings.length).toBeGreaterThan(0);
+  });
+});
+
+describe('validateMove — reservation is computed on the PROPOSED bundle, not the pre-restructure one', () => {
+  // Floor/max scale with bundle size: 2 items -> floor £50 / max £120, 1 item -> floor £25 / max £60.
+  const scaledCtx: ValidationCtx = {
+    bundleOracleValue: (ids) => ids.length * 50,
+    buyerMax: (ids) => ids.length * 60,
+    sellerFloor: (ids) => ids.length * 25,
+    inventoryIds: new Set(['i1', 'i2', 'i3']),
+  };
+
+  it('seller can drop an item and lower the ask below the OLD bundle floor (the demo beat)', () => {
+    // Current bundle ['i1','i2'] floor = £50. Restructure to ['i1'] at £30: £30 < £50 would
+    // false-reject if valued on the current bundle, but £30 >= 1-item floor (£25) so it must pass.
+    const s = state({
+      turn: 'seller',
+      bundleItemIds: ['i1', 'i2'],
+      lastOffer: { side: 'seller', price: 90, bundleItemIds: ['i1', 'i2'] },
+    });
+    const r = validateMove(
+      s, 'seller', { action: 'counter', price: 30, bundleItemIds: ['i1'], message: 'm' }, scaledCtx
+    );
+    expect(r.ok).toBe(true);
+  });
+
+  it('accept is valued against the offered bundle', () => {
+    const s = state({
+      turn: 'seller',
+      bundleItemIds: ['i1'],
+      lastOffer: { side: 'buyer', price: 30, bundleItemIds: ['i1'] },
+    });
+    expect(validateMove(s, 'seller', { action: 'accept', message: 'm' }, scaledCtx).ok).toBe(true);
+  });
+
+  it('buyer offering above the SMALLER bundle max is still rejected', () => {
+    const s = state({ turn: 'buyer', bundleItemIds: ['i1', 'i2'] });
+    // 1-item max = £60; offering £61 on a proposed 1-item bundle must reject.
+    const r = validateMove(
+      s, 'buyer', { action: 'offer', price: 61, bundleItemIds: ['i1'], message: 'm' }, scaledCtx
+    );
+    expect(r.ok).toBe(false);
+  });
+});
+
+describe('validateMove — reject is capped at the round cap', () => {
+  it('rejects a bare reject once the round cap is reached', () => {
+    const s = state({ round: 8, lastOffer: { side: 'seller', price: 55, bundleItemIds: ['i1', 'i2'] } });
+    expect(validateMove(s, 'buyer', { action: 'reject', message: 'm' }, ctx).ok).toBe(false);
+    // closure moves still allowed at the cap
+    expect(validateMove(s, 'buyer', { action: 'walk_away', message: 'm' }, ctx).ok).toBe(true);
   });
 });
 

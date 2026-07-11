@@ -15,7 +15,11 @@ export async function POST(req: Request): Promise<Response> {
 
   void (async () => {
     for (const e of events) {
-      log.append({ negotiationId: replayId, visibility: e.visibility, type: e.type, payload: e.payload });
+      // persist: false — replays are transient animation, not part of the durable log.
+      log.append(
+        { negotiationId: replayId, visibility: e.visibility, type: e.type, payload: e.payload },
+        { persist: false }
+      );
       await new Promise((r) => setTimeout(r, delay));
     }
   })();

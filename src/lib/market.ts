@@ -1,8 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import type { ValidationCtx } from './negotiation';
+import { getEventLog } from './eventlog';
+import { applyMove, type ValidationCtx } from './negotiation';
 import type {
-  BuyerProfile, Comp, Item, NegotiationState, OraclePrice, RelationshipRecord, SellerProfile,
+  BuyerProfile, Comp, Item, MoveAction, NegotiationState, NegotiationStatus,
+  OraclePrice, RelationshipRecord, SellerProfile, Side,
 } from './types';
 
 function readJson<T>(file: string): T {
@@ -17,6 +19,45 @@ export class Market {
   comps: Comp[] = readJson('comps.json');
   oracle: Record<string, OraclePrice> = readJson('oracle-cache.json');
   negotiations = new Map<string, NegotiationState>();
+
+  constructor() {
+    this.rehydrate();
+  }
+
+  // The in-memory negotiations Map is empty on a fresh process, but the event log is
+  // reloaded from disk. Without this, after a `next start` restart the war-room dropdown
+  // lists negotiations from prior runs whose take-over/send-move return 404 and which the
+  // runner can't resume. Replay the durable event log to reconstruct their live state.
+  private rehydrate(): void {
+    for (const e of getEventLog().since(0)) {
+      if (e.type === 'negotiation_created') {
+        const p = e.payload as { buyerId: string; sellerId: string; itemIds: string[]; roundCap?: number };
+        this.negotiations.set(e.negotiationId, {
+          id: e.negotiationId, buyerId: p.buyerId, sellerId: p.sellerId,
+          bundleItemIds: p.itemIds, turn: 'buyer', status: 'active',
+          round: 0, roundCap: p.roundCap ?? 8,
+          control: { buyer: 'agent', seller: 'agent' },
+        });
+        continue;
+      }
+      const neg = this.negotiations.get(e.negotiationId);
+      if (!neg) continue;
+      if (e.type === 'move') {
+        const p = e.payload as { side: Side; action: MoveAction; price?: number; bundleItemIds?: string[]; message: string };
+        this.negotiations.set(
+          e.negotiationId,
+          applyMove(neg, p.side, { action: p.action, price: p.price, bundleItemIds: p.bundleItemIds, message: p.message })
+        );
+      } else if (e.type === 'control_changed') {
+        const p = e.payload as { side: Side; mode: 'agent' | 'human' };
+        neg.control[p.side] = p.mode;
+      } else if (e.type === 'status') {
+        const p = e.payload as { status: NegotiationStatus; agreedPrice?: number };
+        neg.status = p.status;
+        if (p.agreedPrice !== undefined) neg.agreedPrice = p.agreedPrice;
+      }
+    }
+  }
 
   item(id: string): Item {
     const it = this.items.find((i) => i.id === id);
@@ -59,8 +100,8 @@ export class Market {
   validationCtx(neg: NegotiationState): ValidationCtx {
     return {
       bundleOracleValue: (ids) => this.bundleValue(ids),
-      buyerMax: this.buyerMax(neg.buyerId, neg.bundleItemIds),
-      sellerFloor: this.sellerFloor(neg.sellerId, neg.bundleItemIds),
+      buyerMax: (ids) => this.buyerMax(neg.buyerId, ids),
+      sellerFloor: (ids) => this.sellerFloor(neg.sellerId, ids),
       inventoryIds: new Set(this.items.map((i) => i.id)),
     };
   }

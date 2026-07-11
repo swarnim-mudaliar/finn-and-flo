@@ -20,7 +20,10 @@ function release(): void {
 
 const g = globalThis as unknown as { __anthropic?: Anthropic };
 function client(): Anthropic {
-  g.__anthropic ??= new Anthropic();
+  // Venue Wi-Fi intermittently hangs requests for minutes with no response. The SDK's
+  // default 10-min timeout would freeze a negotiation turn; cutting a hung socket at 20s
+  // and retrying on a fresh connection recovers in ~4s. Worst case 20s × 4 attempts.
+  g.__anthropic ??= new Anthropic({ timeout: 20_000, maxRetries: 3 });
   return g.__anthropic;
 }
 
@@ -59,18 +62,26 @@ function buildParams(opts: ToolCallOpts): Record<string, unknown> {
   };
 }
 
+// Streaming instead of one-shot create(): on flaky venue networks the non-streaming
+// response tail intermittently hangs for 60-90s; streamed tokens arrive as generated
+// and finalMessage() completes as soon as the last delta lands.
+async function streamMessage(params: Record<string, unknown>) {
+  const stream = client().messages.stream(params as never);
+  return stream.finalMessage();
+}
+
 export async function callWithTool(opts: ToolCallOpts): Promise<Record<string, unknown>> {
   await acquire();
   try {
     const params = buildParams(opts);
     let resp;
     try {
-      resp = await client().messages.create(params as never);
+      resp = await streamMessage(params);
     } catch (err: unknown) {
       // If the API/SDK rejects output_config (400), strip and retry once.
       if ((err as { status?: number }).status === 400 && 'output_config' in params) {
         delete params.output_config;
-        resp = await client().messages.create(params as never);
+        resp = await streamMessage(params);
       } else {
         throw err;
       }

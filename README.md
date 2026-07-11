@@ -1,47 +1,60 @@
 # Finn & Flo
 
-**Live: https://finn-and-flo-production.up.railway.app** · [How it works](https://finn-and-flo-production.up.railway.app/how-it-works)
+**Live: https://finn-and-flo-production.up.railway.app**
 
-Personal AI agents for both sides of wholesale secondhand fashion.
-**Flo** sells for suppliers — prices from comps, answers instantly, negotiates 24/7 within owner guardrails.
-**Finn** buys for resellers — knows the shop's demand from its sales history, and haggles so the human only decides.
+Personal AI agents for both sides of secondhand fashion wholesale.
+**Finn** buys for resellers. **Flo** sells for suppliers. Agents haggle — humans decide.
 
-Built solo at the Fleek x a16z London hackathon (11 July 2026), Agents & LLMs track.
+Built solo at the Fleek × a16z London hackathon (11 July 2026), Agents & LLMs track.
 
-## What's technically interesting
+## The loop
 
-- **Agent-to-agent negotiation over restructurable bundles.** Agents emit structured moves
-  through a validating state machine: hard invariants (turn order, round caps, reservation
-  prices) are enforced **in code** — a judge who takes over live cannot talk Finn past his
-  max, and prompt injection bounces off both the prompt layer and the state machine.
-  Mid-deal bundle restructuring ("drop the two Y2K tees, then £106 works") is what makes it
-  wholesale negotiation instead of scalar haggling.
-- **Comps-grounded price oracle** (Sonnet 5): per-item estimate + confidence interval +
-  cited comps, disk-cached so nothing is ever priced twice.
-- **Everything is an event** tagged `public` / `buyer_private` / `seller_private`. The
-  split-screen war room renders both private agendas live from the same stream; `?side=`
-  gives a judge a server-scoped view where the other side's secrets never reach the
-  browser. SSE backfills on refresh; **replay is just re-emitting the log**.
-- **Deadlock mediator**: Chatterjee–Samuelson split-the-difference on sealed reservation
-  prices — deals that posturing kills get rescued at the midpoint, and the room never sees
-  either side's number.
-- **Profiles from marketplace history**: Finn's willingness-to-pay derives from his shop's
-  sales velocity and margin targets; Flo remembers past deals with each counterparty and
-  negotiates repeat buyers differently.
+1. **Brief Finn** — "workwear my shop can flip fast, £150 max". A stated ceiling is
+   **enforced in code**, not prompts.
+2. **He scouts every supplier** (4 warehouses, ~130 one-of-a-kind items), picks the supplier
+   and the bundle himself — and **says no** if nothing truly matches, offering the closest
+   substitute for your call instead of pretending.
+3. **Watch the haggle live** — public chat in the middle, each agent's private strategy in
+   its own ledger. Flo upsells; when that would breach your ceiling, **Finn pauses and asks
+   you for a new one**.
+4. **Humans sign every deal.** An agent's accept is a handshake, not a signature — both
+   owners must approve. Send it back with a note and your agent reworks the terms. The
+   supplier's owner is an AI persona, clearly labelled; take the seller side over and you
+   *are* the owner.
+
+## Technically interesting
+
+- **State machine referees the agents.** Turn order, round caps, price sanity, and
+  reservation prices are hard-enforced in code — prompt injection can't move Finn past his
+  maximum (take over and try to fleece him).
+- **Comps-grounded price oracle** (Sonnet 5): estimate + range + cited sold comps per item,
+  disk-cached. Both agents negotiate against the same ground truth.
+- **Everything is an event** (`public` / `buyer_private` / `seller_private`). The war room
+  renders both private agendas from one stream; `/war-room?side=seller` is a server-scoped
+  judge view where the other side's secrets never reach the browser. SSE backfills on
+  refresh; replay just re-emits the log.
+- **Consent-based sealed-bid mediation** (Chatterjee–Samuelson): deadlocks return to the
+  owners; if both consent, sealed limits clear at the midpoint and neither number is ever
+  revealed.
+- **Bundle restructuring both ways**: Flo adds items to upsell, Finn drops defect-heavy ones
+  — wholesale negotiation, not a price slider.
 
 ## Run it
 
 ```bash
 npm install
 cp .env.example .env.local        # add your ANTHROPIC_API_KEY
-npm run generate-data             # synthetic inventory/profiles/comps (once)
-npm run price-inventory           # oracle pass, disk-cached (once)
 npm run demo                      # next build && next start → http://localhost:3000
 ```
 
-- `/` — the war room: watch a live negotiation, take over either side, replay recorded runs
-- `/?side=seller` — judge mode: one side only, opponent's private events never sent
-- `/catalog` — the oracle-priced inventory with evidence
+Synthetic data ships in the repo (`npm run generate-data` / `expand-data` /
+`price-inventory` only if you want to regenerate it).
 
-Models: `claude-haiku-4-5` (negotiation moves), `claude-sonnet-5` (oracle & data generation).
-LLM responses are streamed — flaky-network response hangs cost 60s+ per move before that fix.
+- `/` — brief Finn (the front door)
+- `/war-room` — the live floor: private ledgers, takeover, replay · `?side=seller` = judge mode
+- `/catalog` — oracle-priced inventory with receipts
+- `/how-it-works` — the 30-second version
+
+Models: `claude-haiku-4-5` (negotiation moves, AI owner), `claude-sonnet-5` (scout, oracle,
+data generation). Responses are streamed — venue-network response hangs cost 60s+ per move
+before that fix.

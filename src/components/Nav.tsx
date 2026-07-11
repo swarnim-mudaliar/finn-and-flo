@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { GuideModal } from './GuideModal';
 
 const LINKS = [
   { href: '/', label: 'Brief Finn' },
@@ -41,7 +42,10 @@ export function Nav({ right }: { right?: React.ReactNode }) {
           })}
         </nav>
       </div>
-      <div className="flex items-center gap-2">{right}</div>
+      <div className="flex items-center gap-2">
+        {right}
+        <GuideModal />
+      </div>
     </header>
   );
 }

@@ -203,8 +203,15 @@ export function SidePane({
       {lastStatus === 'pending_approval' && !myDecisionMade && (
         <div className="border-t border-deal/30 bg-deal-deep/40 p-3">
           <div className="microlabel mb-2 !text-deal">
-            Your call — {meta.name} shook on £{pendingPrice}
+            {side === 'seller' && !humanControlled
+              ? `Flo's owner is reviewing £${pendingPrice}…`
+              : `Your call — ${meta.name} shook on £${pendingPrice}`}
           </div>
+          {side === 'seller' && !humanControlled && (
+            <div className="mb-2 text-[11.5px] text-muted">
+              Her owner (AI) decides in a few seconds — or decide for her:
+            </div>
+          )}
           <input
             value={note}
             onChange={(e) => setNote(e.target.value)}

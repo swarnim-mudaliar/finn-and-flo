@@ -1,6 +1,6 @@
 import { generateMove } from './agents';
 import { getEventLog } from './eventlog';
-import type { callWithTool } from './llm';
+import { callWithTool } from './llm';
 import { getMarket } from './market';
 import { mediate } from './mediator';
 import { applyMove, validateMove, type ValidationResult } from './negotiation';
@@ -8,6 +8,66 @@ import type { MoveInput, NegotiationState, Side } from './types';
 
 interface Deps {
   llm?: typeof callWithTool;
+}
+
+// ---- The AI owner on the supplier side ------------------------------------
+// A solo visitor plays Finn's owner; nobody is there to play Flo's. After a
+// short review window (in which a human CAN still decide for her), an AI owner
+// persona makes the seller-side call. A human who has taken the seller side
+// over disables this entirely — they ARE the owner then.
+const OWNER_REVIEW_MS = 7000;
+
+function scheduleSellerOwner(negId: string): void {
+  if (process.env.VITEST) return; // tests drive approvals explicitly
+  setTimeout(() => {
+    void sellerOwnerReview(negId);
+  }, OWNER_REVIEW_MS);
+}
+
+async function sellerOwnerReview(negId: string): Promise<void> {
+  const market = getMarket();
+  const neg = market.negotiations.get(negId);
+  if (!neg || neg.control.seller === 'human') return;
+
+  if (neg.status === 'escalated' && !neg.mediationConsent?.seller) {
+    consentMediation(negId, 'seller', { auto: true });
+    return;
+  }
+  if (neg.status !== 'pending_approval' || neg.approvals?.seller !== undefined) return;
+
+  let approve = true;
+  let note = 'Fair price for the lot — approved.';
+  try {
+    const s = market.seller(neg.sellerId);
+    const out = (await callWithTool({
+      tier: 'haiku',
+      system: `You are the human owner of ${s.warehouseName}. ${s.persona} Your selling agent Flo negotiated a provisional wholesale deal and it needs your sign-off. You almost always approve deals at or above your floor — send one back only if something is clearly wrong. Your note is ONE short sentence in your own voice.`,
+      messages: [
+        {
+          role: 'user',
+          content: `Provisional deal: £${neg.agreedPrice} for a ${neg.bundleItemIds.length}-item bundle (oracle resale ~£${market.bundleValue(neg.bundleItemIds)}; your floor was £${market.sellerFloor(neg.sellerId, neg.bundleItemIds)}). Approve or send back?`,
+        },
+      ],
+      toolName: 'decide',
+      toolDescription: 'Approve or send back the provisional deal',
+      inputSchema: {
+        type: 'object',
+        properties: { approve: { type: 'boolean' }, note: { type: 'string' } },
+        required: ['approve', 'note'],
+      },
+      maxTokens: 300,
+    })) as { approve: boolean; note: string };
+    approve = Boolean(out.approve);
+    if (out.note) note = String(out.note);
+  } catch {
+    /* default approve keeps the floor moving */
+  }
+  // Re-check after the await: a human may have decided (or taken over) meanwhile.
+  const cur = market.negotiations.get(negId);
+  if (!cur || cur.status !== 'pending_approval' || cur.approvals?.seller !== undefined || cur.control.seller === 'human') {
+    return;
+  }
+  approveDeal(negId, 'seller', approve, note, { auto: true });
 }
 
 function privateVis(side: Side): 'buyer_private' | 'seller_private' {
@@ -96,6 +156,7 @@ export function applyAndEmit(negId: string, side: Side, move: MoveInput, warning
   market.negotiations.set(negId, next);
 
   if (next.status !== 'active') emitStatus(next);
+  if (next.status === 'pending_approval') scheduleSellerOwner(negId);
 }
 
 function defaultMove(negId: string, side: Side): MoveInput {
@@ -190,6 +251,7 @@ export function runMediation(negId: string): void {
   // Public: ONLY the verdict/clearing price. Never the bounds.
   log.append({ negotiationId: negId, visibility: 'public', type: 'mediation_result', payload: { deal: result.deal, price: result.price } });
   emitStatus(next);
+  if (next.status === 'pending_approval') scheduleSellerOwner(negId);
 }
 
 function escalate(negId: string): void {
@@ -199,11 +261,12 @@ function escalate(negId: string): void {
   const next: NegotiationState = { ...neg, status: 'escalated' };
   market.negotiations.set(negId, next);
   emitStatus(next);
+  scheduleSellerOwner(negId);
 }
 
 // Owner sign-off on a provisional deal. Both approvals close it; one rejection
 // reopens the negotiation with the note in the transcript.
-export function approveDeal(negId: string, side: Side, approve: boolean, note?: string): { ok: boolean; error?: string } {
+export function approveDeal(negId: string, side: Side, approve: boolean, note?: string, opts?: { auto?: boolean }): { ok: boolean; error?: string } {
   const market = getMarket();
   const log = getEventLog();
   const neg = market.negotiations.get(negId);
@@ -214,7 +277,7 @@ export function approveDeal(negId: string, side: Side, approve: boolean, note?: 
     negotiationId: negId,
     visibility: 'public',
     type: 'approval_decision',
-    payload: { side, approved: approve, note },
+    payload: { side, approved: approve, note, auto: opts?.auto },
   });
 
   if (approve) {
@@ -271,7 +334,7 @@ export function decideCap(negId: string, newCap: number | null): { ok: boolean; 
 }
 
 // An owner consents to mediation on an escalated (or active) negotiation.
-export function consentMediation(negId: string, side: Side): { ok: boolean; error?: string } {
+export function consentMediation(negId: string, side: Side, opts?: { auto?: boolean }): { ok: boolean; error?: string } {
   const market = getMarket();
   const log = getEventLog();
   const neg = market.negotiations.get(negId);
@@ -285,7 +348,7 @@ export function consentMediation(negId: string, side: Side): { ok: boolean; erro
     negotiationId: negId,
     visibility: 'public',
     type: 'mediation_consent',
-    payload: { side, byOwner: true },
+    payload: { side, byOwner: true, auto: opts?.auto },
   });
   const both = mediationConsent.buyer && mediationConsent.seller;
   const next: NegotiationState = { ...neg, mediationConsent, status: both ? 'mediation' : neg.status };

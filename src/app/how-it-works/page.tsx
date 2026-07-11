@@ -12,13 +12,25 @@ function Act({
   return (
     <section className="grid grid-cols-[64px_1fr] gap-6">
       <div className="pt-1 text-right font-display text-3xl italic text-faint">{n}</div>
-      <div className="border-l border-line pb-12 pl-6">
+      <div className="border-l border-line pb-10 pl-6">
         <h2 className="font-display text-xl text-cream">{title}</h2>
-        <div className="mt-3 max-w-2xl space-y-3 text-[14px] leading-relaxed text-muted">
+        <div className="mt-3 max-w-2xl space-y-2 text-[14px] leading-relaxed text-muted">
           {children}
         </div>
       </div>
     </section>
+  );
+}
+
+function More({ children }: { children: React.ReactNode }) {
+  return (
+    <details className="group">
+      <summary className="cursor-pointer list-none text-[12px] text-faint transition-colors hover:text-muted">
+        <span className="group-open:hidden">details ▾</span>
+        <span className="hidden group-open:inline">less ▴</span>
+      </summary>
+      <div className="mt-2 space-y-2 text-[13px] leading-relaxed">{children}</div>
+    </details>
   );
 }
 
@@ -67,17 +79,15 @@ export default function HowItWorks() {
     <main className="mx-auto max-w-[1100px] px-6 py-5">
       <Nav />
 
-      <div className="mx-auto max-w-3xl py-16 text-center">
+      <div className="mx-auto max-w-3xl py-14 text-center">
         <h1 className="font-display text-[42px] leading-tight text-cream">
           Two agents. <em className="text-flo">Opposing interests.</em>
           <br />
           One deal.
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-muted">
-          Secondhand wholesale runs on haggling: every item is one-of-a-kind, there is no price
-          authority, and every deal is a negotiation between strangers in different time zones.
-          Finn &amp; Flo gives each side a personal agent that does the haggling — so humans only
-          decide.
+          Secondhand wholesale is haggling between strangers over one-of-a-kind stock. We gave
+          each side an agent. Humans only decide.
         </p>
       </div>
 
@@ -90,10 +100,9 @@ export default function HowItWorks() {
             border="border-flo/25"
             role="sells for the supplier"
             lines={[
-              'Knows the warehouse: every item, grade, and defect in the catalog.',
-              'Remembers each buyer — past deals, concession patterns, payment reliability — and negotiates repeat buyers differently.',
-              'Upsells like a saleswoman: offers additions from her shelf when they fit the buyer’s interests, and drops back gracefully when declined.',
-              'Answers every enquiry instantly, 24/7, and never sells below the owner’s floor.',
+              'Knows every item, grade, and defect in her warehouse.',
+              'Remembers each buyer — and negotiates repeat buyers differently.',
+              'Upsells like a saleswoman. Never sells below her owner’s floor.',
             ]}
           />
           <AgentCard
@@ -103,80 +112,79 @@ export default function HowItWorks() {
             border="border-finn/25"
             role="buys for the reseller"
             lines={[
-              'Takes your brief — “workwear my shop can flip fast, £180 max” — scouts every supplier’s stock, and picks the supplier and the bundle himself.',
-              'Your spend ceiling becomes a hard cap enforced in code, alongside the maximum derived from the shop’s margins.',
-              'Haggles evidence-first: every offer anchored to the oracle’s comps — and declines upsells that don’t serve the brief.',
+              'Takes your brief. Scouts every supplier. Picks the bundle himself.',
+              'Your spend ceiling is enforced in code — he can’t exceed it.',
+              'Haggles evidence-first, anchored to the oracle’s comps.',
             ]}
           />
         </div>
       </Act>
 
-      <Act n="II" title="The oracle prices everything first">
-        <p>
-          There is no blue book for a 90s Carhartt with a repaired seam. Our price oracle builds
-          one: for every item it reads sold comps for that archetype and produces an estimate, a
-          confidence range, and cited evidence. Both agents negotiate against the same ground
-          truth — which is exactly what keeps the haggling honest.
+      <Act n="II" title="A price oracle grounds every number">
+        <p className="text-cream/85">
+          Every item gets an estimate, a range, and cited sold comps — before anyone haggles.
         </p>
-        <p className="rounded-xl border border-line bg-panel p-4 font-mono text-[12px] text-cream/70">
-          item-004 · Carhartt Detroit jacket · grade B
-          <br />
-          <span className="text-brass">estimate £58</span> · range £46–£72 · &quot;comp: eBay sold
-          £62, 2026-06-14, similar fade&quot;
-        </p>
+        <More>
+          <p>
+            There is no blue book for a 90s Carhartt with a repaired seam, so we built one. Both
+            agents negotiate against the same ground truth; that is what keeps the haggling honest.
+          </p>
+          <p className="rounded-xl border border-line bg-panel p-3 font-mono text-[12px] text-cream/70">
+            item-004 · Carhartt Detroit jacket · grade B
+            <br />
+            <span className="text-brass">estimate £58</span> · range £46–£72 · &quot;comp: eBay
+            sold £62, similar fade&quot;
+          </p>
+        </More>
       </Act>
 
-      <Act n="III" title="Agents negotiate — a state machine referees">
-        <p>
-          Finn and Flo trade structured moves: offer, counter, accept, reject, walk away — or
-          restructure the bundle mid-deal (&quot;drop the two damaged flannels and £180
-          works&quot;). That last one is what makes it wholesale negotiation rather than a price
-          slider.
+      <Act n="III" title="A state machine referees the haggle">
+        <p className="text-cream/85">
+          Agents trade structured moves — offer, counter, restructure the bundle, accept. Hard
+          limits are enforced in code, not prompts.
         </p>
-        <p>
-          Every move passes through a validating state machine. Turn order, round caps, price
-          sanity, and — critically — <span className="text-cream">reservation prices are enforced
-          in code</span>: Finn physically cannot offer above his maximum, Flo cannot accept below
-          her floor. Prompt injection bounces off. Take a side over yourself in the war room and
-          try.
-        </p>
+        <More>
+          <p>
+            Finn physically cannot offer above his maximum; Flo cannot accept below her floor.
+            Prompt injection bounces off — take a side over in the war room and try to fleece
+            them. Bundle restructuring (&quot;drop the two damaged flannels and £180 works&quot;)
+            is what makes this wholesale negotiation, not a price slider.
+          </p>
+        </More>
       </Act>
 
       <Act n="IV" title="Humans make every final call">
-        <p>
-          An agent&apos;s accept is a <span className="text-cream">handshake, not a signature</span>:
-          the deal closes only when both owners approve. Send it back with a note — &quot;too
-          rich, push for £60&quot; — and your agent reopens the negotiation with your note as
-          its top priority. When Flo upsells past your stated ceiling, Finn doesn&apos;t guess:
-          he pauses and asks you for a new one.
+        <p className="text-cream/85">
+          An agent&apos;s accept is a handshake, not a signature. Deals close when both owners
+          approve.
         </p>
-        <p>
-          And when agents deadlock, the negotiation <span className="text-cream">returns to the
-          humans</span>. Sealed-bid mediation exists — both sides privately disclose their true
-          limits and the deal clears at the midpoint, neither number ever revealed
-          (Chatterjee–Samuelson) — but it runs only if <span className="text-cream">both sides
-          consent</span>. Nobody gets arbitrated against their will.
-        </p>
+        <More>
+          <p>
+            Send a deal back with a note — &quot;too rich, push for £60&quot; — and your agent
+            reworks it. When Flo upsells past your ceiling, Finn pauses and asks you for a new
+            one. Deadlocks return to the owners; sealed-bid mediation (both limits disclosed
+            privately, deal clears at the midpoint, neither number revealed) runs only if both
+            sides consent. The supplier&apos;s owner is played by an AI persona, clearly labelled
+            — take the seller side over and you become the owner.
+          </p>
+        </More>
       </Act>
 
-      <Act n="V" title="What's live and what's seeded (honesty section)">
-        <p>
-          <span className="text-cream">Live:</span> every negotiation move, every private
-          reasoning line, the takeover, and the mediation are real agent decisions happening as
-          you watch (Claude Haiku 4.5 per move, streamed).
+      <Act n="V" title="What's live, what's seeded">
+        <p className="text-cream/85">
+          <span className="text-deal">Live:</span> every move, private thought, takeover,
+          approval, and mediation. <span className="text-brass">Seeded:</span> the inventory,
+          profiles, and market history — synthetic, per the hackathon&apos;s guidance.
         </p>
-        <p>
-          <span className="text-cream">Seeded:</span> the inventory, both traders&apos; profiles,
-          and the marketplace history they&apos;re built from are synthetic — per the
-          hackathon&apos;s guidance to assume transaction history exists. Oracle prices are
-          computed once (Claude Sonnet 5) and cached.
-        </p>
-        <p>
-          <span className="text-cream">Roadmap, deliberately out of one-day scope:</span>{' '}
-          onboarding flows — a supplier photographing a pile into a cataloged, priced storefront
-          (vision), and a reseller connecting their shop so Finn learns real demand. The
-          profiles you see are what those flows would produce.
-        </p>
+        <More>
+          <p>
+            Negotiation moves run on Claude Haiku 4.5, streamed; scouting and the oracle on
+            Claude Sonnet 5 (oracle prices computed once and cached). Roadmap, deliberately out
+            of one-day scope: real onboarding — a supplier photographs a pile into a priced
+            storefront, a reseller connects their shop so Finn learns real demand. The seeded
+            profiles are what those flows would produce.
+          </p>
+        </More>
       </Act>
 
       <footer className="border-t border-line py-8 text-center">

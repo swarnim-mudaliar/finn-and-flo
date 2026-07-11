@@ -192,11 +192,14 @@ export function PublicChat({
             );
           }
           if (e.type === 'approval_decision') {
-            const p = e.payload as { side: string; approved: boolean; note?: string };
+            const p = e.payload as { side: string; approved: boolean; note?: string; auto?: boolean };
             const who = p.side === 'buyer' ? "Finn's owner" : "Flo's owner";
+            const tag = p.auto ? ' (AI owner)' : '';
             return (
               <div key={e.seq} className={`animate-rise text-center text-[12px] ${p.approved ? 'text-deal' : 'text-alarm'}`}>
-                {p.approved ? `✓ ${who} approved` : `✗ ${who} sent it back${p.note ? `: “${p.note}”` : ''}`}
+                {p.approved
+                  ? `✓ ${who}${tag} approved${p.note ? ` — “${p.note}”` : ''}`
+                  : `✗ ${who}${tag} sent it back${p.note ? `: “${p.note}”` : ''}`}
               </div>
             );
           }

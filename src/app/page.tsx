@@ -34,6 +34,7 @@ function WarRoom({ scope }: { scope?: 'buyer' | 'seller' }) {
   const [market, setMarket] = useState<MarketInfo | null>(null);
   const [negId, setNegId] = useState('');
   const [starting, setStarting] = useState(false);
+  const [brief, setBrief] = useState('');
 
   useEffect(() => {
     fetch('/api/market').then((r) => r.json()).then(setMarket);
@@ -60,17 +61,30 @@ function WarRoom({ scope }: { scope?: 'buyer' | 'seller' }) {
     ? (created.payload as { buyerShop: string; sellerWarehouse: string })
     : { buyerShop: '', sellerWarehouse: '' };
 
-  // Whose turn is it? Buyer opens; every public move flips the turn. Drives the
-  // "X is thinking…" indicator while an agent's LLM call is in flight.
-  const { turn, terminal } = useMemo(() => {
+  // Whose turn is it, and what state is the negotiation in? Status events carry the
+  // authoritative turn (owners can reopen negotiations, which breaks move-parity);
+  // moves after the last status event flip it. Drives the "X is thinking…" indicator.
+  const { turn, status } = useMemo(() => {
     const mine = events.filter((e) => e.negotiationId === activeNeg);
-    const isTerminal = mine.some(
-      (e) => e.type === 'status' && TERMINAL.has((e.payload as { status: string }).status)
-    );
-    const moves = mine.filter((e) => e.type === 'move').length;
-    const t: Side = moves % 2 === 0 ? 'buyer' : 'seller';
-    return { turn: t, terminal: isTerminal };
+    const statusEvents = mine.filter((e) => e.type === 'status');
+    const last = statusEvents[statusEvents.length - 1];
+    const st = ((last?.payload as { status?: string } | undefined)?.status ?? 'active') as string;
+    const baseTurn = (((last?.payload as { turn?: Side } | undefined)?.turn ?? 'buyer') as Side) || 'buyer';
+    const baseSeq = last?.seq ?? 0;
+    const movesAfter = mine.filter((e) => e.type === 'move' && e.seq > baseSeq).length;
+    const t: Side =
+      movesAfter % 2 === 0 ? baseTurn : baseTurn === 'buyer' ? 'seller' : 'buyer';
+    return { turn: t, status: st };
   }, [events, activeNeg]);
+
+  // Paused while the buyer's owner decides on a ceiling raise?
+  const awaitingCap = useMemo(() => {
+    const mine = events.filter((e) => e.negotiationId === activeNeg);
+    const reqs = mine.filter((e) => e.type === 'cap_raise_requested').length;
+    const decs = mine.filter((e) => e.type === 'cap_decision').length;
+    return reqs > decs;
+  }, [events, activeNeg]);
+  void TERMINAL; // membership retained for readers; status string drives the UI now
 
   async function start(): Promise<void> {
     if (!market) return;
@@ -83,6 +97,19 @@ function WarRoom({ scope }: { scope?: 'buyer' | 'seller' }) {
     });
     const { id } = await res.json();
     setNegId(id);
+    setStarting(false);
+  }
+
+  async function submitBrief(): Promise<void> {
+    if (!market || !brief.trim()) return;
+    setStarting(true);
+    const res = await fetch('/api/brief', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ buyerId: market.buyers[0].id, sellerId: market.sellers[0].id, brief }),
+    });
+    const { id } = await res.json();
+    if (id) setNegId(id);
     setStarting(false);
   }
 
@@ -148,7 +175,7 @@ function WarRoom({ scope }: { scope?: 'buyer' | 'seller' }) {
               events={events}
               humanControlled={controls.seller}
               principal={principals.sellerWarehouse}
-              thinking={!terminal && turn === 'seller' && !controls.seller}
+              thinking={status === 'active' && !awaitingCap && turn === 'seller' && !controls.seller}
             />
           )}
           <PublicChat negotiationId={activeNeg} events={events} />
@@ -159,7 +186,7 @@ function WarRoom({ scope }: { scope?: 'buyer' | 'seller' }) {
               events={events}
               humanControlled={controls.buyer}
               principal={principals.buyerShop}
-              thinking={!terminal && turn === 'buyer' && !controls.buyer}
+              thinking={status === 'active' && !awaitingCap && turn === 'buyer' && !controls.buyer}
             />
           )}
         </div>
@@ -169,16 +196,36 @@ function WarRoom({ scope }: { scope?: 'buyer' | 'seller' }) {
             Two agents. <em className="text-flo">Opposing interests.</em> One deal.
           </div>
           <p className="max-w-md text-center text-[14px] leading-relaxed text-muted">
-            Flo sells for the supplier. Finn buys for the reseller. Start a negotiation and
-            watch them work — or take a side over and try to beat them yourself.
+            Tell <span className="text-finn">Finn</span> what you&apos;re hunting for. He scouts
+            the catalog, picks the bundle, and haggles with{' '}
+            <span className="text-flo">Flo</span> — who will absolutely try to upsell him.
           </p>
-          <button
-            onClick={start}
-            disabled={starting || !market}
-            className="mt-2 rounded-full bg-flo px-6 py-2.5 text-[14px] font-semibold text-night transition-opacity hover:opacity-90 disabled:opacity-40"
-          >
-            {starting ? 'Starting…' : 'Start a negotiation'}
-          </button>
+          <div className="mt-3 w-full max-w-xl rounded-2xl border border-finn/25 bg-panel p-4">
+            <div className="microlabel mb-2 !text-finn">Brief your agent</div>
+            <textarea
+              value={brief}
+              onChange={(e) => setBrief(e.target.value)}
+              placeholder={'e.g. "I need workwear jackets my Brighton shop can flip fast — £150 max, nothing with bad stains."'}
+              rows={3}
+              className="w-full rounded-xl border border-line-2 bg-night px-3 py-2.5 text-[14px] text-cream placeholder:text-faint focus:border-finn/50 focus:outline-none"
+            />
+            <div className="mt-3 flex items-center justify-between">
+              <button
+                onClick={start}
+                disabled={starting || !market}
+                className="text-[12px] text-faint underline-offset-4 hover:text-muted hover:underline disabled:opacity-40"
+              >
+                or skip the brief — quick-start a negotiation
+              </button>
+              <button
+                onClick={submitBrief}
+                disabled={starting || !market || !brief.trim()}
+                className="rounded-full bg-finn px-6 py-2.5 text-[14px] font-semibold text-night transition-opacity hover:opacity-90 disabled:opacity-40"
+              >
+                {starting ? 'Briefing Finn…' : 'Send Finn to work'}
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </main>

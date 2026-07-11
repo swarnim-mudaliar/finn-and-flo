@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { EventLog, getEventLog } from '../src/lib/eventlog';
 import { getMarket } from '../src/lib/market';
-import { runNegotiation } from '../src/lib/runner';
+import { approveDeal, runNegotiation } from '../src/lib/runner';
 import type { NegotiationState } from '../src/lib/types';
 
 // Fake LLM: buyer opens low then accepts; seller counters once.
@@ -44,9 +44,10 @@ describe('runNegotiation', () => {
 
     await runNegotiation('n-test', { llm: fakeLlm() as never });
 
-    const done = market.negotiations.get('n-test')!;
-    expect(done.status).toBe('deal');
-    expect(done.agreedPrice).toBe(80);
+    // Agents shook hands — but that's provisional until BOTH owners approve.
+    const shook = market.negotiations.get('n-test')!;
+    expect(shook.status).toBe('pending_approval');
+    expect(shook.agreedPrice).toBe(80);
 
     const events = getEventLog().byNegotiation('n-test');
     const moves = events.filter((e) => e.type === 'move');
@@ -55,5 +56,32 @@ describe('runNegotiation', () => {
     const reasoning = events.filter((e) => e.type === 'reasoning');
     expect(reasoning.some((e) => e.visibility === 'buyer_private')).toBe(true);
     expect(reasoning.some((e) => e.visibility === 'seller_private')).toBe(true);
+
+    // One approval is not enough…
+    expect(approveDeal('n-test', 'buyer', true).ok).toBe(true);
+    expect(market.negotiations.get('n-test')!.status).toBe('pending_approval');
+    // …both close the deal.
+    expect(approveDeal('n-test', 'seller', true).ok).toBe(true);
+    expect(market.negotiations.get('n-test')!.status).toBe('deal');
+    const decisions = getEventLog().byNegotiation('n-test').filter((e) => e.type === 'approval_decision');
+    expect(decisions).toHaveLength(2);
+  });
+
+  it('owner rejection reopens the negotiation with the rejecting side to move', async () => {
+    const market = getMarket();
+    const neg: NegotiationState = {
+      id: 'n-reject', buyerId: market.buyers[0].id, sellerId: market.sellers[0].id,
+      bundleItemIds: market.items.slice(0, 3).map((i) => i.id),
+      turn: 'seller', status: 'pending_approval', agreedPrice: 70, round: 4, roundCap: 8,
+      control: { buyer: 'human', seller: 'human' }, // humans hold both sides so no LLM runs
+      approvals: {},
+    };
+    market.negotiations.set(neg.id, neg);
+    expect(approveDeal('n-reject', 'buyer', false, 'too rich, push for £60').ok).toBe(true);
+    const reopened = market.negotiations.get('n-reject')!;
+    expect(reopened.status).toBe('active');
+    expect(reopened.turn).toBe('buyer');
+    expect(reopened.agreedPrice).toBeUndefined();
+    expect(reopened.roundCap).toBe(10); // grace rounds
   });
 });

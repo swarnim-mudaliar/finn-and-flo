@@ -100,8 +100,10 @@ export function applyMove(state: NegotiationState, side: Side, move: MoveInput):
       break;
     }
     case 'accept':
-      next.status = 'deal';
+      // A handshake, not a closing: both owners must approve before it becomes a deal.
+      next.status = 'pending_approval';
       next.agreedPrice = state.lastOffer!.price;
+      next.approvals = {};
       break;
     case 'reject':
       next.lastOffer = undefined;
@@ -110,9 +112,14 @@ export function applyMove(state: NegotiationState, side: Side, move: MoveInput):
     case 'walk_away':
       next.status = 'walked_away';
       break;
-    case 'invoke_mediator':
-      next.status = 'mediation';
+    case 'invoke_mediator': {
+      // A proposal, not a trigger: mediation runs only once BOTH sides consent.
+      next.mediationConsent = { ...state.mediationConsent, [side]: true };
+      if (next.mediationConsent.buyer && next.mediationConsent.seller) {
+        next.status = 'mediation';
+      }
       break;
+    }
   }
   return next;
 }

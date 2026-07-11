@@ -164,15 +164,24 @@ describe('applyMove', () => {
     expect(next.round).toBe(1);
     expect(next.turn).toBe('seller');
   });
-  it('accept closes the deal at lastOffer price', () => {
+  it('accept creates a PROVISIONAL deal awaiting owner approval', () => {
     const s = state({ lastOffer: { side: 'seller', price: 55, bundleItemIds: ['i1', 'i2'] } });
     const next = applyMove(s, 'buyer', { action: 'accept', message: 'm' });
-    expect(next.status).toBe('deal');
+    expect(next.status).toBe('pending_approval');
     expect(next.agreedPrice).toBe(55);
+    expect(next.approvals).toEqual({});
   });
-  it('walk_away and invoke_mediator set terminal/mediation status', () => {
+  it('walk_away is terminal; invoke_mediator only records consent', () => {
     expect(applyMove(state(), 'buyer', { action: 'walk_away', message: 'm' }).status).toBe('walked_away');
-    expect(applyMove(state(), 'buyer', { action: 'invoke_mediator', message: 'm' }).status).toBe('mediation');
+    const one = applyMove(state(), 'buyer', { action: 'invoke_mediator', message: 'm' });
+    expect(one.status).toBe('active'); // one-sided proposal does NOT trigger mediation
+    expect(one.mediationConsent?.buyer).toBe(true);
+  });
+
+  it('mediation starts only when BOTH sides have consented', () => {
+    const s = state({ mediationConsent: { seller: true } });
+    const next = applyMove(s, 'buyer', { action: 'invoke_mediator', message: 'm' });
+    expect(next.status).toBe('mediation');
   });
   it('reject clears lastOffer and flips turn', () => {
     const s = state({ lastOffer: { side: 'seller', price: 55, bundleItemIds: ['i1', 'i2'] } });

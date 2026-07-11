@@ -1,6 +1,6 @@
 import { getEventLog } from '@/lib/eventlog';
 import { getMarket } from '@/lib/market';
-import { runNegotiation } from '@/lib/runner';
+import { resumeEscalated, runNegotiation } from '@/lib/runner';
 import type { Side } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
@@ -21,6 +21,8 @@ export async function POST(req: Request): Promise<Response> {
     type: 'control_changed',
     payload: { side, mode },
   });
+  // Taking over an escalated negotiation reopens it with grace rounds.
+  if (mode === 'human' && neg.status === 'escalated') resumeEscalated(negotiationId);
   if (mode === 'agent') void runNegotiation(negotiationId);
   return Response.json({ ok: true });
 }

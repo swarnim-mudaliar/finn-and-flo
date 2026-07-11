@@ -97,10 +97,17 @@ export class Market {
     return Math.round(this.bundleValue(itemIds) * 0.25);
   }
 
+  // The binding maximum for a negotiation: shop economics AND the human's brief ceiling.
+  // The brief cap is enforced here — in the state machine — not just in the prompt.
+  effectiveBuyerMax(neg: NegotiationState, itemIds: string[]): number {
+    const economic = this.buyerMax(neg.buyerId, itemIds);
+    return neg.buyerCap !== undefined ? Math.min(economic, neg.buyerCap) : economic;
+  }
+
   validationCtx(neg: NegotiationState): ValidationCtx {
     return {
       bundleOracleValue: (ids) => this.bundleValue(ids),
-      buyerMax: (ids) => this.buyerMax(neg.buyerId, ids),
+      buyerMax: (ids) => this.effectiveBuyerMax(neg, ids),
       sellerFloor: (ids) => this.sellerFloor(neg.sellerId, ids),
       inventoryIds: new Set(this.items.map((i) => i.id)),
     };

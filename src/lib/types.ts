@@ -65,6 +65,8 @@ export interface MoveInput {
 
 export type NegotiationStatus =
   | 'active'
+  | 'pending_approval' // agents shook hands; deal closes only when BOTH owners approve
+  | 'escalated' // deadlock without mutual mediation consent — returned to the owners
   | 'deal'
   | 'walked_away'
   | 'mediation'
@@ -75,6 +77,12 @@ export interface NegotiationState {
   id: string;
   buyerId: string;
   sellerId: string;
+  /** The human buyer's instruction to Finn ("I'm hunting workwear under £150"). */
+  buyerBrief?: string;
+  /** Finn's scouting rationale for the bundle he picked from the catalog. */
+  scoutNotes?: string;
+  /** Spend ceiling stated in the brief (GBP) — enforced in code, caps buyerMax. */
+  buyerCap?: number;
   bundleItemIds: string[];
   turn: Side;
   status: NegotiationStatus;
@@ -83,6 +91,16 @@ export interface NegotiationState {
   roundCap: number;
   lastOffer?: { side: Side; price: number; bundleItemIds: string[] };
   control: Record<Side, 'agent' | 'human'>;
+  /** Owner sign-offs while status is pending_approval. Deal closes when both true. */
+  approvals?: Partial<Record<Side, boolean>>;
+  /** invoke_mediator only PROPOSES; mediation runs when both sides have consented. */
+  mediationConsent?: Partial<Record<Side, boolean>>;
+  /** Paused waiting for the buyer's owner to grant/decline a new spend ceiling (upsell). */
+  awaitingCap?: boolean;
+  /** The buyer's owner declined a ceiling raise — Finn must not chase additions past the cap. */
+  capDeclined?: boolean;
+  /** Provisional agreement came from mediation (affects final status on approval). */
+  mediated?: boolean;
 }
 
 export interface MarketEvent {

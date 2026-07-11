@@ -16,6 +16,27 @@ export function PublicChat({
     scroller.current?.scrollTo({ top: scroller.current.scrollHeight, behavior: 'smooth' });
   }, [pub.length]);
 
+  // Walk the move sequence to label bundle changes as additions (upsell) vs drops.
+  const bundleDiffs = new Map<number, { added: number; dropped: number }>();
+  {
+    let current: string[] | null = null;
+    for (const e of pub) {
+      if (e.type === 'negotiation_created') current = (e.payload as { itemIds: string[] }).itemIds;
+      if (e.type === 'move') {
+        const next = (e.payload as { bundleItemIds?: string[] }).bundleItemIds;
+        if (next && current) {
+          const cur = new Set(current);
+          const nxt = new Set(next);
+          bundleDiffs.set(e.seq, {
+            added: next.filter((id) => !cur.has(id)).length,
+            dropped: current.filter((id) => !nxt.has(id)).length,
+          });
+        }
+        if (next) current = next;
+      }
+    }
+  }
+
   return (
     <div className="flex h-full min-h-0 flex-col rounded-2xl border border-line bg-panel">
       <div className="flex items-center gap-2 border-b border-line px-4 py-[18px]">
@@ -63,8 +84,27 @@ export function PublicChat({
                     )}
                   </div>
                   {p.bundleItemIds && (
-                    <div className="mb-2 inline-block rounded-md border border-dashed border-brass/40 bg-brass-deep/50 px-2 py-0.5 text-[11px] text-brass">
-                      ✂ bundle restructured → {p.bundleItemIds.length} items
+                    <div
+                      className={`mb-2 inline-block rounded-md border border-dashed px-2 py-0.5 text-[11px] ${
+                        (bundleDiffs.get(e.seq)?.added ?? 0) > 0 && (bundleDiffs.get(e.seq)?.dropped ?? 0) === 0
+                          ? 'border-deal/40 bg-deal-deep/50 text-deal'
+                          : 'border-brass/40 bg-brass-deep/50 text-brass'
+                      }`}
+                    >
+                      {(() => {
+                        const d = bundleDiffs.get(e.seq);
+                        if (!d || (d.added === 0 && d.dropped === 0))
+                          return <>✂ bundle restructured → {p.bundleItemIds.length} items</>;
+                        const parts = [];
+                        if (d.added) parts.push(`+${d.added} added`);
+                        if (d.dropped) parts.push(`−${d.dropped} dropped`);
+                        return (
+                          <>
+                            {d.added && !d.dropped ? '✚ upsell' : '✂ restructure'}: {parts.join(', ')} →{' '}
+                            {p.bundleItemIds.length} items
+                          </>
+                        );
+                      })()}
                     </div>
                   )}
                   <div className="text-[13.5px] leading-relaxed text-cream/85">{p.message}</div>
@@ -97,6 +137,42 @@ export function PublicChat({
           }
           if (e.type === 'status') {
             const p = e.payload as { status: string; agreedPrice?: number };
+            if (p.status === 'pending_approval') {
+              return (
+                <div
+                  key={e.seq}
+                  className="animate-rise mx-auto max-w-[80%] rounded-2xl border border-deal/40 bg-deal-deep/60 p-4 text-center"
+                >
+                  <div className="font-display text-lg text-deal">
+                    🤝 Agents shook on <span className="font-mono not-italic">£{p.agreedPrice}</span>
+                  </div>
+                  <div className="mt-1 text-[11px] tracking-[0.14em] uppercase text-deal/60">
+                    provisional — awaiting both owners
+                  </div>
+                </div>
+              );
+            }
+            if (p.status === 'escalated') {
+              return (
+                <div
+                  key={e.seq}
+                  className="animate-rise mx-auto max-w-[80%] rounded-2xl border border-seal/40 bg-seal-deep/60 p-4 text-center"
+                >
+                  <div className="font-display text-lg text-seal">↩ Returned to the owners</div>
+                  <div className="mt-1 text-[11px] text-seal/70">
+                    the agents couldn&apos;t close — mediation needs both sides&apos; consent, or
+                    take over and finish it yourselves
+                  </div>
+                </div>
+              );
+            }
+            if (p.status === 'active') {
+              return (
+                <div key={e.seq} className="animate-rise text-center text-[11px] tracking-[0.14em] uppercase text-muted">
+                  negotiation reopened
+                </div>
+              );
+            }
             const good = p.status === 'deal' || p.status === 'mediated_deal';
             return (
               <div key={e.seq} className="animate-rise flex justify-center py-1">
@@ -112,6 +188,23 @@ export function PublicChat({
                     <span className="ml-2 font-mono tabular-nums">£{p.agreedPrice}</span>
                   )}
                 </span>
+              </div>
+            );
+          }
+          if (e.type === 'approval_decision') {
+            const p = e.payload as { side: string; approved: boolean; note?: string };
+            const who = p.side === 'buyer' ? "Finn's owner" : "Flo's owner";
+            return (
+              <div key={e.seq} className={`animate-rise text-center text-[12px] ${p.approved ? 'text-deal' : 'text-alarm'}`}>
+                {p.approved ? `✓ ${who} approved` : `✗ ${who} sent it back${p.note ? `: “${p.note}”` : ''}`}
+              </div>
+            );
+          }
+          if (e.type === 'mediation_consent') {
+            const p = e.payload as { side: string };
+            return (
+              <div key={e.seq} className="animate-rise text-center text-[12px] text-seal">
+                ⚖ {p.side === 'buyer' ? 'buyer side' : 'seller side'} consents to mediation
               </div>
             );
           }

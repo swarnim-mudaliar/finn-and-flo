@@ -92,6 +92,7 @@ export default function HowItWorks() {
             lines={[
               'Knows the warehouse: every item, grade, and defect in the catalog.',
               'Remembers each buyer — past deals, concession patterns, payment reliability — and negotiates repeat buyers differently.',
+              'Upsells like a saleswoman: offers additions from her shelf when they fit the buyer’s interests, and drops back gracefully when declined.',
               'Answers every enquiry instantly, 24/7, and never sells below the owner’s floor.',
             ]}
           />
@@ -102,9 +103,9 @@ export default function HowItWorks() {
             border="border-finn/25"
             role="buys for the reseller"
             lines={[
-              'Knows the shop: what sells, at what price, how fast — learned from its sales history.',
-              'Derives a hard maximum for every bundle from the shop’s margin target and budget.',
-              'Haggles evidence-first: every offer is anchored to the oracle’s comps, not vibes.',
+              'Takes your brief — “workwear my shop can flip fast, £180 max” — scouts the whole catalog, and picks the bundle himself.',
+              'Your spend ceiling becomes a hard cap enforced in code, alongside the maximum derived from the shop’s margins.',
+              'Haggles evidence-first: every offer anchored to the oracle’s comps — and declines upsells that don’t serve the brief.',
             ]}
           />
         </div>
@@ -141,12 +142,20 @@ export default function HowItWorks() {
         </p>
       </Act>
 
-      <Act n="IV" title="Deadlock? The mediator settles it">
+      <Act n="IV" title="Humans make every final call">
         <p>
-          When posturing kills a deal both sides actually wanted, either agent can call the
-          mediator. Both privately disclose their true limits; if they overlap, the deal clears
-          at the midpoint — and neither side&apos;s number is ever revealed to the room. A
-          classic mechanism-design result (Chatterjee–Samuelson), running live.
+          An agent&apos;s accept is a <span className="text-cream">handshake, not a signature</span>:
+          the deal closes only when both owners approve. Send it back with a note — &quot;too
+          rich, push for £60&quot; — and your agent reopens the negotiation with your note as
+          its top priority. When Flo upsells past your stated ceiling, Finn doesn&apos;t guess:
+          he pauses and asks you for a new one.
+        </p>
+        <p>
+          And when agents deadlock, the negotiation <span className="text-cream">returns to the
+          humans</span>. Sealed-bid mediation exists — both sides privately disclose their true
+          limits and the deal clears at the midpoint, neither number ever revealed
+          (Chatterjee–Samuelson) — but it runs only if <span className="text-cream">both sides
+          consent</span>. Nobody gets arbitrated against their will.
         </p>
       </Act>
 

@@ -78,6 +78,7 @@ describe('scoutBundle', () => {
     const real = market.itemsOf(seller.id).slice(0, 3).map((i) => i.id);
     const llm = vi.fn().mockResolvedValue({
       sellerId: seller.id,
+      matchQuality: 'good',
       itemIds: [...real, 'item-999-fake'],
       rationale: 'good velocity',
       openingPlan: 'open at 30%',
@@ -96,6 +97,7 @@ describe('scoutBundle', () => {
     const foreign = market.itemsOf(other.id).slice(0, 2).map((i) => i.id);
     const llm = vi.fn().mockResolvedValue({
       sellerId: chosen.id,
+      matchQuality: 'good',
       itemIds: [...own, ...foreign],
       rationale: 'mixed picks',
       openingPlan: 'open low',
@@ -109,6 +111,7 @@ describe('scoutBundle', () => {
     const market = getMarket();
     const llm = vi.fn().mockResolvedValue({
       sellerId: market.sellers[0].id,
+      matchQuality: 'none',
       itemIds: ['nope'],
       rationale: 'x',
       openingPlan: 'y',

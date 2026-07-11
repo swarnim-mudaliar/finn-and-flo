@@ -73,6 +73,14 @@ export function SidePane({
   const myConsentGiven = all.some(
     (e) => e.type === 'mediation_consent' && (e.payload as { side: string }).side === side
   );
+  // Finn said no: scout verdict short of 'good', owner hasn't decided, nothing started.
+  const scoutRep = [...all].reverse().find((e) => e.type === 'scout_report');
+  const scoutGateOpen =
+    side === 'buyer' &&
+    scoutRep !== undefined &&
+    ((scoutRep.payload as { matchQuality?: string }).matchQuality ?? 'good') !== 'good' &&
+    !all.some((e) => e.type === 'scout_decision') &&
+    !all.some((e) => e.type === 'negotiation_created');
   const suggestedCap = capOpen ? ((capReq!.payload as { suggestedCap: number }).suggestedCap ?? 0) : 0;
   const [capValue, setCapValue] = useState('');
   useEffect(() => {
@@ -137,6 +145,11 @@ export function SidePane({
           ) : e.type === 'scout_report' ? (
             <div key={e.seq} className={`animate-rise rounded-xl border ${meta.border} bg-panel-2 p-3`}>
               <div className="microlabel mb-1">Scout report · {(e.payload.itemIds as string[])?.length} items picked</div>
+              {((e.payload as { matchQuality?: string }).matchQuality ?? 'good') !== 'good' && (
+                <div className="mb-1.5 inline-block rounded-md border border-alarm/40 bg-alarm-deep/60 px-2 py-0.5 text-[11px] text-alarm">
+                  ⚠ no true match in stock — closest substitute shown
+                </div>
+              )}
               {e.payload.sellerName !== undefined && (
                 <div className="mb-1.5 text-[12px] text-cream/70">
                   Supplier chosen: <span className="text-cream/90">{e.payload.sellerName as string}</span>
@@ -153,6 +166,12 @@ export function SidePane({
                   </span>
                 )}
               </div>
+            </div>
+          ) : e.type === 'scout_decision' ? (
+            <div key={e.seq} className="animate-rise border-l-2 border-line-2 pl-3 text-[12.5px] text-muted">
+              {(e.payload as { proceed: boolean }).proceed
+                ? 'You approved the substitute — Finn is going in.'
+                : 'You closed this brief. Nothing was bought.'}
             </div>
           ) : e.type === 'scout_failed' ? (
             <div key={e.seq} className="animate-rise rounded-xl border border-alarm/40 bg-alarm-deep p-3 text-[13px] text-alarm">
@@ -199,6 +218,30 @@ export function SidePane({
           <div className="pt-6 text-center text-[12px] text-faint">No private notes yet.</div>
         )}
       </div>
+
+      {scoutGateOpen && (
+        <div className="border-t border-finn/30 bg-finn-deep/40 p-3">
+          <div className="microlabel mb-1 !text-finn">Finn is waiting on you</div>
+          <div className="mb-2 text-[12.5px] leading-relaxed text-cream/80">
+            Nothing truly matches your brief. He found the closest substitute — pursue it, or
+            close the brief?
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => post('/api/scout-decision', { negotiationId, proceed: true })}
+              className="flex-1 rounded-lg bg-finn px-3 py-2 text-[13px] font-semibold text-night hover:opacity-90"
+            >
+              Pursue substitute
+            </button>
+            <button
+              onClick={() => post('/api/scout-decision', { negotiationId, proceed: false })}
+              className="flex-1 rounded-lg border border-line-2 px-3 py-2 text-[13px] text-muted hover:border-faint hover:text-cream"
+            >
+              Close brief
+            </button>
+          </div>
+        </div>
+      )}
 
       {lastStatus === 'pending_approval' && !myDecisionMade && (
         <div className="border-t border-deal/30 bg-deal-deep/40 p-3">

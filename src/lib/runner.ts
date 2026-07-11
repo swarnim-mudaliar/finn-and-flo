@@ -357,6 +357,54 @@ export function consentMediation(negId: string, side: Side, opts?: { auto?: bool
   return { ok: true };
 }
 
+export interface ScoutPlan {
+  buyerId: string;
+  brief: string;
+  sellerId: string;
+  itemIds: string[];
+  rationale: string;
+  openingPlan: string;
+  briefBudgetMax?: number;
+  substitute?: boolean; // owner approved a best-effort substitute for an unmatched brief
+}
+
+// Create and launch a negotiation from a completed scout (directly for a good
+// match, or after the owner approves a substitute via /api/scout-decision).
+export function startNegotiationFromScout(negId: string, plan: ScoutPlan): void {
+  const market = getMarket();
+  const neg: NegotiationState = {
+    id: negId,
+    buyerId: plan.buyerId,
+    sellerId: plan.sellerId,
+    buyerBrief: plan.substitute
+      ? `${plan.brief} (exact match unavailable — owner approved pursuing the closest substitute)`
+      : plan.brief,
+    scoutNotes: `${plan.rationale} Opening plan: ${plan.openingPlan}`,
+    buyerCap: plan.briefBudgetMax,
+    bundleItemIds: plan.itemIds,
+    turn: 'buyer',
+    status: 'active',
+    round: 0,
+    roundCap: 8,
+    control: { buyer: 'agent', seller: 'agent' },
+  };
+  market.negotiations.set(negId, neg);
+  getEventLog().append({
+    negotiationId: negId,
+    visibility: 'public',
+    type: 'negotiation_created',
+    payload: {
+      buyerId: plan.buyerId,
+      sellerId: plan.sellerId,
+      itemIds: plan.itemIds,
+      oracleValue: market.bundleValue(plan.itemIds),
+      buyerShop: market.buyer(plan.buyerId).shopName,
+      sellerWarehouse: market.seller(plan.sellerId).warehouseName,
+    },
+  });
+  void runNegotiation(negId);
+}
+
 // An owner reopens an escalated negotiation by taking their side over.
 export function resumeEscalated(negId: string): void {
   const market = getMarket();

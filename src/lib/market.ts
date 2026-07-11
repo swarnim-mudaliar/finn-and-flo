@@ -19,6 +19,12 @@ export class Market {
   comps: Comp[] = readJson('comps.json');
   oracle: Record<string, OraclePrice> = readJson('oracle-cache.json');
   negotiations = new Map<string, NegotiationState>();
+  // Briefs whose scout verdict was not a clean match — awaiting the owner's
+  // pursue/abandon decision before any negotiation exists.
+  pendingScouts = new Map<
+    string,
+    { buyerId: string; brief: string; sellerId: string; itemIds: string[]; rationale: string; openingPlan: string; briefBudgetMax?: number }
+  >();
 
   constructor() {
     this.rehydrate();

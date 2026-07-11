@@ -85,7 +85,15 @@ function WarRoom({ scope, initialNeg }: { scope?: 'buyer' | 'seller'; initialNeg
     const mine = events.filter((e) => e.negotiationId === activeNeg);
     const reqs = mine.filter((e) => e.type === 'cap_raise_requested').length;
     const decs = mine.filter((e) => e.type === 'cap_decision').length;
-    return reqs > decs;
+    if (reqs > decs) return true;
+    // Finn said no (scout verdict short of 'good'): paused on the owner's pursue/close call.
+    const scoutRep = [...mine].reverse().find((e) => e.type === 'scout_report');
+    return (
+      scoutRep !== undefined &&
+      ((scoutRep.payload as { matchQuality?: string }).matchQuality ?? 'good') !== 'good' &&
+      !mine.some((e) => e.type === 'scout_decision') &&
+      !mine.some((e) => e.type === 'negotiation_created')
+    );
   }, [events, activeNeg]);
   void TERMINAL; // membership retained for readers; status string drives the UI now
 

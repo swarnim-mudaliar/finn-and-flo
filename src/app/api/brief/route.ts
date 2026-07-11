@@ -1,8 +1,7 @@
 import { scoutBundle } from '@/lib/agents';
 import { getEventLog } from '@/lib/eventlog';
 import { getMarket } from '@/lib/market';
-import { runNegotiation } from '@/lib/runner';
-import type { NegotiationState } from '@/lib/types';
+import { startNegotiationFromScout } from '@/lib/runner';
 
 export const dynamic = 'force-dynamic';
 
@@ -46,37 +45,34 @@ export async function POST(req: Request): Promise<Response> {
           openingPlan: scout.openingPlan,
           itemIds: scout.itemIds,
           briefBudgetMax: scout.briefBudgetMax,
+          matchQuality: scout.matchQuality,
         },
       });
-      const neg: NegotiationState = {
-        id,
-        buyerId,
-        sellerId,
-        buyerBrief: brief.trim(),
-        scoutNotes: `${scout.rationale} Opening plan: ${scout.openingPlan}`,
-        buyerCap: scout.briefBudgetMax,
-        bundleItemIds: scout.itemIds,
-        turn: 'buyer',
-        status: 'active',
-        round: 0,
-        roundCap: 8,
-        control: { buyer: 'agent', seller: 'agent' },
-      };
-      market.negotiations.set(id, neg);
-      log.append({
-        negotiationId: id,
-        visibility: 'public',
-        type: 'negotiation_created',
-        payload: {
+
+      // Finn says no: anything short of a genuine match stops here. The owner
+      // decides whether to pursue the closest substitute — /api/scout-decision.
+      if (scout.matchQuality !== 'good') {
+        market.pendingScouts.set(id, {
           buyerId,
+          brief: brief.trim(),
           sellerId,
           itemIds: scout.itemIds,
-          oracleValue: market.bundleValue(scout.itemIds),
-          buyerShop: market.buyer(buyerId).shopName,
-          sellerWarehouse: market.seller(sellerId).warehouseName,
-        },
+          rationale: scout.rationale,
+          openingPlan: scout.openingPlan,
+          briefBudgetMax: scout.briefBudgetMax,
+        });
+        return;
+      }
+
+      startNegotiationFromScout(id, {
+        buyerId,
+        brief: brief.trim(),
+        sellerId,
+        itemIds: scout.itemIds,
+        rationale: scout.rationale,
+        openingPlan: scout.openingPlan,
+        briefBudgetMax: scout.briefBudgetMax,
       });
-      await runNegotiation(id);
     } catch (err) {
       log.append({
         negotiationId: id,

@@ -264,9 +264,66 @@ export function renderTranscript(market: Market, neg: NegotiationState, side: Si
       const p = e.payload as { side: Side; action: string; price?: number; message: string; bundleItemIds?: string[] };
       const who = p.side === side ? 'YOU' : 'COUNTERPARTY';
       const bundleNote = p.bundleItemIds ? ` [restructured bundle to: ${p.bundleItemIds.join(', ')}]` : '';
-      return `${who} — ${p.action}${p.price !== undefined ? ` £${p.price}` : ''}${bundleNote}: "${p.message}"`;
+      // A reject whose message names a price ("I'll meet you at £65") reads like an offer;
+      // formally it cleared the table. Say so, or the next mover tries to accept a phantom.
+      const rejectNote = p.action === 'reject' ? ' [this rejection took the previous offer OFF the table]' : '';
+      return `${who} — ${p.action}${p.price !== undefined ? ` £${p.price}` : ''}${bundleNote}: "${p.message}"${rejectNote}`;
     })
     .join('\n');
+}
+
+// The referee (validateMove) enforces rules the model otherwise has to guess:
+// per-bundle reservation prices, the collapsed action space at the round cap, and
+// whether a live offer even exists after a reject. Restate what is legal THIS turn,
+// so agents stop burning both attempts on moves the referee is guaranteed to bin —
+// measured on the reference negotiation, that was 26/30 samples hitting fallback.
+export function situationBrief(market: Market, neg: NegotiationState, side: Side): string {
+  const lines: string[] = [];
+  const atCap = neg.round >= neg.roundCap;
+  const limitWord = side === 'buyer' ? 'maximum' : 'floor';
+  const limitFor = (ids: string[]): number =>
+    side === 'buyer' ? market.effectiveBuyerMax(neg, ids) : market.sellerFloor(neg.sellerId, ids);
+
+  lines.push(
+    `Your ${limitWord} is enforced PER BUNDLE, not per negotiation: for the current ${neg.bundleItemIds.length}-item bundle it is £${limitFor(neg.bundleItemIds)}.`
+  );
+  const created = getEventLog().byNegotiation(neg.id).find((e) => e.type === 'negotiation_created');
+  const orig = (created?.payload as { itemIds?: string[] } | undefined)?.itemIds;
+  if (orig && JSON.stringify([...orig].sort()) !== JSON.stringify([...neg.bundleItemIds].sort())) {
+    lines.push(
+      `If you restructure back to the original ${orig.length}-item bundle, your ${limitWord} for it is £${limitFor(orig)} — a price on that bundle is judged against THAT number, not the current one.`
+    );
+  }
+
+  const live = neg.lastOffer && neg.lastOffer.side !== side ? neg.lastOffer : undefined;
+  let acceptLegal = false;
+  if (live) {
+    const limit = limitFor(live.bundleItemIds);
+    acceptLegal = side === 'buyer' ? live.price <= limit : live.price >= limit;
+    lines.push(
+      `On the table: the counterparty's £${live.price} for a ${live.bundleItemIds.length}-item bundle.` +
+        (acceptLegal
+          ? ' You may accept it.'
+          : ` Accepting it would breach your ${limitWord} of £${limit} — an accept will be auto-rejected, do not attempt one.`)
+    );
+  } else {
+    lines.push(
+      'NO offer is on the table (none yet, or the last one was rejected): accept is ILLEGAL this turn. A price mentioned inside a rejection message is NOT a formal offer and cannot be accepted' +
+        (atCap ? '.' : ' — if you want that number, put it on the table yourself as a priced offer.')
+    );
+  }
+
+  if (atCap) {
+    const legal = [...(acceptLegal ? ['accept'] : []), 'walk_away', 'invoke_mediator'];
+    lines.push(
+      `ROUND CAP REACHED (round ${neg.round} of ${neg.roundCap}): offer, counter, and reject are now ILLEGAL. Your ONLY legal actions: ${legal.join(', ')}.`
+    );
+  } else if (neg.round === neg.roundCap - 1) {
+    lines.push(
+      `This turn is the LAST on which a priced offer/counter is legal — after it, only accept, walk_away, or invoke_mediator remain.`
+    );
+  }
+  return `THE REFEREE'S RULES FOR THIS TURN (moves that break them are auto-rejected):\n- ${lines.join('\n- ')}`;
 }
 
 export async function generateMove(
@@ -276,7 +333,7 @@ export async function generateMove(
   retryError?: string,
   llm: typeof callWithTool = callWithTool
 ): Promise<MoveInput> {
-  let content = `Negotiation transcript so far:\n${renderTranscript(market, neg, side)}\n\nIt is your turn. Submit your move.`;
+  let content = `Negotiation transcript so far:\n${renderTranscript(market, neg, side)}\n\n${situationBrief(market, neg, side)}\n\nIt is your turn. Submit your move.`;
   if (side === 'seller' && neg.round >= 2 && neg.round <= 5) {
     const sellerPlayedBundle = getEventLog()
       .byNegotiation(neg.id)
@@ -291,7 +348,7 @@ export async function generateMove(
         "\n\n(Check your upsell shelf: if an item clearly matches this buyer's interests and you haven't yet offered an addition, this is a natural moment — bundle it into your counter with sweetened per-unit economics. If nothing fits, ignore this.)";
     }
   }
-  if (retryError) content += `\n\nYour previous attempt was INVALID: ${retryError}. Submit a corrected move.`;
+  if (retryError) content += `\n\nYour previous attempt was INVALID: ${retryError}. Re-read THE REFEREE'S RULES above and submit a move that satisfies them.`;
   const raw = await llm({
     tier: 'haiku',
     system: buildSystemPrompt(market, neg, side),

@@ -166,7 +166,8 @@ function defaultMove(negId: string, side: Side): MoveInput {
     return {
       action: 'invoke_mediator',
       message: 'We are going in circles — I propose we let a neutral mediator settle it, if you agree.',
-      privateReasoning: 'fallback: round cap reached after invalid LLM output',
+      privateReasoning:
+        'Referee note: no legal reply arrived from the agent at the round cap — proposing mediation to close cleanly.',
     };
   }
   const v = market.bundleValue(neg.bundleItemIds);
@@ -180,7 +181,8 @@ function defaultMove(negId: string, side: Side): MoveInput {
     action: neg.lastOffer ? 'counter' : 'offer',
     price,
     message: 'Holding at this price for now.',
-    privateReasoning: 'fallback move after invalid LLM output',
+    privateReasoning:
+      "Referee note: the agent's reply did not validate — holding a safe price while the negotiation continues.",
   };
 }
 
@@ -190,28 +192,47 @@ export async function stepAgent(negId: string, deps: Deps = {}): Promise<void> {
   if (!neg || neg.status !== 'active') return;
   const side = neg.turn;
 
-  let move: MoveInput = defaultMove(negId, side);
+  let move: MoveInput | undefined;
   let result: ValidationResult = { ok: false, reason: 'no move generated yet' };
-  // A live Haiku 529/overload, network blip, or a malformed tool response that fails
-  // MoveZod.parse throws here. Catch it so the negotiation falls through to the safe
-  // default path below instead of leaking an unhandled rejection out of
-  // `void runNegotiation()` and freezing the panel with no recovery trigger.
-  try {
-    move = await generateMove(market, neg, side, undefined, deps.llm);
-    result = validateMove(neg, side, move, market.validationCtx(neg));
-    if (!result.ok) {
-      move = await generateMove(market, neg, side, result.reason, deps.llm);
+  let retryReason: string | undefined;
+  // Two attempts, each individually shielded: a Haiku 529, a venue-network timeout, or
+  // a malformed tool response failing MoveZod.parse costs that one attempt — it must
+  // not skip the retry and jump straight to the scripted fallback (and it must never
+  // leak an unhandled rejection out of `void runNegotiation()`, freezing the panel).
+  for (let attempt = 0; attempt < 2 && !result.ok; attempt++) {
+    try {
+      move = await generateMove(market, neg, side, retryReason, deps.llm);
       result = validateMove(neg, side, move, market.validationCtx(neg));
+      retryReason = result.ok ? undefined : result.reason;
+    } catch {
+      move = undefined;
+      result = { ok: false, reason: 'the reply was malformed or never arrived' };
+      retryReason = 'your reply was malformed or did not arrive — call submit_move again with a complete move';
     }
-  } catch {
-    result = { ok: false, reason: 'llm call failed' };
+    if (!result.ok) {
+      // Referee transparency: rejected attempts used to vanish without trace, so a
+      // scripted fallback read as the agent's own baffling choice in the ledger.
+      const desc = move
+        ? `${move.action}${move.price !== undefined ? ` £${move.price}` : ''}${move.bundleItemIds ? ` (${move.bundleItemIds.length}-item bundle)` : ''}`
+        : 'the reply';
+      getEventLog().append({
+        negotiationId: negId,
+        visibility: privateVis(side),
+        type: 'validation_warning',
+        payload: { side, text: `referee rejected ${desc}: ${result.reason}${attempt === 0 ? ' — asking the agent to correct it' : ''}` },
+      });
+    }
   }
-  if (!result.ok) {
+  if (!result.ok || !move) {
     move = defaultMove(negId, side);
     result = validateMove(neg, side, move, market.validationCtx(neg));
     if (!result.ok) {
       // Last resort: proposing mediation is always a legal move on your turn.
-      move = { action: 'invoke_mediator', message: 'I propose mediation.', privateReasoning: 'fallback' };
+      move = {
+        action: 'invoke_mediator',
+        message: 'I propose mediation.',
+        privateReasoning: 'Referee note: proposing mediation as the always-legal safe move.',
+      };
       result = { ok: true, warnings: [] };
     }
   }

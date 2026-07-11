@@ -1,233 +1,139 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Nav } from '@/components/Nav';
-import { PublicChat } from '@/components/PublicChat';
-import { SidePane } from '@/components/SidePane';
-import { useEvents } from '@/hooks/useEvents';
-import type { Item, OraclePrice, Side } from '@/lib/types';
 
 interface MarketInfo {
-  items: Item[];
-  oracle: Record<string, OraclePrice>;
-  buyers: { id: string; shopName: string }[];
-  sellers: { id: string; warehouseName: string }[];
+  buyers: { id: string; shopName: string; persona: string }[];
+  sellers: { id: string; warehouseName: string; persona: string }[];
 }
 
-const TERMINAL = new Set(['deal', 'walked_away', 'mediated_deal', 'mediation_no_deal']);
+const EXAMPLES = [
+  'I need hard-wearing workwear my shop can flip fast — Carhartt, Dickies, Barbour. £150 max all-in, nothing with bad stains.',
+  'Y2K graphic tees and vintage sportswear for a Depop store — £80 ceiling, grade A/B only.',
+  'Build me a coherent “90s Americana” rail: denim, flannel, boots. Around £200, defects fine if the price reflects them.',
+];
 
 export default function Home() {
-  // Judge mode: /?side=seller renders ONLY that side's pane and opens a server-scoped
-  // SSE stream — the opposing side's private events never even reach this browser.
-  // Hand the judge this URL for the takeover beat; Finn's max stays off their screen.
-  const [scope, setScope] = useState<'buyer' | 'seller' | undefined>(undefined);
-  const [scopeReady, setScopeReady] = useState(false);
-  useEffect(() => {
-    const s = new URLSearchParams(window.location.search).get('side');
-    if (s === 'buyer' || s === 'seller') setScope(s);
-    setScopeReady(true);
-  }, []);
-  return scopeReady ? <WarRoom scope={scope} /> : null;
-}
-
-function WarRoom({ scope }: { scope?: 'buyer' | 'seller' }) {
-  const events = useEvents(scope);
+  const router = useRouter();
   const [market, setMarket] = useState<MarketInfo | null>(null);
-  const [negId, setNegId] = useState('');
-  const [starting, setStarting] = useState(false);
+  const [buyerId, setBuyerId] = useState('');
+  const [sellerId, setSellerId] = useState('');
   const [brief, setBrief] = useState('');
+  const [sending, setSending] = useState(false);
 
   useEffect(() => {
-    fetch('/api/market').then((r) => r.json()).then(setMarket);
+    fetch('/api/market')
+      .then((r) => r.json())
+      .then((m: MarketInfo) => {
+        setMarket(m);
+        setBuyerId(m.buyers[0]?.id ?? '');
+        setSellerId(m.sellers[0]?.id ?? '');
+      });
   }, []);
 
-  const negotiationIds = useMemo(
-    () => [...new Set(events.filter((e) => e.type === 'negotiation_created').map((e) => e.negotiationId))],
-    [events]
-  );
-  const activeNeg = negId || negotiationIds[negotiationIds.length - 1] || '';
-
-  const controls = useMemo(() => {
-    const c = { buyer: false, seller: false };
-    for (const e of events) {
-      if (e.negotiationId !== activeNeg || e.type !== 'control_changed') continue;
-      const p = e.payload as { side: 'buyer' | 'seller'; mode: string };
-      c[p.side] = p.mode === 'human';
-    }
-    return c;
-  }, [events, activeNeg]);
-
-  const created = events.find((e) => e.negotiationId === activeNeg && e.type === 'negotiation_created');
-  const principals = created
-    ? (created.payload as { buyerShop: string; sellerWarehouse: string })
-    : { buyerShop: '', sellerWarehouse: '' };
-
-  // Whose turn is it, and what state is the negotiation in? Status events carry the
-  // authoritative turn (owners can reopen negotiations, which breaks move-parity);
-  // moves after the last status event flip it. Drives the "X is thinking…" indicator.
-  const { turn, status } = useMemo(() => {
-    const mine = events.filter((e) => e.negotiationId === activeNeg);
-    const statusEvents = mine.filter((e) => e.type === 'status');
-    const last = statusEvents[statusEvents.length - 1];
-    const st = ((last?.payload as { status?: string } | undefined)?.status ?? 'active') as string;
-    const baseTurn = (((last?.payload as { turn?: Side } | undefined)?.turn ?? 'buyer') as Side) || 'buyer';
-    const baseSeq = last?.seq ?? 0;
-    const movesAfter = mine.filter((e) => e.type === 'move' && e.seq > baseSeq).length;
-    const t: Side =
-      movesAfter % 2 === 0 ? baseTurn : baseTurn === 'buyer' ? 'seller' : 'buyer';
-    return { turn: t, status: st };
-  }, [events, activeNeg]);
-
-  // Paused while the buyer's owner decides on a ceiling raise?
-  const awaitingCap = useMemo(() => {
-    const mine = events.filter((e) => e.negotiationId === activeNeg);
-    const reqs = mine.filter((e) => e.type === 'cap_raise_requested').length;
-    const decs = mine.filter((e) => e.type === 'cap_decision').length;
-    return reqs > decs;
-  }, [events, activeNeg]);
-  void TERMINAL; // membership retained for readers; status string drives the UI now
-
-  async function start(): Promise<void> {
-    if (!market) return;
-    setStarting(true);
-    const itemIds = market.items.slice(0, 5).map((i) => i.id);
-    const res = await fetch('/api/negotiations', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ buyerId: market.buyers[0].id, sellerId: market.sellers[0].id, itemIds }),
-    });
-    const { id } = await res.json();
-    setNegId(id);
-    setStarting(false);
-  }
-
-  async function submitBrief(): Promise<void> {
-    if (!market || !brief.trim()) return;
-    setStarting(true);
+  async function send(): Promise<void> {
+    if (!brief.trim() || !buyerId || !sellerId) return;
+    setSending(true);
     const res = await fetch('/api/brief', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ buyerId: market.buyers[0].id, sellerId: market.sellers[0].id, brief }),
+      body: JSON.stringify({ buyerId, sellerId, brief }),
     });
-    const { id } = await res.json();
-    if (id) setNegId(id);
-    setStarting(false);
+    const { id, error } = await res.json();
+    setSending(false);
+    if (id) router.push(`/war-room?n=${id}`);
+    else alert(error ?? 'something went wrong');
   }
 
-  async function replay(): Promise<void> {
-    if (!activeNeg) return;
-    const res = await fetch('/api/replay', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ negotiationId: activeNeg }),
-    });
-    const { replayId } = await res.json();
-    if (replayId) setNegId(replayId);
-  }
-
-  const ghostBtn =
-    'rounded-full border border-line-2 px-4 py-2 text-[13px] text-muted transition-colors hover:border-faint hover:text-cream disabled:opacity-40 disabled:hover:border-line-2 disabled:hover:text-muted';
+  const select =
+    'w-full rounded-xl border border-line-2 bg-night px-3 py-2.5 text-[13.5px] text-cream focus:border-finn/50 focus:outline-none';
 
   return (
-    <main className="mx-auto flex h-screen max-w-[1700px] flex-col gap-4 px-6 py-5">
-      <Nav
-        right={
-          <>
-            <select
-              value={activeNeg}
-              onChange={(e) => setNegId(e.target.value)}
-              className="max-w-[220px] rounded-full border border-line-2 bg-panel px-3 py-2 font-mono text-[11px] text-muted focus:border-brass/60 focus:outline-none"
-            >
-              {negotiationIds.map((id) => (
-                <option key={id} value={id}>
-                  {id}
-                </option>
-              ))}
-            </select>
-            <button onClick={replay} disabled={!activeNeg} className={ghostBtn}>
-              Replay
-            </button>
-            {!scope && (
+    <main className="mx-auto flex min-h-screen max-w-[1100px] flex-col px-6 py-5">
+      <Nav />
+
+      <div className="flex flex-1 flex-col items-center justify-center py-10">
+        <h1 className="text-center font-display text-[44px] leading-tight text-cream">
+          Don&apos;t haggle. <em className="text-flo">Brief your agent.</em>
+        </h1>
+        <p className="mt-4 max-w-xl text-center text-[15px] leading-relaxed text-muted">
+          Tell <span className="text-finn">Finn</span> what your shop is hunting for. He scouts
+          the catalog, picks the bundle, and negotiates with <span className="text-flo">Flo</span>{' '}
+          — the supplier&apos;s agent, who will absolutely try to upsell him. You only make the
+          final calls.
+        </p>
+
+        <div className="mt-8 w-full max-w-2xl rounded-2xl border border-finn/25 bg-panel p-5">
+          <div className="microlabel mb-3 !text-finn">Your brief to Finn</div>
+          <textarea
+            value={brief}
+            onChange={(e) => setBrief(e.target.value)}
+            placeholder={`e.g. "${EXAMPLES[0]}"`}
+            rows={4}
+            className="w-full rounded-xl border border-line-2 bg-night px-4 py-3 text-[15px] leading-relaxed text-cream placeholder:text-faint focus:border-finn/50 focus:outline-none"
+          />
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {EXAMPLES.map((ex, i) => (
               <button
-                onClick={start}
-                disabled={starting || !market}
-                className="rounded-full bg-flo px-5 py-2 text-[13px] font-semibold text-night transition-opacity hover:opacity-90 disabled:opacity-40"
+                key={i}
+                onClick={() => setBrief(ex)}
+                className="rounded-full border border-line-2 px-3 py-1 text-[11px] text-faint transition-colors hover:border-faint hover:text-muted"
               >
-                {starting ? 'Starting…' : 'New negotiation'}
+                {ex.slice(0, 44)}…
               </button>
-            )}
-          </>
-        }
-      />
-
-      {scope && (
-        <div className="flex items-center justify-center gap-2 rounded-xl border border-alarm/30 bg-alarm-deep/50 py-2 text-[12px] text-alarm">
-          Judge mode — you see only the <span className="font-semibold uppercase">{scope}</span> side.
-          The other side&apos;s private reasoning never reaches this browser.
-        </div>
-      )}
-
-      {activeNeg ? (
-        <div className={`grid min-h-0 flex-1 gap-4 ${scope ? 'grid-cols-2' : 'grid-cols-3'}`}>
-          {(!scope || scope === 'seller') && (
-            <SidePane
-              side="seller"
-              negotiationId={activeNeg}
-              events={events}
-              humanControlled={controls.seller}
-              principal={principals.sellerWarehouse}
-              thinking={status === 'active' && !awaitingCap && turn === 'seller' && !controls.seller}
-            />
-          )}
-          <PublicChat negotiationId={activeNeg} events={events} />
-          {(!scope || scope === 'buyer') && (
-            <SidePane
-              side="buyer"
-              negotiationId={activeNeg}
-              events={events}
-              humanControlled={controls.buyer}
-              principal={principals.buyerShop}
-              thinking={status === 'active' && !awaitingCap && turn === 'buyer' && !controls.buyer}
-            />
-          )}
-        </div>
-      ) : (
-        <div className="flex flex-1 flex-col items-center justify-center gap-3">
-          <div className="font-display text-3xl text-cream/90">
-            Two agents. <em className="text-flo">Opposing interests.</em> One deal.
+            ))}
           </div>
-          <p className="max-w-md text-center text-[14px] leading-relaxed text-muted">
-            Tell <span className="text-finn">Finn</span> what you&apos;re hunting for. He scouts
-            the catalog, picks the bundle, and haggles with{' '}
-            <span className="text-flo">Flo</span> — who will absolutely try to upsell him.
-          </p>
-          <div className="mt-3 w-full max-w-xl rounded-2xl border border-finn/25 bg-panel p-4">
-            <div className="microlabel mb-2 !text-finn">Brief your agent</div>
-            <textarea
-              value={brief}
-              onChange={(e) => setBrief(e.target.value)}
-              placeholder={'e.g. "I need workwear jackets my Brighton shop can flip fast — £150 max, nothing with bad stains."'}
-              rows={3}
-              className="w-full rounded-xl border border-line-2 bg-night px-3 py-2.5 text-[14px] text-cream placeholder:text-faint focus:border-finn/50 focus:outline-none"
-            />
-            <div className="mt-3 flex items-center justify-between">
-              <button
-                onClick={start}
-                disabled={starting || !market}
-                className="text-[12px] text-faint underline-offset-4 hover:text-muted hover:underline disabled:opacity-40"
-              >
-                or skip the brief — quick-start a negotiation
-              </button>
-              <button
-                onClick={submitBrief}
-                disabled={starting || !market || !brief.trim()}
-                className="rounded-full bg-finn px-6 py-2.5 text-[14px] font-semibold text-night transition-opacity hover:opacity-90 disabled:opacity-40"
-              >
-                {starting ? 'Briefing Finn…' : 'Send Finn to work'}
-              </button>
+
+          <div className="mt-4 grid grid-cols-2 gap-3">
+            <div>
+              <div className="microlabel mb-1.5">Buying for</div>
+              <select value={buyerId} onChange={(e) => setBuyerId(e.target.value)} className={select}>
+                {market?.buyers.map((b) => (
+                  <option key={b.id} value={b.id}>
+                    {b.shopName}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <div className="microlabel mb-1.5">Sourcing from</div>
+              <select value={sellerId} onChange={(e) => setSellerId(e.target.value)} className={select}>
+                {market?.sellers.map((s) => (
+                  <option key={s.id} value={s.id}>
+                    {s.warehouseName}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
+
+          <div className="mt-5 flex items-center justify-between">
+            <div className="text-[12px] text-faint">
+              Mention a spend ceiling and it&apos;s{' '}
+              <span className="text-muted">enforced in code</span> — Finn can&apos;t exceed it.
+            </div>
+            <button
+              onClick={send}
+              disabled={sending || !brief.trim() || !market}
+              className="rounded-full bg-finn px-7 py-2.5 text-[14px] font-semibold text-night transition-opacity hover:opacity-90 disabled:opacity-40"
+            >
+              {sending ? 'Briefing Finn…' : 'Send Finn to work'}
+            </button>
+          </div>
         </div>
-      )}
+
+        <div className="mt-6 flex items-center gap-5 text-[13px] text-faint">
+          <Link href="/war-room" className="underline-offset-4 hover:text-muted hover:underline">
+            Or watch the war room — negotiations already on the floor
+          </Link>
+          <span className="text-line-2">·</span>
+          <Link href="/how-it-works" className="underline-offset-4 hover:text-muted hover:underline">
+            How it works
+          </Link>
+        </div>
+      </div>
     </main>
   );
 }

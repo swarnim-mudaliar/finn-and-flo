@@ -1,5 +1,7 @@
 # Finn & Flo
 
+**Live: https://finn-and-flo-production.up.railway.app** · [How it works](https://finn-and-flo-production.up.railway.app/how-it-works)
+
 Personal AI agents for both sides of wholesale secondhand fashion.
 **Flo** sells for suppliers — prices from comps, answers instantly, negotiates 24/7 within owner guardrails.
 **Finn** buys for resellers — knows the shop's demand from its sales history, and haggles so the human only decides.

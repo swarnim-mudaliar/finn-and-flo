@@ -11,7 +11,11 @@ const MOVE_SCHEMA = {
       type: 'string',
       enum: ['offer', 'counter', 'accept', 'reject', 'walk_away', 'invoke_mediator'],
     },
-    price: { type: 'number', description: 'Total GBP for the current bundle. Required for offer/counter.' },
+    price: {
+      type: 'number',
+      description:
+        'Total GBP for the bundle you are proposing. Required for offer/counter. This field is the BINDING number — any total you state in your message must equal it exactly.',
+    },
     bundleItemIds: {
       type: 'array',
       items: { type: 'string' },

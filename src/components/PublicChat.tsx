@@ -1,13 +1,22 @@
 'use client';
 import { useEffect, useRef } from 'react';
-import type { MarketEvent } from '@/lib/types';
+import type { Item, MarketEvent, OraclePrice } from '@/lib/types';
+import { bundleOracle, deriveDealSummary } from '@/lib/summary';
+import { DealSummary } from './DealSummary';
+
+export interface MarketData {
+  items: Item[];
+  oracle: Record<string, OraclePrice>;
+}
 
 export function PublicChat({
   negotiationId,
   events,
+  market,
 }: {
   negotiationId: string;
   events: MarketEvent[];
+  market: MarketData | null;
 }) {
   const pub = events.filter((e) => e.negotiationId === negotiationId && e.visibility === 'public');
   const scroller = useRef<HTMLDivElement>(null);
@@ -16,8 +25,13 @@ export function PublicChat({
     scroller.current?.scrollTo({ top: scroller.current.scrollHeight, behavior: 'smooth' });
   }, [pub.length]);
 
-  // Walk the move sequence to label bundle changes as additions (upsell) vs drops.
-  const bundleDiffs = new Map<number, { added: number; dropped: number }>();
+  // Walk the move sequence to label bundle changes as additions (upsell) vs drops —
+  // with the bundle's oracle value before/after, so an upsell price is read against the
+  // NEW combined bundle rather than the stale figure on the opening card.
+  const bundleDiffs = new Map<
+    number,
+    { added: number; dropped: number; fromCount: number; toCount: number; fromOracle: number; toOracle: number }
+  >();
   {
     let current: string[] | null = null;
     for (const e of pub) {
@@ -30,12 +44,19 @@ export function PublicChat({
           bundleDiffs.set(e.seq, {
             added: next.filter((id) => !cur.has(id)).length,
             dropped: current.filter((id) => !nxt.has(id)).length,
+            fromCount: current.length,
+            toCount: next.length,
+            fromOracle: market ? bundleOracle(current, market.oracle) : 0,
+            toOracle: market ? bundleOracle(next, market.oracle) : 0,
           });
         }
         if (next) current = next;
       }
     }
   }
+
+  const summary = market ? deriveDealSummary(events, negotiationId, market.oracle) : null;
+  const itemsById = new Map((market?.items ?? []).map((i) => [i.id, i]));
 
   return (
     <div className="flex h-full min-h-0 flex-col rounded-2xl border border-line bg-panel">
@@ -96,12 +117,22 @@ export function PublicChat({
                         if (!d || (d.added === 0 && d.dropped === 0))
                           return <>✂ bundle restructured → {p.bundleItemIds.length} items</>;
                         const parts = [];
-                        if (d.added) parts.push(`+${d.added} added`);
-                        if (d.dropped) parts.push(`−${d.dropped} dropped`);
+                        if (d.added) parts.push(`+${d.added}`);
+                        if (d.dropped) parts.push(`−${d.dropped}`);
+                        // The price on this bubble is for the NEW bundle — show both
+                        // deltas so it isn't read against the opening card's oracle.
                         return (
                           <>
-                            {d.added && !d.dropped ? '✚ upsell' : '✂ restructure'}: {parts.join(', ')} →{' '}
-                            {p.bundleItemIds.length} items
+                            {d.added && !d.dropped ? '✚ upsell' : '✂ restructure'} {parts.join(', ')}:{' '}
+                            <span className="font-mono tabular-nums">
+                              {d.fromCount}→{d.toCount} items
+                              {d.fromOracle > 0 && (
+                                <>
+                                  {' '}
+                                  · oracle £{d.fromOracle}→£{d.toOracle}
+                                </>
+                              )}
+                            </span>
                           </>
                         );
                       })()}
@@ -229,7 +260,7 @@ export function PublicChat({
                   <span className="text-finn">{p.buyerShop}</span>
                 </div>
                 <div className="mt-1 font-mono text-[11px] text-muted">
-                  {p.itemIds.length} items · oracle resale value{' '}
+                  opening bundle — {p.itemIds.length} items · oracle resale{' '}
                   <span className="text-brass">£{p.oracleValue}</span>
                 </div>
               </div>
@@ -245,6 +276,7 @@ export function PublicChat({
           }
           return null;
         })}
+        {summary && <DealSummary data={summary} items={itemsById} />}
       </div>
     </div>
   );

@@ -194,7 +194,7 @@ function WarRoom({ scope, initialNeg }: { scope?: 'buyer' | 'seller'; initialNeg
               thinking={status === 'active' && !awaitingCap && turn === 'seller' && !controls.seller}
             />
           )}
-          <PublicChat negotiationId={activeNeg} events={events} />
+          <PublicChat negotiationId={activeNeg} events={events} market={market} />
           {(!scope || scope === 'buyer') && (
             <SidePane
               side="buyer"

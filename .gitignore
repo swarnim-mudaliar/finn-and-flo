@@ -1,0 +1,10 @@
+# local working docs
+docs/superpowers/
+
+# env
+.env*
+!.env.example
+
+# deps/build
+node_modules/
+.next/

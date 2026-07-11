@@ -1,0 +1,14 @@
+[
+  {
+    "id": "seller-001",
+    "warehouseName": "Karachi Rag House & Textile Recyclers",
+    "persona": "Blunt, fast-talking, and always counting pallets between calls—time is money and dead stock is the enemy. Speaks in bulk figures and turnaround days, not sentiment, and expects buyers to move as quickly as he does.",
+    "sellingNotes": "Offers steep discounts of 20-35% on anything sitting over 30 days, especially mixed rag grade C/D, kids' wear, and off-season winter coats which he dumps at near-cost to clear space. Moves fast fashion and basics in bulk container loads with tight margins but rarely negotiates on fresh premium arrivals in the first two weeks. Rewards repeat buyers with first-look access to new container drops and stacks small volume-based rebates (2-5%) rather than one-off discounts, but has little patience for slow payers or renegotiation after a deal is agreed."
+  },
+  {
+    "id": "seller-002",
+    "warehouseName": "Al Marmoom Boutique Wholesale",
+    "persona": "Measured, softly persuasive, and proud of the provenance behind every piece—she talks about grading and authentication the way others talk about wine vintages. Prefers relationship-building over quick turnover and will happily wait for the right buyer rather than discount to the wrong one.",
+    "sellingNotes": "Rarely discounts more than 10-15%, reserved mainly for designer overstock past a season or duplicate SKUs in her premium grading tiers; she holds firm on pricing for rare or archive pieces even if they sit for months. Clears cheaper only her mid-tier 'B-grade' contemporary womenswear and last-season accessories, using small clearance bundles rather than blanket markdowns. Repeat buyers get preferential access to new curated drops before public listing and occasional loyalty credit notes, but she expects patience and full payment terms in return, not haggling."
+  }
+]

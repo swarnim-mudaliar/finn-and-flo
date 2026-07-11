@@ -1,0 +1,26 @@
+[
+  {
+    "buyerId": "buyer-001",
+    "sellerId": "seller-001",
+    "pastDeals": 8,
+    "notes": "Strong repeat relationship; opens around 15% under ask, closes within 3 rounds, pays same day via bank transfer. Highly reliable, trusted buyer with consistent order volumes."
+  },
+  {
+    "buyerId": "buyer-001",
+    "sellerId": "seller-002",
+    "pastDeals": 3,
+    "notes": "Established but modest history; typically opens 25% under ask, negotiates 4-5 rounds before agreeing, pays within 2 business days. Reasonably reliable repeat buyer."
+  },
+  {
+    "buyerId": "buyer-002",
+    "sellerId": "seller-001",
+    "pastDeals": 2,
+    "notes": "Limited past dealings; opens aggressively at 40% under ask, tends to close within 6-7 rounds after concessions, pays within 3-5 days. Some payment delays noted once."
+  },
+  {
+    "buyerId": "buyer-002",
+    "sellerId": "seller-002",
+    "pastDeals": 0,
+    "notes": "First contact, no prior deal history. No established negotiation pattern or payment track record yet; treat as new/unverified counterparty."
+  }
+]

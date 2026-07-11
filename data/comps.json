@@ -1,0 +1,722 @@
+[
+  {
+    "archetype": "levis-501",
+    "title": "Levi's 501 Vintage Faded Blue Jeans W32 L32",
+    "soldPrice": 38,
+    "soldDate": "2026-05-02",
+    "condition": "good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "levis-501",
+    "title": "Levi's 501 Made in USA Dark Wash W34 L30",
+    "soldPrice": 52,
+    "soldDate": "2026-06-14",
+    "condition": "very good",
+    "source": "depop"
+  },
+  {
+    "archetype": "levis-501",
+    "title": "Levi's 501 Black Denim Jeans W30 L32",
+    "soldPrice": 29,
+    "soldDate": "2026-04-28",
+    "condition": "fair",
+    "source": "vinted"
+  },
+  {
+    "archetype": "levis-501",
+    "title": "Levi's 501 Big E Redline Selvedge W36",
+    "soldPrice": 95,
+    "soldDate": "2026-06-30",
+    "condition": "excellent",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "levis-501",
+    "title": "Levi's 501 Light Wash Straight Leg W28 L30",
+    "soldPrice": 33,
+    "soldDate": "2026-05-20",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "levis-501",
+    "title": "Levi's 501 Distressed Jeans W33",
+    "soldPrice": 41,
+    "soldDate": "2026-07-05",
+    "condition": "good",
+    "source": "depop"
+  },
+  {
+    "archetype": "carhartt-jacket",
+    "title": "Carhartt WIP Detroit Jacket Brown Duck Canvas L",
+    "soldPrice": 75,
+    "soldDate": "2026-05-10",
+    "condition": "very good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "carhartt-jacket",
+    "title": "Carhartt Michigan Chore Coat Black XL",
+    "soldPrice": 60,
+    "soldDate": "2026-06-01",
+    "condition": "good",
+    "source": "depop"
+  },
+  {
+    "archetype": "carhartt-jacket",
+    "title": "Vintage Carhartt Sherpa Lined Jacket Tan M",
+    "soldPrice": 110,
+    "soldDate": "2026-06-25",
+    "condition": "excellent",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "carhartt-jacket",
+    "title": "Carhartt WIP OG Active Jacket Navy S",
+    "soldPrice": 68,
+    "soldDate": "2026-04-18",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "carhartt-jacket",
+    "title": "Carhartt Duck Canvas Jacket Faded Brown XXL",
+    "soldPrice": 55,
+    "soldDate": "2026-05-29",
+    "condition": "fair",
+    "source": "vinted"
+  },
+  {
+    "archetype": "carhartt-jacket",
+    "title": "Carhartt Detroit Jacket Distressed Beige L",
+    "soldPrice": 82,
+    "soldDate": "2026-07-02",
+    "condition": "very good",
+    "source": "depop"
+  },
+  {
+    "archetype": "ralph-lauren-oxford",
+    "title": "Ralph Lauren Oxford Shirt Blue Polo Pony M",
+    "soldPrice": 22,
+    "soldDate": "2026-05-05",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "ralph-lauren-oxford",
+    "title": "Polo Ralph Lauren Custom Fit Oxford Shirt Pink L",
+    "soldPrice": 26,
+    "soldDate": "2026-06-10",
+    "condition": "very good",
+    "source": "depop"
+  },
+  {
+    "archetype": "ralph-lauren-oxford",
+    "title": "Vintage Ralph Lauren Oxford White Shirt M",
+    "soldPrice": 18,
+    "soldDate": "2026-04-22",
+    "condition": "fair",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "ralph-lauren-oxford",
+    "title": "Ralph Lauren Slim Fit Oxford Shirt Striped S",
+    "soldPrice": 24,
+    "soldDate": "2026-06-18",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "ralph-lauren-oxford",
+    "title": "Ralph Lauren Big Pony Oxford Shirt Navy XL",
+    "soldPrice": 31,
+    "soldDate": "2026-07-01",
+    "condition": "excellent",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "ralph-lauren-oxford",
+    "title": "Ralph Lauren Oxford Shirt Yellow Custom Fit M",
+    "soldPrice": 20,
+    "soldDate": "2026-05-30",
+    "condition": "good",
+    "source": "depop"
+  },
+  {
+    "archetype": "y2k-graphic-tee",
+    "title": "Y2K Butterfly Graphic Baby Tee S",
+    "soldPrice": 19,
+    "soldDate": "2026-06-05",
+    "condition": "good",
+    "source": "depop"
+  },
+  {
+    "archetype": "y2k-graphic-tee",
+    "title": "Vintage Y2K Flame Print Tee M",
+    "soldPrice": 24,
+    "soldDate": "2026-05-15",
+    "condition": "very good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "y2k-graphic-tee",
+    "title": "Y2K Racing Graphic Tee Distressed L",
+    "soldPrice": 16,
+    "soldDate": "2026-04-25",
+    "condition": "fair",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "y2k-graphic-tee",
+    "title": "Y2K Rhinestone Logo Tee XS",
+    "soldPrice": 28,
+    "soldDate": "2026-06-28",
+    "condition": "excellent",
+    "source": "depop"
+  },
+  {
+    "archetype": "y2k-graphic-tee",
+    "title": "Vintage Y2K Cartoon Print Tee M",
+    "soldPrice": 21,
+    "soldDate": "2026-05-08",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "y2k-graphic-tee",
+    "title": "Y2K Star Print Baby Tee XS",
+    "soldPrice": 17,
+    "soldDate": "2026-07-04",
+    "condition": "good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "nike-vintage-hoodie",
+    "title": "Vintage Nike Swoosh Hoodie Grey L",
+    "soldPrice": 34,
+    "soldDate": "2026-05-12",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "nike-vintage-hoodie",
+    "title": "90s Nike Fleece Hoodie Navy M",
+    "soldPrice": 45,
+    "soldDate": "2026-06-08",
+    "condition": "very good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "nike-vintage-hoodie",
+    "title": "Vintage Nike Centre Swoosh Hoodie White XL",
+    "soldPrice": 52,
+    "soldDate": "2026-06-22",
+    "condition": "excellent",
+    "source": "depop"
+  },
+  {
+    "archetype": "nike-vintage-hoodie",
+    "title": "Nike Vintage Faded Hoodie Black L",
+    "soldPrice": 29,
+    "soldDate": "2026-04-30",
+    "condition": "fair",
+    "source": "vinted"
+  },
+  {
+    "archetype": "nike-vintage-hoodie",
+    "title": "Vintage Nike Spellout Hoodie Green M",
+    "soldPrice": 38,
+    "soldDate": "2026-05-27",
+    "condition": "good",
+    "source": "depop"
+  },
+  {
+    "archetype": "nike-vintage-hoodie",
+    "title": "90s Nike Air Hoodie Red S",
+    "soldPrice": 41,
+    "soldDate": "2026-07-03",
+    "condition": "good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "adidas-track-jacket",
+    "title": "Vintage Adidas Originals Track Jacket Blue M",
+    "soldPrice": 25,
+    "soldDate": "2026-05-14",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "adidas-track-jacket",
+    "title": "90s Adidas Track Jacket Trefoil Red L",
+    "soldPrice": 32,
+    "soldDate": "2026-06-05",
+    "condition": "very good",
+    "source": "depop"
+  },
+  {
+    "archetype": "adidas-track-jacket",
+    "title": "Adidas Firebird Track Jacket Black XL",
+    "soldPrice": 29,
+    "soldDate": "2026-04-27",
+    "condition": "good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "adidas-track-jacket",
+    "title": "Vintage Adidas Track Top Green S",
+    "soldPrice": 22,
+    "soldDate": "2026-06-19",
+    "condition": "fair",
+    "source": "vinted"
+  },
+  {
+    "archetype": "adidas-track-jacket",
+    "title": "Adidas Originals Track Jacket White M",
+    "soldPrice": 35,
+    "soldDate": "2026-07-06",
+    "condition": "excellent",
+    "source": "depop"
+  },
+  {
+    "archetype": "adidas-track-jacket",
+    "title": "Adidas Track Jacket 90s Purple L",
+    "soldPrice": 27,
+    "soldDate": "2026-05-22",
+    "condition": "good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "barbour-wax-jacket",
+    "title": "Barbour Beaufort Wax Jacket Green L",
+    "soldPrice": 85,
+    "soldDate": "2026-05-09",
+    "condition": "good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "barbour-wax-jacket",
+    "title": "Barbour Bedale Wax Jacket Olive M",
+    "soldPrice": 95,
+    "soldDate": "2026-06-12",
+    "condition": "very good",
+    "source": "depop"
+  },
+  {
+    "archetype": "barbour-wax-jacket",
+    "title": "Vintage Barbour Wax Jacket Navy XL",
+    "soldPrice": 70,
+    "soldDate": "2026-04-20",
+    "condition": "fair",
+    "source": "vinted"
+  },
+  {
+    "archetype": "barbour-wax-jacket",
+    "title": "Barbour International Wax Jacket Black L",
+    "soldPrice": 120,
+    "soldDate": "2026-06-27",
+    "condition": "excellent",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "barbour-wax-jacket",
+    "title": "Barbour Beadnell Wax Jacket Green M",
+    "soldPrice": 92,
+    "soldDate": "2026-05-25",
+    "condition": "good",
+    "source": "depop"
+  },
+  {
+    "archetype": "barbour-wax-jacket",
+    "title": "Barbour Ashby Wax Jacket Sage L",
+    "soldPrice": 88,
+    "soldDate": "2026-07-01",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "band-tee",
+    "title": "Vintage Metallica Tour Tee 1994 L",
+    "soldPrice": 65,
+    "soldDate": "2026-05-16",
+    "condition": "good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "band-tee",
+    "title": "Nirvana Nevermind Graphic Tee M",
+    "soldPrice": 35,
+    "soldDate": "2026-06-02",
+    "condition": "very good",
+    "source": "depop"
+  },
+  {
+    "archetype": "band-tee",
+    "title": "Vintage AC/DC Tour Tee Faded L",
+    "soldPrice": 48,
+    "soldDate": "2026-04-24",
+    "condition": "fair",
+    "source": "vinted"
+  },
+  {
+    "archetype": "band-tee",
+    "title": "Rolling Stones Tongue Logo Tee XL",
+    "soldPrice": 40,
+    "soldDate": "2026-06-21",
+    "condition": "good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "band-tee",
+    "title": "Vintage Pink Floyd Dark Side Tee M",
+    "soldPrice": 55,
+    "soldDate": "2026-05-31",
+    "condition": "excellent",
+    "source": "depop"
+  },
+  {
+    "archetype": "band-tee",
+    "title": "Iron Maiden Eddie Graphic Tee L",
+    "soldPrice": 42,
+    "soldDate": "2026-07-07",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "levis-trucker-jacket",
+    "title": "Levi's Trucker Jacket Type III Blue M",
+    "soldPrice": 45,
+    "soldDate": "2026-05-11",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "levis-trucker-jacket",
+    "title": "Vintage Levi's Denim Trucker Jacket Faded L",
+    "soldPrice": 58,
+    "soldDate": "2026-06-09",
+    "condition": "very good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "levis-trucker-jacket",
+    "title": "Levi's Trucker Jacket Black S",
+    "soldPrice": 40,
+    "soldDate": "2026-04-29",
+    "condition": "fair",
+    "source": "depop"
+  },
+  {
+    "archetype": "levis-trucker-jacket",
+    "title": "Levi's Type III Trucker Jacket Light Wash XL",
+    "soldPrice": 62,
+    "soldDate": "2026-06-24",
+    "condition": "excellent",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "levis-trucker-jacket",
+    "title": "Levi's Trucker Jacket Sherpa Lined M",
+    "soldPrice": 75,
+    "soldDate": "2026-05-23",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "levis-trucker-jacket",
+    "title": "Levi's Denim Trucker Jacket Stonewash L",
+    "soldPrice": 50,
+    "soldDate": "2026-07-04",
+    "condition": "good",
+    "source": "depop"
+  },
+  {
+    "archetype": "patagonia-fleece",
+    "title": "Patagonia Retro X Fleece Jacket Green M",
+    "soldPrice": 78,
+    "soldDate": "2026-05-13",
+    "condition": "very good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "patagonia-fleece",
+    "title": "Patagonia Synchilla Fleece Pullover Navy L",
+    "soldPrice": 65,
+    "soldDate": "2026-06-04",
+    "condition": "good",
+    "source": "depop"
+  },
+  {
+    "archetype": "patagonia-fleece",
+    "title": "Vintage Patagonia Fleece Purple S",
+    "soldPrice": 55,
+    "soldDate": "2026-04-26",
+    "condition": "fair",
+    "source": "vinted"
+  },
+  {
+    "archetype": "patagonia-fleece",
+    "title": "Patagonia Better Sweater Fleece Grey M",
+    "soldPrice": 70,
+    "soldDate": "2026-06-20",
+    "condition": "good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "patagonia-fleece",
+    "title": "Patagonia Retro Pile Fleece Tan L",
+    "soldPrice": 95,
+    "soldDate": "2026-05-28",
+    "condition": "excellent",
+    "source": "depop"
+  },
+  {
+    "archetype": "patagonia-fleece",
+    "title": "Patagonia Fleece Vest Black M",
+    "soldPrice": 48,
+    "soldDate": "2026-07-05",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "dickies-work-pants",
+    "title": "Dickies 874 Original Work Pants Khaki W32",
+    "soldPrice": 22,
+    "soldDate": "2026-05-06",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "dickies-work-pants",
+    "title": "Dickies Carpenter Pants Black W34",
+    "soldPrice": 26,
+    "soldDate": "2026-06-11",
+    "condition": "very good",
+    "source": "depop"
+  },
+  {
+    "archetype": "dickies-work-pants",
+    "title": "Vintage Dickies Work Pants Grey W30",
+    "soldPrice": 18,
+    "soldDate": "2026-04-19",
+    "condition": "fair",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "dickies-work-pants",
+    "title": "Dickies 874 Navy Work Pants W36",
+    "soldPrice": 24,
+    "soldDate": "2026-06-23",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "dickies-work-pants",
+    "title": "Dickies Painter Pants White W32",
+    "soldPrice": 20,
+    "soldDate": "2026-05-19",
+    "condition": "good",
+    "source": "depop"
+  },
+  {
+    "archetype": "dickies-work-pants",
+    "title": "Dickies Work Pants Olive W33",
+    "soldPrice": 28,
+    "soldDate": "2026-07-02",
+    "condition": "excellent",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "burberry-scarf",
+    "title": "Burberry Cashmere Check Scarf Classic Camel",
+    "soldPrice": 110,
+    "soldDate": "2026-05-17",
+    "condition": "very good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "burberry-scarf",
+    "title": "Burberry Wool Nova Check Scarf",
+    "soldPrice": 95,
+    "soldDate": "2026-06-06",
+    "condition": "good",
+    "source": "depop"
+  },
+  {
+    "archetype": "burberry-scarf",
+    "title": "Vintage Burberry Silk Scarf",
+    "soldPrice": 75,
+    "soldDate": "2026-04-21",
+    "condition": "fair",
+    "source": "vinted"
+  },
+  {
+    "archetype": "burberry-scarf",
+    "title": "Burberry Cashmere Scarf Grey Check",
+    "soldPrice": 130,
+    "soldDate": "2026-06-26",
+    "condition": "excellent",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "burberry-scarf",
+    "title": "Burberry Check Scarf Fringe Detail",
+    "soldPrice": 100,
+    "soldDate": "2026-05-24",
+    "condition": "good",
+    "source": "depop"
+  },
+  {
+    "archetype": "burberry-scarf",
+    "title": "Burberry Wool Scarf Classic Beige",
+    "soldPrice": 88,
+    "soldDate": "2026-07-06",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "stone-island-crewneck",
+    "title": "Stone Island Crewneck Sweatshirt Badge Navy L",
+    "soldPrice": 95,
+    "soldDate": "2026-05-18",
+    "condition": "very good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "stone-island-crewneck",
+    "title": "Stone Island Compass Logo Crewneck Grey M",
+    "soldPrice": 80,
+    "soldDate": "2026-06-07",
+    "condition": "good",
+    "source": "depop"
+  },
+  {
+    "archetype": "stone-island-crewneck",
+    "title": "Vintage Stone Island Crewneck Black XL",
+    "soldPrice": 110,
+    "soldDate": "2026-04-23",
+    "condition": "fair",
+    "source": "vinted"
+  },
+  {
+    "archetype": "stone-island-crewneck",
+    "title": "Stone Island Crewneck Sweatshirt Green S",
+    "soldPrice": 105,
+    "soldDate": "2026-06-29",
+    "condition": "excellent",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "stone-island-crewneck",
+    "title": "Stone Island Badge Crewneck White M",
+    "soldPrice": 90,
+    "soldDate": "2026-05-26",
+    "condition": "good",
+    "source": "depop"
+  },
+  {
+    "archetype": "stone-island-crewneck",
+    "title": "Stone Island Crewneck Sweatshirt Blue L",
+    "soldPrice": 85,
+    "soldDate": "2026-07-08",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "vintage-football-shirt",
+    "title": "Vintage Manchester United 1999 Home Shirt L",
+    "soldPrice": 65,
+    "soldDate": "2026-05-20",
+    "condition": "good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "vintage-football-shirt",
+    "title": "Arsenal 1998 Away Shirt Vintage M",
+    "soldPrice": 55,
+    "soldDate": "2026-06-13",
+    "condition": "very good",
+    "source": "depop"
+  },
+  {
+    "archetype": "vintage-football-shirt",
+    "title": "Brazil 1994 World Cup Home Shirt Vintage L",
+    "soldPrice": 90,
+    "soldDate": "2026-04-24",
+    "condition": "fair",
+    "source": "vinted"
+  },
+  {
+    "archetype": "vintage-football-shirt",
+    "title": "England 1990 Italia World Cup Shirt XL",
+    "soldPrice": 78,
+    "soldDate": "2026-06-28",
+    "condition": "excellent",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "vintage-football-shirt",
+    "title": "Liverpool 1996 Home Shirt Vintage M",
+    "soldPrice": 60,
+    "soldDate": "2026-05-30",
+    "condition": "good",
+    "source": "depop"
+  },
+  {
+    "archetype": "vintage-football-shirt",
+    "title": "Juventus 1996 Away Shirt Vintage L",
+    "soldPrice": 70,
+    "soldDate": "2026-07-09",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "dr-martens-boots",
+    "title": "Dr Martens 1460 8 Eye Boots Black UK8",
+    "soldPrice": 48,
+    "soldDate": "2026-05-21",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "dr-martens-boots",
+    "title": "Vintage Dr Martens Made in England Boots UK7",
+    "soldPrice": 75,
+    "soldDate": "2026-06-15",
+    "condition": "very good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "dr-martens-boots",
+    "title": "Dr Martens 1461 Shoes Cherry Red UK9",
+    "soldPrice": 40,
+    "soldDate": "2026-04-27",
+    "condition": "fair",
+    "source": "depop"
+  },
+  {
+    "archetype": "dr-martens-boots",
+    "title": "Dr Martens Jadon Platform Boots Black UK6",
+    "soldPrice": 65,
+    "soldDate": "2026-06-24",
+    "condition": "good",
+    "source": "vinted"
+  },
+  {
+    "archetype": "dr-martens-boots",
+    "title": "Dr Martens 1490 10 Eye Boots Brown UK9",
+    "soldPrice": 58,
+    "soldDate": "2026-05-29",
+    "condition": "good",
+    "source": "ebay-sold"
+  },
+  {
+    "archetype": "dr-martens-boots",
+    "title": "Dr Martens 1460 Boots Smooth Black UK10",
+    "soldPrice": 52,
+    "soldDate": "2026-07-07",
+    "condition": "excellent",
+    "source": "depop"
+  }
+]

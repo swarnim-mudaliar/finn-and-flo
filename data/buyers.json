@@ -1,0 +1,34 @@
+[
+  {
+    "id": "buyer-001",
+    "shopName": "NorthQuarter Vintage",
+    "persona": "Fast-talking Manchester Depop seller obsessed with Y2K nostalgia and streetwear hype, always chasing the next viral archive drop. Speaks in quick, slang-heavy bursts and wants stock she can flip within days, not weeks.",
+    "categoryDemand": {
+      "Y2K graphic tees": 18,
+      "low-rise cargo trousers": 12,
+      "baby tees": 15,
+      "branded zip-ups (Nike/Adidas)": 10,
+      "mesh/going-out tops": 8,
+      "denim mini skirts": 7
+    },
+    "salesNotes": "Graphic tees and baby tees sell within 48 hours if priced £8-£15 buy-in, resold £20-£35; anything over £18 buy-in sits for weeks and gets discounted. Cargo trousers move fast in sizes 8-12 but slow above size 14. Branded zip-ups do well only if logo is clean and era-correct (2000s), faded/damaged ones sit dead stock. Avoid plain basics with no logo - dead weight in the last 6 months.",
+    "budget": 400,
+    "targetMarginPct": 55
+  },
+  {
+    "id": "buyer-002",
+    "shopName": "Salt & Canvas Vintage",
+    "persona": "Considered, slow-fashion Brighton shop owner who talks like a curator, valuing provenance, fabric weight, and repairability over trends. Prefers a smaller, well-chosen edit to a rack stuffed with filler.",
+    "categoryDemand": {
+      "waxed cotton jackets": 6,
+      "workwear chore coats": 8,
+      "canvas trousers": 5,
+      "flannel shirts": 7,
+      "wool outdoor jumpers": 4,
+      "vintage boots (leather)": 3
+    },
+    "salesNotes": "Chore coats and waxed jackets in French/British brands (Le Laboureur, Barbour) consistently sell within 2 weeks at £70-£120, strong repeat customer base. Canvas trousers sell steadily but slower, roughly 3-4 weeks average, priced £45-£65. Wool jumpers with moth damage or synthetic blends sit unsold for months - only pure wool moves. Boots sell well but only larger sizes (9-11) shift quickly, smaller sizes languish.",
+    "budget": 800,
+    "targetMarginPct": 45
+  }
+]

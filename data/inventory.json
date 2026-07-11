@@ -1,0 +1,608 @@
+[
+  {
+    "id": "item-001",
+    "title": "Levi's 501 Classic Wash Jeans",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "levis-501"
+  },
+  {
+    "id": "item-002",
+    "title": "Levi's 501 Faded Straight Leg Jeans",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "era": "1980s",
+    "conditionGrade": "B",
+    "defects": [
+      "fading at knees",
+      "small stain on thigh"
+    ],
+    "archetype": "levis-501"
+  },
+  {
+    "id": "item-003",
+    "title": "Levi's 501 Distressed Denim",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "era": "2000s",
+    "conditionGrade": "C",
+    "defects": [
+      "frayed hem",
+      "repaired seam",
+      "belt loop torn"
+    ],
+    "archetype": "levis-501"
+  },
+  {
+    "id": "item-004",
+    "title": "Carhartt Detroit Jacket Duck Canvas",
+    "brand": "Carhartt",
+    "category": "Jacket",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "carhartt-jacket"
+  },
+  {
+    "id": "item-005",
+    "title": "Carhartt Blanket Lined Chore Jacket",
+    "brand": "Carhartt",
+    "category": "Jacket",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "cuff wear",
+      "light staining"
+    ],
+    "archetype": "carhartt-jacket"
+  },
+  {
+    "id": "item-006",
+    "title": "Carhartt Workwear Jacket Faded Brown",
+    "brand": "Carhartt",
+    "category": "Jacket",
+    "era": "1990s",
+    "conditionGrade": "C",
+    "defects": [
+      "missing button",
+      "torn pocket",
+      "oil stain"
+    ],
+    "archetype": "carhartt-jacket"
+  },
+  {
+    "id": "item-007",
+    "title": "Ralph Lauren Oxford Button Down Shirt",
+    "brand": "Ralph Lauren",
+    "category": "Shirt",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "ralph-lauren-oxford"
+  },
+  {
+    "id": "item-008",
+    "title": "Ralph Lauren Oxford Striped Shirt",
+    "brand": "Ralph Lauren",
+    "category": "Shirt",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "collar fraying"
+    ],
+    "archetype": "ralph-lauren-oxford"
+  },
+  {
+    "id": "item-009",
+    "title": "Ralph Lauren Polo Oxford Shirt Faded",
+    "brand": "Ralph Lauren",
+    "category": "Shirt",
+    "era": "1990s",
+    "conditionGrade": "C",
+    "defects": [
+      "yellowing underarm",
+      "missing button",
+      "small tear"
+    ],
+    "archetype": "ralph-lauren-oxford"
+  },
+  {
+    "id": "item-010",
+    "title": "Y2K Graphic Tee Flame Print",
+    "brand": "Unbranded",
+    "category": "T-Shirt",
+    "era": "2000s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "y2k-graphic-tee"
+  },
+  {
+    "id": "item-011",
+    "title": "Y2K Butterfly Graphic Tee",
+    "brand": "Unbranded",
+    "category": "T-Shirt",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "cracked print"
+    ],
+    "archetype": "y2k-graphic-tee"
+  },
+  {
+    "id": "item-012",
+    "title": "Y2K Racing Graphic Tee Distressed",
+    "brand": "Unbranded",
+    "category": "T-Shirt",
+    "era": "2000s",
+    "conditionGrade": "C",
+    "defects": [
+      "holes",
+      "faded print",
+      "neckline stretched"
+    ],
+    "archetype": "y2k-graphic-tee"
+  },
+  {
+    "id": "item-013",
+    "title": "Nike Vintage Hoodie Swoosh Grey",
+    "brand": "Nike",
+    "category": "Hoodie",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "nike-vintage-hoodie"
+  },
+  {
+    "id": "item-014",
+    "title": "Nike Vintage Hoodie Faded Navy",
+    "brand": "Nike",
+    "category": "Hoodie",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "pilling",
+      "drawstring missing"
+    ],
+    "archetype": "nike-vintage-hoodie"
+  },
+  {
+    "id": "item-015",
+    "title": "Nike Vintage Hoodie Distressed Grey",
+    "brand": "Nike",
+    "category": "Hoodie",
+    "era": "1990s",
+    "conditionGrade": "C",
+    "defects": [
+      "large stain",
+      "holes in sleeve",
+      "cuff wear"
+    ],
+    "archetype": "nike-vintage-hoodie"
+  },
+  {
+    "id": "item-016",
+    "title": "Adidas Track Jacket Original Trefoil",
+    "brand": "Adidas",
+    "category": "Track Jacket",
+    "era": "1980s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "adidas-track-jacket"
+  },
+  {
+    "id": "item-017",
+    "title": "Adidas Track Jacket Retro Stripes",
+    "brand": "Adidas",
+    "category": "Track Jacket",
+    "era": "1990s",
+    "conditionGrade": "B",
+    "defects": [
+      "zipper sticking",
+      "light bobbling"
+    ],
+    "archetype": "adidas-track-jacket"
+  },
+  {
+    "id": "item-018",
+    "title": "Adidas Track Jacket Faded Red",
+    "brand": "Adidas",
+    "category": "Track Jacket",
+    "era": "1990s",
+    "conditionGrade": "C",
+    "defects": [
+      "broken zipper",
+      "stains",
+      "frayed collar"
+    ],
+    "archetype": "adidas-track-jacket"
+  },
+  {
+    "id": "item-019",
+    "title": "Barbour Wax Jacket Beadnell",
+    "brand": "Barbour",
+    "category": "Jacket",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "barbour-wax-jacket"
+  },
+  {
+    "id": "item-020",
+    "title": "Barbour Wax Jacket Bedale Green",
+    "brand": "Barbour",
+    "category": "Jacket",
+    "era": "1980s",
+    "conditionGrade": "B",
+    "defects": [
+      "wax wear on cuffs",
+      "minor scuffing"
+    ],
+    "archetype": "barbour-wax-jacket"
+  },
+  {
+    "id": "item-021",
+    "title": "Barbour Wax Jacket Worn Corduroy Collar",
+    "brand": "Barbour",
+    "category": "Jacket",
+    "era": "1990s",
+    "conditionGrade": "C",
+    "defects": [
+      "torn lining",
+      "missing snap button",
+      "heavy wax loss"
+    ],
+    "archetype": "barbour-wax-jacket"
+  },
+  {
+    "id": "item-022",
+    "title": "Vintage Band Tee Rolling Stones",
+    "brand": "Unbranded",
+    "category": "T-Shirt",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "band-tee"
+  },
+  {
+    "id": "item-023",
+    "title": "Vintage Band Tee Metallica Faded",
+    "brand": "Unbranded",
+    "category": "T-Shirt",
+    "era": "1990s",
+    "conditionGrade": "B",
+    "defects": [
+      "small hole",
+      "print cracking"
+    ],
+    "archetype": "band-tee"
+  },
+  {
+    "id": "item-024",
+    "title": "Vintage Band Tee Nirvana Distressed",
+    "brand": "Unbranded",
+    "category": "T-Shirt",
+    "era": "1990s",
+    "conditionGrade": "C",
+    "defects": [
+      "large holes",
+      "collar stretched",
+      "stains"
+    ],
+    "archetype": "band-tee"
+  },
+  {
+    "id": "item-025",
+    "title": "Levi's Trucker Jacket Type III Denim",
+    "brand": "Levi's",
+    "category": "Jacket",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "levis-trucker-jacket"
+  },
+  {
+    "id": "item-026",
+    "title": "Levi's Trucker Jacket Faded Blue",
+    "brand": "Levi's",
+    "category": "Jacket",
+    "era": "1980s",
+    "conditionGrade": "B",
+    "defects": [
+      "button loose",
+      "light fraying"
+    ],
+    "archetype": "levis-trucker-jacket"
+  },
+  {
+    "id": "item-027",
+    "title": "Levi's Trucker Jacket Distressed Denim",
+    "brand": "Levi's",
+    "category": "Jacket",
+    "era": "2000s",
+    "conditionGrade": "C",
+    "defects": [
+      "torn pocket",
+      "repaired seam",
+      "missing button"
+    ],
+    "archetype": "levis-trucker-jacket"
+  },
+  {
+    "id": "item-028",
+    "title": "Patagonia Fleece Retro Pile Jacket",
+    "brand": "Patagonia",
+    "category": "Fleece",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "patagonia-fleece"
+  },
+  {
+    "id": "item-029",
+    "title": "Patagonia Fleece Synchilla Pullover",
+    "brand": "Patagonia",
+    "category": "Fleece",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "pilling",
+      "zip pull missing"
+    ],
+    "archetype": "patagonia-fleece"
+  },
+  {
+    "id": "item-030",
+    "title": "Patagonia Fleece Worn Snap-T",
+    "brand": "Patagonia",
+    "category": "Fleece",
+    "era": "1990s",
+    "conditionGrade": "C",
+    "defects": [
+      "stains",
+      "broken snap",
+      "frayed cuffs"
+    ],
+    "archetype": "patagonia-fleece"
+  },
+  {
+    "id": "item-031",
+    "title": "Dickies Work Pants Original 874",
+    "brand": "Dickies",
+    "category": "Trousers",
+    "era": "2000s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "dickies-work-pants"
+  },
+  {
+    "id": "item-032",
+    "title": "Dickies Work Pants Faded Khaki",
+    "brand": "Dickies",
+    "category": "Trousers",
+    "era": "1990s",
+    "conditionGrade": "B",
+    "defects": [
+      "knee wear",
+      "small stain"
+    ],
+    "archetype": "dickies-work-pants"
+  },
+  {
+    "id": "item-033",
+    "title": "Dickies Work Pants Distressed Navy",
+    "brand": "Dickies",
+    "category": "Trousers",
+    "era": "2000s",
+    "conditionGrade": "C",
+    "defects": [
+      "hole in pocket",
+      "hem fraying",
+      "paint stains"
+    ],
+    "archetype": "dickies-work-pants"
+  },
+  {
+    "id": "item-034",
+    "title": "Burberry Scarf Classic Check Cashmere",
+    "brand": "Burberry",
+    "category": "Scarf",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "burberry-scarf"
+  },
+  {
+    "id": "item-035",
+    "title": "Burberry Scarf Wool Nova Check",
+    "brand": "Burberry",
+    "category": "Scarf",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "light pilling",
+      "frayed fringe"
+    ],
+    "archetype": "burberry-scarf"
+  },
+  {
+    "id": "item-036",
+    "title": "Burberry Scarf Worn Vintage Check",
+    "brand": "Burberry",
+    "category": "Scarf",
+    "era": "1990s",
+    "conditionGrade": "C",
+    "defects": [
+      "stains",
+      "holes",
+      "fringe missing"
+    ],
+    "archetype": "burberry-scarf"
+  },
+  {
+    "id": "item-037",
+    "title": "Stone Island Crewneck Badge Logo",
+    "brand": "Stone Island",
+    "category": "Sweatshirt",
+    "era": "2000s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "stone-island-crewneck"
+  },
+  {
+    "id": "item-038",
+    "title": "Stone Island Crewneck Faded Grey",
+    "brand": "Stone Island",
+    "category": "Sweatshirt",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "pilling",
+      "badge slightly discolored"
+    ],
+    "archetype": "stone-island-crewneck"
+  },
+  {
+    "id": "item-039",
+    "title": "Stone Island Crewneck Distressed Navy",
+    "brand": "Stone Island",
+    "category": "Sweatshirt",
+    "era": "2000s",
+    "conditionGrade": "C",
+    "defects": [
+      "holes",
+      "stains",
+      "cuff fraying"
+    ],
+    "archetype": "stone-island-crewneck"
+  },
+  {
+    "id": "item-040",
+    "title": "Vintage Football Shirt Man United 1998",
+    "brand": "Umbro",
+    "category": "Football Shirt",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "vintage-football-shirt"
+  },
+  {
+    "id": "item-041",
+    "title": "Vintage Football Shirt Brazil 1994",
+    "brand": "Umbro",
+    "category": "Football Shirt",
+    "era": "1990s",
+    "conditionGrade": "B",
+    "defects": [
+      "small hole",
+      "print cracking"
+    ],
+    "archetype": "vintage-football-shirt"
+  },
+  {
+    "id": "item-042",
+    "title": "Vintage Football Shirt Arsenal Faded",
+    "brand": "Nike",
+    "category": "Football Shirt",
+    "era": "2000s",
+    "conditionGrade": "C",
+    "defects": [
+      "large stain",
+      "collar stretched",
+      "print peeling"
+    ],
+    "archetype": "vintage-football-shirt"
+  },
+  {
+    "id": "item-043",
+    "title": "Dr Martens Boots 1460 Black Leather",
+    "brand": "Dr Martens",
+    "category": "Boots",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "dr-martens-boots"
+  },
+  {
+    "id": "item-044",
+    "title": "Dr Martens Boots Worn Cherry Red",
+    "brand": "Dr Martens",
+    "category": "Boots",
+    "era": "2000s",
+    "conditionGrade": "B",
+    "defects": [
+      "sole wear",
+      "scuffed toe"
+    ],
+    "archetype": "dr-martens-boots"
+  },
+  {
+    "id": "item-045",
+    "title": "Dr Martens Boots Distressed Leather",
+    "brand": "Dr Martens",
+    "category": "Boots",
+    "era": "1990s",
+    "conditionGrade": "C",
+    "defects": [
+      "cracked leather",
+      "broken laces",
+      "sole separation"
+    ],
+    "archetype": "dr-martens-boots"
+  },
+  {
+    "id": "item-046",
+    "title": "Levi's 501 Vintage Stonewash Jeans",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "era": "1990s",
+    "conditionGrade": "B",
+    "defects": [
+      "fading",
+      "small tear at cuff"
+    ],
+    "archetype": "levis-501"
+  },
+  {
+    "id": "item-047",
+    "title": "Carhartt Jacket Duck Canvas Tan",
+    "brand": "Carhartt",
+    "category": "Jacket",
+    "era": "2000s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "carhartt-jacket"
+  },
+  {
+    "id": "item-048",
+    "title": "Nike Vintage Hoodie Embroidered Swoosh",
+    "brand": "Nike",
+    "category": "Hoodie",
+    "era": "2000s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "nike-vintage-hoodie"
+  },
+  {
+    "id": "item-049",
+    "title": "Adidas Track Jacket Vintage Blue",
+    "brand": "Adidas",
+    "category": "Track Jacket",
+    "era": "1990s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "adidas-track-jacket"
+  },
+  {
+    "id": "item-050",
+    "title": "Stone Island Crewneck Classic Green",
+    "brand": "Stone Island",
+    "category": "Sweatshirt",
+    "era": "2000s",
+    "conditionGrade": "A",
+    "defects": [],
+    "archetype": "stone-island-crewneck"
+  }
+]

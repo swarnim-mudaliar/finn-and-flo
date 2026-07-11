@@ -42,11 +42,35 @@ function baseEvents(): MarketEvent[] {
 }
 
 describe('deriveDealSummary', () => {
-  it('returns null while the negotiation is not terminal', () => {
+  it('is hidden while haggling, provisional at the handshake, and gone again on send-back', () => {
     const events = baseEvents();
     expect(deriveDealSummary(events, 'n1', ORACLE)).toBeNull();
-    events.push(ev('status', { status: 'pending_approval', agreedPrice: 60, turn: 'buyer' }));
-    expect(deriveDealSummary(events, 'n1', ORACLE)).toBeNull();
+    events.push(
+      ev('move', { side: 'buyer', action: 'accept', price: 60, message: 'ok' }),
+      ev('status', { status: 'pending_approval', agreedPrice: 60, turn: 'buyer' }),
+      ev('approval_decision', { side: 'seller', approved: true, auto: true })
+    );
+    const pending = deriveDealSummary(events, 'n1', ORACLE)!;
+    expect(pending.outcome).toBe('pending_approval');
+    expect(pending.finalPrice).toBe(60);
+    expect(pending.awaiting).toEqual(['buyer']); // seller signed, buyer hasn't
+    // Sent back → the summary STAYS as a live 'reopened' scoreboard (no stale price).
+    events.push(
+      ev('approval_decision', { side: 'buyer', approved: false, note: 'push lower' }),
+      ev('status', { status: 'active', turn: 'buyer' })
+    );
+    const reopened = deriveDealSummary(events, 'n1', ORACLE)!;
+    expect(reopened.outcome).toBe('reopened');
+    expect(reopened.finalPrice).toBeUndefined();
+    // A fresh handshake must not count the seller's OLD approval as a signature.
+    events.push(
+      ev('move', { side: 'buyer', action: 'offer', price: 55, message: 'again' }),
+      ev('move', { side: 'seller', action: 'accept', price: 55, message: 'fine' }),
+      ev('status', { status: 'pending_approval', agreedPrice: 55, turn: 'seller' })
+    );
+    const second = deriveDealSummary(events, 'n1', ORACLE)!;
+    expect(second.awaiting).toEqual(['seller', 'buyer']);
+    expect(second.sendBacks).toBe(1);
   });
 
   it('derives trajectory, upsell oracle shift, approvals, and outcome for a closed deal', () => {

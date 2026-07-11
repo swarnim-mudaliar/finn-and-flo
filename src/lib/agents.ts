@@ -393,7 +393,7 @@ export function raceIntel(market: Market, neg: NegotiationState): string {
   });
   return `RACE INTEL (private — your owner has you running this brief with ${siblings.length + 1} suppliers at once; they will pick ONE winning deal):
 ${lines.join('\n')}
-You may cite a competing position truthfully in your public message to press for better terms ("another warehouse is at £X for N pieces"). NEVER invent, round up, or exaggerate a competing number — cite only what is listed above, and never name the rival supplier. Your goal is the best single deal for the brief, not closing every lane.`;
+When a rival's live position supports your case, cite it at least once in this negotiation, at a natural moment ("another warehouse is asking £X for N pieces"). Cite truthfully: NEVER invent, round up, or exaggerate a number, never name the rival supplier, and never present YOUR OWN bid in another lane as a supplier's quote — only their asks and handshakes count as quotes. Your goal is the best single deal for the brief, not closing every lane.`;
 }
 
 export function renderTranscript(market: Market, neg: NegotiationState, side: Side): string {

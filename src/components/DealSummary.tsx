@@ -64,6 +64,18 @@ const OUTCOME_META: Record<
   mediated_deal: { label: '⚖ mediated deal', cls: 'border-deal/40 bg-deal-deep text-deal', showPrice: true },
   walked_away: { label: 'walked away', cls: 'border-line-2 bg-panel text-muted', showPrice: false },
   mediation_no_deal: { label: '⚖ no deal', cls: 'border-seal/40 bg-seal-deep text-seal', showPrice: false },
+  // Shown from the handshake: the digest the owners read BEFORE signing.
+  pending_approval: {
+    label: '🤝 handshake — provisional',
+    cls: 'border-dashed border-deal/50 bg-deal-deep/50 text-deal',
+    showPrice: true,
+  },
+  // A send-back reopened the floor; the summary stays up as a live scoreboard.
+  reopened: {
+    label: '↩ reopened — back on the floor',
+    cls: 'border-dashed border-alarm/50 bg-alarm-deep/50 text-alarm',
+    showPrice: false,
+  },
 };
 
 function Stat({ label, value, tone }: { label: string; value: string; tone?: string }) {
@@ -150,18 +162,34 @@ export function DealSummary({ data, items }: { data: DealSummaryData; items: Map
               : `, cleared at the midpoint £${data.finalPrice}`}
           </div>
         )}
-        {data.finalApprovals.length > 0 && (
+        {data.outcome === 'pending_approval' ? (
           <div>
-            {data.finalApprovals.map((a) => (
-              <span key={a.side} className={`mr-3 ${a.approved ? 'text-deal/90' : 'text-alarm'}`}>
-                {a.approved ? '✓' : '✗'} {a.side === 'buyer' ? "Finn's owner" : "Flo's owner"}
-                {a.auto ? ' (AI)' : ''}
-              </span>
-            ))}
-            {data.sendBacks > 0 && (
-              <span className="text-muted">· sent back ×{data.sendBacks} before closing</span>
-            )}
+            {(['seller', 'buyer'] as const).map((side) => {
+              const waiting = data.awaiting.includes(side);
+              const decision = data.finalApprovals.find((a) => a.side === side);
+              const who = side === 'buyer' ? "Finn's owner" : "Flo's owner";
+              return (
+                <span key={side} className={`mr-3 ${waiting ? 'text-muted' : 'text-deal/90'}`}>
+                  {waiting ? `⧖ awaiting ${who}` : `✓ ${who}${decision?.auto ? ' (AI)' : ''}`}
+                </span>
+              );
+            })}
+            {data.sendBacks > 0 && <span className="text-muted">· sent back ×{data.sendBacks}</span>}
           </div>
+        ) : (
+          data.finalApprovals.length > 0 && (
+            <div>
+              {data.finalApprovals.map((a) => (
+                <span key={a.side} className={`mr-3 ${a.approved ? 'text-deal/90' : 'text-alarm'}`}>
+                  {a.approved ? '✓' : '✗'} {a.side === 'buyer' ? "Finn's owner" : "Flo's owner"}
+                  {a.auto ? ' (AI)' : ''}
+                </span>
+              ))}
+              {data.sendBacks > 0 && (
+                <span className="text-muted">· sent back ×{data.sendBacks} before closing</span>
+              )}
+            </div>
+          )
         )}
       </div>
 

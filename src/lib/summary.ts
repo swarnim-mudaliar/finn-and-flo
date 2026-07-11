@@ -36,7 +36,13 @@ export interface OwnerDecision {
 }
 
 export interface DealSummaryData {
-  outcome: 'deal' | 'mediated_deal' | 'walked_away' | 'mediation_no_deal';
+  outcome:
+    | 'deal'
+    | 'mediated_deal'
+    | 'walked_away'
+    | 'mediation_no_deal'
+    | 'pending_approval'
+    | 'reopened';
   finalPrice?: number;
   /** Rounds consumed (offers, counters, rejects — mirrors the server's round meter). */
   rounds: number;
@@ -51,9 +57,14 @@ export interface DealSummaryData {
   finalApprovals: OwnerDecision[];
   /** Times a provisional handshake was sent back before the final outcome. */
   sendBacks: number;
+  /** Only for a pending handshake: the sides whose sign-off is still missing. */
+  awaiting: Side[];
 }
 
-const TERMINAL = new Set(['deal', 'mediated_deal', 'walked_away', 'mediation_no_deal']);
+// The summary appears at the FIRST handshake — the owner reads it to decide whether to
+// sign — and never disappears after that: a send-back flips it to 'reopened' (a live
+// scoreboard of the renewed haggle) until the next handshake or a terminal state.
+const SUMMARISABLE = new Set(['pending_approval', 'deal', 'mediated_deal', 'walked_away', 'mediation_no_deal']);
 
 export function bundleOracle(itemIds: string[], oracle: Record<string, OraclePrice>): number {
   // Must mirror Market.bundleValue exactly: rounded sum of estimates.
@@ -70,7 +81,13 @@ export function deriveDealSummary(
   const last = statuses[statuses.length - 1]?.payload as
     | { status?: string; agreedPrice?: number }
     | undefined;
-  if (!last?.status || !TERMINAL.has(last.status)) return null;
+  const everShook = statuses.some(
+    (s) => (s.payload as { status?: string }).status === 'pending_approval'
+  );
+  if (!last?.status || (!SUMMARISABLE.has(last.status) && !everShook)) return null;
+  const outcome = SUMMARISABLE.has(last.status)
+    ? (last.status as DealSummaryData['outcome'])
+    : 'reopened';
 
   const created = pub.find((e) => e.type === 'negotiation_created');
   if (!created) return null;
@@ -164,11 +181,27 @@ export function deriveDealSummary(
   // for closed deals both entries are the approvals that sealed it.
   const finalApprovals = [...lastBySide.values()];
 
+  // For a live handshake, only approvals given since THIS pending round count — an
+  // approval from before a send-back must not read as a current signature.
+  let awaiting: Side[] = [];
+  if (outcome === 'pending_approval') {
+    const lastPendingSeq =
+      [...statuses]
+        .reverse()
+        .find((s) => (s.payload as { status?: string }).status === 'pending_approval')?.seq ?? 0;
+    const current = new Set(
+      decisions
+        .filter((e) => e.seq > lastPendingSeq && (e.payload as unknown as OwnerDecision).approved)
+        .map((e) => (e.payload as unknown as OwnerDecision).side)
+    );
+    awaiting = (['seller', 'buyer'] as Side[]).filter((s) => !current.has(s));
+  }
+
   return {
-    outcome: last.status as DealSummaryData['outcome'],
-    finalPrice: last.agreedPrice,
+    outcome,
+    finalPrice: outcome === 'reopened' ? undefined : last.agreedPrice,
     rounds,
-    mediated: last.status === 'mediated_deal' || pub.some((e) => e.type === 'mediation_result'),
+    mediated: outcome === 'mediated_deal' || pub.some((e) => e.type === 'mediation_result'),
     trajectory,
     openingItemIds,
     openingOracle: bundleOracle(openingItemIds, oracle),
@@ -177,5 +210,6 @@ export function deriveDealSummary(
     changes,
     finalApprovals,
     sendBacks,
+    awaiting,
   };
 }

@@ -60,6 +60,11 @@ describe('validateMove — hard invariants reject', () => {
   it('ENFORCES buyer max in code: offer above max rejected', () => {
     expect(validateMove(state(), 'buyer', offer(61), ctx).ok).toBe(false);
   });
+  it('ENFORCES seller floor in code: ask below floor rejected', () => {
+    // bundle value 100, sane range [10, 500]; £20 clears the sane check but is below the £30 floor.
+    const s = state({ turn: 'seller' });
+    expect(validateMove(s, 'seller', offer(20), ctx).ok).toBe(false);
+  });
   it('ENFORCES reservation on accept: buyer cannot accept above max, seller below floor', () => {
     const sBuyer = state({ lastOffer: { side: 'seller', price: 61, bundleItemIds: ['i1', 'i2'] } });
     expect(validateMove(sBuyer, 'buyer', { action: 'accept', message: 'm' }, ctx).ok).toBe(false);

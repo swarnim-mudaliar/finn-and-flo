@@ -99,6 +99,13 @@ export async function stepAgent(negId: string, deps: Deps = {}): Promise<void> {
       result = { ok: true, warnings: [] };
     }
   }
+  // Takeover race: a human may have taken control (or the state otherwise moved on)
+  // while we were awaiting the LLM. Re-check before committing an agent move so we
+  // never apply a stale agent turn after control has flipped to human.
+  const current = market.negotiations.get(negId);
+  if (!current || current.status !== 'active' || current.turn !== side || current.control[side] === 'human') {
+    return;
+  }
   applyAndEmit(negId, side, move, result.ok ? result.warnings : []);
 }
 
@@ -144,6 +151,13 @@ export async function runNegotiation(negId: string, deps: Deps = {}): Promise<vo
       if (neg.status !== 'active') return;
       if (neg.control[neg.turn] === 'human') return; // paused for takeover; POST /api/move resumes
       await stepAgent(negId, deps);
+    }
+    // Guard cap exhausted without a terminal status: force a terminal outcome via the
+    // mediator so the war room never stalls on a closure-less, still-'active' negotiation.
+    const stalled = getMarket().negotiations.get(negId);
+    if (stalled && stalled.status === 'active') {
+      getMarket().negotiations.set(negId, { ...stalled, status: 'mediation' });
+      runMediation(negId);
     }
   } finally {
     running.delete(negId);

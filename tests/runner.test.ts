@@ -5,17 +5,19 @@ import { runNegotiation } from '../src/lib/runner';
 import type { NegotiationState } from '../src/lib/types';
 
 // Fake LLM: buyer opens low then accepts; seller counters once.
+// Seller ask (£80) sits above the seller floor (~£66) and below the buyer max
+// (~£118), so the close is legal under both reservation bounds.
 function fakeLlm() {
   let call = 0;
   return async (opts: { system: string }) => {
     call++;
     const isSeller = opts.system.startsWith('You are Flo');
     if (isSeller) {
-      return { action: 'counter', price: 60, message: 'Can do £60.', privateReasoning: 'anchor high' };
+      return { action: 'counter', price: 80, message: 'Can do £80.', privateReasoning: 'anchor high' };
     }
     return call === 1
       ? { action: 'offer', price: 40, message: 'Opening at £40.', privateReasoning: 'open low' }
-      : { action: 'accept', message: 'Deal at £60.', privateReasoning: 'within max' };
+      : { action: 'accept', message: 'Deal at £80.', privateReasoning: 'within max' };
   };
 }
 
@@ -44,7 +46,7 @@ describe('runNegotiation', () => {
 
     const done = market.negotiations.get('n-test')!;
     expect(done.status).toBe('deal');
-    expect(done.agreedPrice).toBe(60);
+    expect(done.agreedPrice).toBe(80);
 
     const events = getEventLog().byNegotiation('n-test');
     const moves = events.filter((e) => e.type === 'move');

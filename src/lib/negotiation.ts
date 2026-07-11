@@ -56,6 +56,9 @@ export function validateMove(
     if (side === 'buyer' && move.price > ctx.buyerMax) {
       return { ok: false, reason: `offer of £${move.price} exceeds your maximum of £${ctx.buyerMax}` };
     }
+    if (side === 'seller' && move.price < ctx.sellerFloor) {
+      return { ok: false, reason: `ask of £${move.price} is below your floor of £${ctx.sellerFloor}` };
+    }
     // Soft signals: concession-direction oddities are warnings, never rejections —
     // bundles change mid-negotiation and strict trajectory checks kill restructuring.
     if (state.lastOffer && state.lastOffer.side === side) {
@@ -95,6 +98,7 @@ export function applyMove(state: NegotiationState, side: Side, move: MoveInput):
       break;
     case 'reject':
       next.lastOffer = undefined;
+      next.round += 1; // a rejection consumes a round so reject-loops still reach the cap
       break;
     case 'walk_away':
       next.status = 'walked_away';

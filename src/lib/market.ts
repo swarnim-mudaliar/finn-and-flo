@@ -1,0 +1,74 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import type { ValidationCtx } from './negotiation';
+import type {
+  BuyerProfile, Comp, Item, NegotiationState, OraclePrice, RelationshipRecord, SellerProfile,
+} from './types';
+
+function readJson<T>(file: string): T {
+  return JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data', file), 'utf8')) as T;
+}
+
+export class Market {
+  items: Item[] = readJson('inventory.json');
+  buyers: BuyerProfile[] = readJson('buyers.json');
+  sellers: SellerProfile[] = readJson('sellers.json');
+  relationships: RelationshipRecord[] = readJson('relationships.json');
+  comps: Comp[] = readJson('comps.json');
+  oracle: Record<string, OraclePrice> = readJson('oracle-cache.json');
+  negotiations = new Map<string, NegotiationState>();
+
+  item(id: string): Item {
+    const it = this.items.find((i) => i.id === id);
+    if (!it) throw new Error(`unknown item ${id}`);
+    return it;
+  }
+
+  buyer(id: string): BuyerProfile {
+    const b = this.buyers.find((x) => x.id === id);
+    if (!b) throw new Error(`unknown buyer ${id}`);
+    return b;
+  }
+
+  seller(id: string): SellerProfile {
+    const s = this.sellers.find((x) => x.id === id);
+    if (!s) throw new Error(`unknown seller ${id}`);
+    return s;
+  }
+
+  relationship(buyerId: string, sellerId: string): RelationshipRecord | undefined {
+    return this.relationships.find((r) => r.buyerId === buyerId && r.sellerId === sellerId);
+  }
+
+  bundleValue(itemIds: string[]): number {
+    return Math.round(itemIds.reduce((sum, id) => sum + (this.oracle[id]?.estimate ?? 0), 0));
+  }
+
+  // Buyer's true max: resale value discounted by the margin their shop needs, capped by budget.
+  buyerMax(buyerId: string, itemIds: string[]): number {
+    const b = this.buyer(buyerId);
+    const v = this.bundleValue(itemIds);
+    return Math.min(b.budget, Math.round(v * (1 - b.targetMarginPct / 100)));
+  }
+
+  // Seller's true floor: wholesale clearing fraction of resale value (rag-houses buy by the kilo).
+  sellerFloor(_sellerId: string, itemIds: string[]): number {
+    return Math.round(this.bundleValue(itemIds) * 0.25);
+  }
+
+  validationCtx(neg: NegotiationState): ValidationCtx {
+    return {
+      bundleOracleValue: (ids) => this.bundleValue(ids),
+      buyerMax: this.buyerMax(neg.buyerId, neg.bundleItemIds),
+      sellerFloor: this.sellerFloor(neg.sellerId, neg.bundleItemIds),
+      inventoryIds: new Set(this.items.map((i) => i.id)),
+    };
+  }
+}
+
+const g = globalThis as unknown as { __market?: Market };
+
+export function getMarket(): Market {
+  g.__market ??= new Market();
+  return g.__market;
+}

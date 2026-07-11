@@ -67,4 +67,53 @@ describe('Market rehydration from the persisted event log', () => {
     expect(neg!.status).toBe('deal');
     expect(neg!.agreedPrice).toBe(55);
   });
+
+  it('restores owner approvals, brief/scout context, cap state, and race grouping', () => {
+    const file = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'ff-')), 'events.jsonl');
+    const log1 = new EventLog(file);
+    const id = 'neg-z';
+    // brief + scout land BEFORE the negotiation exists — the buffered path.
+    log1.append({
+      negotiationId: id, visibility: 'buyer_private', type: 'brief_submitted',
+      payload: { text: 'tees, £100 max' },
+    });
+    log1.append({
+      negotiationId: id, visibility: 'buyer_private', type: 'scout_report',
+      payload: { rationale: 'good tees here', openingPlan: 'open at 30%', briefBudgetMax: 100 },
+    });
+    log1.append({
+      negotiationId: id, visibility: 'public', type: 'negotiation_created',
+      payload: { buyerId: 'buyer-001', sellerId: 'seller-001', itemIds: ['item-001'], roundCap: 8 },
+    });
+    log1.append({
+      negotiationId: id, visibility: 'buyer_private', type: 'race_created',
+      payload: { raceId: 'race-1', negotiationIds: [id] },
+    });
+    log1.append({
+      negotiationId: id, visibility: 'buyer_private', type: 'cap_raise_requested',
+      payload: { addedItemIds: ['item-002'], currentCap: 100, newBundleOracle: 200, suggestedCap: 110 },
+    });
+    log1.append({
+      negotiationId: id, visibility: 'buyer_private', type: 'cap_decision',
+      payload: { granted: true, newCap: 140 },
+    });
+    log1.append({
+      negotiationId: id, visibility: 'public', type: 'status',
+      payload: { status: 'pending_approval', agreedPrice: 70 },
+    });
+    log1.append({
+      negotiationId: id, visibility: 'public', type: 'approval_decision',
+      payload: { side: 'seller', approved: true, auto: true },
+    });
+
+    reset(new EventLog(file));
+    const neg = getMarket().negotiations.get(id)!;
+    expect(neg.buyerBrief).toBe('tees, £100 max');
+    expect(neg.scoutNotes).toContain('good tees here');
+    expect(neg.raceId).toBe('race-1');
+    expect(neg.awaitingCap).toBe(false);
+    expect(neg.buyerCap).toBe(140); // cap decision overrides the brief ceiling
+    // The surviving seller approval means a post-restart buyer approval closes the deal.
+    expect(neg.approvals).toEqual({ seller: true });
+  });
 });

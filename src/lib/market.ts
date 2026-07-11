@@ -35,14 +35,34 @@ export class Market {
   // lists negotiations from prior runs whose take-over/send-move return 404 and which the
   // runner can't resume. Replay the durable event log to reconstruct their live state.
   private rehydrate(): void {
+    // brief_submitted / scout_report precede negotiation_created in the log; buffer
+    // them so the created state gets its brief, scout notes, and ceiling back.
+    const briefs = new Map<string, string>();
+    const scouts = new Map<string, { notes: string; cap?: number }>();
     for (const e of getEventLog().since(0)) {
       if (e.type === 'negotiation_created') {
         const p = e.payload as { buyerId: string; sellerId: string; itemIds: string[]; roundCap?: number };
+        const scout = scouts.get(e.negotiationId);
         this.negotiations.set(e.negotiationId, {
           id: e.negotiationId, buyerId: p.buyerId, sellerId: p.sellerId,
           bundleItemIds: p.itemIds, turn: 'buyer', status: 'active',
           round: 0, roundCap: p.roundCap ?? 8,
           control: { buyer: 'agent', seller: 'agent' },
+          buyerBrief: briefs.get(e.negotiationId),
+          scoutNotes: scout?.notes,
+          buyerCap: scout?.cap,
+        });
+        continue;
+      }
+      if (e.type === 'brief_submitted') {
+        briefs.set(e.negotiationId, (e.payload as { text: string }).text);
+        continue;
+      }
+      if (e.type === 'scout_report') {
+        const p = e.payload as { rationale?: string; openingPlan?: string; briefBudgetMax?: number };
+        scouts.set(e.negotiationId, {
+          notes: `${p.rationale ?? ''}${p.openingPlan ? ` Opening plan: ${p.openingPlan}` : ''}`,
+          cap: p.briefBudgetMax,
         });
         continue;
       }
@@ -65,6 +85,21 @@ export class Market {
         // Race grouping lives in buyer-private events (the public room stays
         // race-agnostic); each member carries its own copy.
         neg.raceId = (e.payload as { raceId: string }).raceId;
+      } else if (e.type === 'approval_decision') {
+        // Without this, a handshake that straddles a restart can never close:
+        // the pre-restart owner approval would be forgotten.
+        const p = e.payload as { side: Side; approved: boolean };
+        neg.approvals = p.approved ? { ...neg.approvals, [p.side]: true } : {};
+      } else if (e.type === 'mediation_consent') {
+        const p = e.payload as { side: Side };
+        neg.mediationConsent = { ...neg.mediationConsent, [p.side]: true };
+      } else if (e.type === 'cap_raise_requested') {
+        neg.awaitingCap = true;
+      } else if (e.type === 'cap_decision') {
+        const p = e.payload as { granted: boolean; newCap?: number };
+        neg.awaitingCap = false;
+        if (p.granted && p.newCap !== undefined) neg.buyerCap = p.newCap;
+        else neg.capDeclined = true;
       }
     }
   }

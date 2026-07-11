@@ -12,6 +12,15 @@ export async function POST(req: Request): Promise<Response> {
   const market = getMarket();
   if (!itemIds?.length) return Response.json({ error: 'itemIds required' }, { status: 400 });
 
+  // Public-deployment cost guard: each negotiation is ~10 live LLM calls. Cap the
+  // total this server will run; replays stay free and unlimited.
+  if (market.negotiations.size >= 60) {
+    return Response.json(
+      { error: 'live-negotiation cap reached for this deployment — use Replay to watch recorded runs' },
+      { status: 429 }
+    );
+  }
+
   const id = `neg-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
   const neg: NegotiationState = {
     id, buyerId, sellerId, bundleItemIds: itemIds,

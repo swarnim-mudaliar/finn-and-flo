@@ -1,1 +1,76 @@
 @import "tailwindcss";
+
+@theme inline {
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+
+  /* Fleek brand (coral #f86868, gold #f8c642, slate #6b6e8b, green #16a34a),
+     translated to a classy dark editorial system. Token names are semantic so
+     components stay palette-agnostic. */
+  --color-night: #0f1013;
+  --color-panel: #15161b;
+  --color-panel-2: #1c1e25;
+  --color-line: #262933;
+  --color-line-2: #363a47;
+  --color-cream: #edeef3;
+  --color-muted: #9298ab;
+  --color-faint: #626879;
+  --color-flo: #f86868;
+  --color-flo-deep: #3a1e22;
+  --color-finn: #8fa0e0;
+  --color-finn-deep: #22283f;
+  --color-brass: #f0c455;
+  --color-brass-deep: #3a2f14;
+  --color-deal: #4fc07a;
+  --color-deal-deep: #17301f;
+  --color-seal: #b195e8;
+  --color-seal-deep: #2c2440;
+  --color-alarm: #f09a5c;
+  --color-alarm-deep: #3a2817;
+}
+
+body {
+  background:
+    radial-gradient(1100px 700px at 88% -8%, rgba(248, 198, 66, 0.05), transparent 60%),
+    radial-gradient(900px 650px at -8% 108%, rgba(248, 104, 104, 0.05), transparent 60%),
+    var(--color-night);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Visible, styled scrollbars — macOS hides them by default */
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: var(--color-line-2); border-radius: 4px; }
+*::-webkit-scrollbar-thumb:hover { background: #454a5c; }
+*::-webkit-scrollbar-track { background: transparent; }
+* { scrollbar-width: thin; scrollbar-color: var(--color-line-2) transparent; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-rise { animation: rise 0.4s cubic-bezier(0.2, 0.7, 0.3, 1) both; }
+
+@keyframes thinkdot {
+  0%, 80%, 100% { opacity: 0.2; transform: translateY(0); }
+  35% { opacity: 1; transform: translateY(-3px); }
+}
+.thinkdot { animation: thinkdot 1.2s ease-in-out infinite; }
+.thinkdot:nth-child(2) { animation-delay: 0.15s; }
+.thinkdot:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes sealpulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(177, 149, 232, 0.25); }
+  50% { box-shadow: 0 0 24px 2px rgba(177, 149, 232, 0.18); }
+}
+.animate-sealpulse { animation: sealpulse 2.4s ease-in-out infinite; }
+
+.microlabel {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-faint);
+  font-weight: 600;
+}

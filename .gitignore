@@ -8,3 +8,6 @@ docs/superpowers/
 # deps/build
 node_modules/
 .next/
+
+# tooling artifacts
+.playwright-mcp/
